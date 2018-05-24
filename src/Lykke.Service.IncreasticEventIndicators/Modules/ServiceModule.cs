@@ -1,9 +1,14 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Common;
 using Common.Log;
+using Lykke.Service.IncreasticEventIndicators.Core.Domain;
 using Lykke.Service.IncreasticEventIndicators.Core.Services;
+using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
+using Lykke.Service.IncreasticEventIndicators.Rabbit;
 using Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings;
 using Lykke.Service.IncreasticEventIndicators.Services;
+using Lykke.Service.IncreasticEventIndicators.Services.Exchanges;
 using Lykke.SettingsReader;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -47,6 +52,20 @@ namespace Lykke.Service.IncreasticEventIndicators.Modules
                 .As<IShutdownManager>();
 
             // TODO: Add your dependencies here
+
+            builder.RegisterInstance(_settings.CurrentValue)
+                .SingleInstance();
+
+            builder.RegisterType<LykkeTickPriceSubscriber>()
+                .As<IStartable>()
+                .As<IStopable>()
+                .AutoActivate()
+                .SingleInstance();
+
+            builder.RegisterType<TickPriceManager>()
+                .As<ITickPriceManager>()
+                .As<ILykkeTickPriceHandler>()
+                .SingleInstance();
 
             builder.Populate(_services);
         }
