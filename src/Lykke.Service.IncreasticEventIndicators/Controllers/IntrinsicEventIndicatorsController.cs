@@ -64,6 +64,48 @@ namespace Lykke.Service.IncreasticEventIndicators.Controllers
         }
 
         /// <summary>
+        /// Adds asset pair.
+        /// </summary>
+        /// <param name="row">Asset pair to add.</param>
+        [HttpPut("intrinsiceventindicatorsassetpair")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> AddAssetPair([FromBody] IntrinsicEventIndicatorsAssetPairPost row)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ErrorResponse.Create(ModelState));
+            }
+
+            var model = _mapper
+                .Map<IntrinsicEventIndicatorsAssetPair>(row);
+
+            try
+            {
+                await _intrinsicEventIndicatorsService.AddAssetPair(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ErrorResponse.Create(ex.Message));
+            }
+
+            return StatusCode((int)HttpStatusCode.OK);
+        }
+
+        /// <summary>
+        /// Deletes asset pair.
+        /// </summary>
+        /// <param name="rowId">asset pair</param>
+        /// <returns></returns>
+        [HttpDelete("intrinsiceventindicatorsassetpair")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> RemoveAssetPair(string rowId)
+        {
+            await _intrinsicEventIndicatorsService.RemoveAssetPair(rowId);
+            return NoContent();
+        }
+
+        /// <summary>
         /// Gets data.
         /// </summary>
         /// <returns>Data</returns>

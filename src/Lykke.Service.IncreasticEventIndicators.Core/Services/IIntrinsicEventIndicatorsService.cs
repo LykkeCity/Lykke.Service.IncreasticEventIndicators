@@ -8,6 +8,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Services
         Task AddColumn(IIntrinsicEventIndicatorsColumn column);
         Task RemoveColumn(string columnId);
 
+        Task AddAssetPair(IIntrinsicEventIndicatorsAssetPair row);
+        Task RemoveAssetPair(string rowId);
+
         Task<IntrinsicEventIndicators> GetData();
     }
 }

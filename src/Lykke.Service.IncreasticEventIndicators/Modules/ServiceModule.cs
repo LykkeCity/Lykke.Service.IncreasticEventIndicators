@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AzureStorage.Tables;
 using Common;
 using Common.Log;
+using Lykke.Service.IncreasticEventIndicators.AzureRepositories;
 using Lykke.Service.IncreasticEventIndicators.Core.Domain;
 using Lykke.Service.IncreasticEventIndicators.Core.Services;
 using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
@@ -31,12 +33,6 @@ namespace Lykke.Service.IncreasticEventIndicators.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            // TODO: Do not register entire settings in container, pass necessary settings to services which requires them
-            // ex:
-            //  builder.RegisterType<QuotesPublisher>()
-            //      .As<IQuotesPublisher>()
-            //      .WithParameter(TypedParameter.From(_settings.CurrentValue.QuotesPublication))
-
             builder.RegisterInstance(_log)
                 .As<ILog>()
                 .SingleInstance();
@@ -50,8 +46,6 @@ namespace Lykke.Service.IncreasticEventIndicators.Modules
 
             builder.RegisterType<ShutdownManager>()
                 .As<IShutdownManager>();
-
-            // TODO: Add your dependencies here
 
             builder.RegisterInstance(_settings.CurrentValue)
                 .SingleInstance();
@@ -67,7 +61,22 @@ namespace Lykke.Service.IncreasticEventIndicators.Modules
                 .As<ILykkeTickPriceHandler>()
                 .SingleInstance();
 
+            builder.RegisterType<IntrinsicEventIndicatorsService>()
+                .As<IIntrinsicEventIndicatorsService>()
+                .SingleInstance();
+
+            RegisterRepositories(builder);
+
             builder.Populate(_services);
+        }
+
+        private void RegisterRepositories(ContainerBuilder builder)
+        {
+            builder.RegisterType<IntrinsicEventIndicatorsRepository>()
+                .As<IIntrinsicEventIndicatorsRepository>()
+                .WithParameter(TypedParameter.From(AzureTableStorage<IntrinsicEventIndicatorsEntity>
+                    .Create(_settings.ConnectionString(x => x.Db.DataConnString), "IntrinsicEventIndicators", _log)))
+                .SingleInstance();
         }
     }
 }

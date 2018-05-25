@@ -34,15 +34,27 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
             await _repo.RemoveColumnAsync(columnId);
         }
 
+        public async Task AddAssetPair(IIntrinsicEventIndicatorsAssetPair row)
+        {
+            await _repo.AddAssetPairAsync(row);
+        }
+
+        public async Task RemoveAssetPair(string rowId)
+        {
+            await _repo.RemoveAssetPairAsync(rowId);
+        }
+
         public async Task<IntrinsicEventIndicators> GetData()
         {
-            var columns = (await _repo.GetColumnsAsync()).OrderBy(x => x.Value).ToList();
+            var columns = (await _repo.GetColumnsAsync()).OrderBy(x => x.Delta).ToList();
+            var rows = (await _repo.GetAssetPairsAsync()).OrderBy(x => x.AssetPair).ToList();
 
-            var data = Enumerable.Range(0, 1).Select(x => columns.Select(c => 0M.ToString(CultureInfo.InvariantCulture)).ToArray()).ToArray();
+            var data = rows.Select(x => columns.Select(c => 0M.ToString(CultureInfo.InvariantCulture)).ToArray()).ToArray();
 
             return await Task.FromResult(new IntrinsicEventIndicators
             {
                 Columns = columns.ToArray(),
+                AssetPairs = rows.ToArray(),
                 Data = data
             });
         }

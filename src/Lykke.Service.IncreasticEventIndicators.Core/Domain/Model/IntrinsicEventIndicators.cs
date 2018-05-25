@@ -3,6 +3,7 @@
     public class IntrinsicEventIndicators
     {
         public IIntrinsicEventIndicatorsColumn[] Columns { get; set; }
+        public IIntrinsicEventIndicatorsAssetPair[] AssetPairs { get; set; }
         public string[][] Data { get; set; }
     }
 }

@@ -11,6 +11,9 @@ namespace Lykke.Service.IncreasticEventIndicators.AutoMapperProfiles
             CreateMap<IntrinsicEventIndicatorsColumnPost, IntrinsicEventIndicatorsColumn>()
                 .ForMember(x => x.ColumnId, opt => opt.Ignore());
             CreateMap<IIntrinsicEventIndicatorsColumn, IntrinsicEventIndicatorsColumnDto>();
+            CreateMap<IntrinsicEventIndicatorsAssetPairPost, IntrinsicEventIndicatorsAssetPair>()
+                .ForMember(x => x.RowId, opt => opt.Ignore());
+            CreateMap<IIntrinsicEventIndicatorsAssetPair, IntrinsicEventIndicatorsAssetPairDto>();
             CreateMap<IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>();
         }
     }
