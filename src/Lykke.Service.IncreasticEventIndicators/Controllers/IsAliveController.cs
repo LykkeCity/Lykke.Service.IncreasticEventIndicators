@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using System.Net;
+using Lykke.Common.Api.Contract.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Lykke.Common.Api.Contract.Responses;
 using Lykke.Service.IncreasticEventIndicators.Core.Services;
+using ErrorResponse = Lykke.Service.IncreasticEventIndicators.Models.ErrorResponse;
 
 namespace Lykke.Service.IncreasticEventIndicators.Controllers
 {
