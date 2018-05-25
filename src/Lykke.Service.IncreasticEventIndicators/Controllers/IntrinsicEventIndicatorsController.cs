@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Lykke.Common.Api.Contract.Responses;
-using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
+using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
+using Lykke.Service.IncreasticEventIndicators.Core.Services;
+using Lykke.Service.IncreasticEventIndicators.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lykke.Service.IncreasticEventIndicators.Controllers
@@ -14,34 +13,34 @@ namespace Lykke.Service.IncreasticEventIndicators.Controllers
     public class IntrinsicEventIndicatorsController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly ILykkeTickPriceHandler _lykkeTickPriceHandler;
+        private readonly IIntrinsicEventIndicatorsService _intrinsicEventIndicatorsService;        
 
-        public IntrinsicEventIndicatorsController(IMapper mapper, ILykkeTickPriceHandler lykkeTickPriceHandler)
+        public IntrinsicEventIndicatorsController(IMapper mapper, IIntrinsicEventIndicatorsService intrinsicEventIndicatorsService)
         {
             _mapper = mapper;
-            _lykkeTickPriceHandler = lykkeTickPriceHandler;
+            _intrinsicEventIndicatorsService = intrinsicEventIndicatorsService;
         }
 
         /// <summary>
         /// Adds delta.
         /// </summary>
-        /// <param name="delta">Delta to add.</param>
+        /// <param name="column">Delta to add.</param>
         [HttpPut("intrinsiceventindicatorsdelta")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> AddDelta()
+        public async Task<IActionResult> AddDelta([FromBody] IntrinsicEventIndicatorsColumnPost column)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ErrorResponse.Create(ModelState));
-            //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ErrorResponse.Create(ModelState));
+            }
 
-            //var model = _mapper
-            //    .Map<ScenarioAnalysisMatrixColumn>(column);
+            var model = _mapper
+                .Map<IntrinsicEventIndicatorsColumn>(column);
 
             try
             {
-                //await _scenarioAnalysisMatrixService.AddColumn(instanceName, model);
+                await _intrinsicEventIndicatorsService.AddColumn(model);
             }
             catch (Exception ex)
             {
@@ -54,14 +53,29 @@ namespace Lykke.Service.IncreasticEventIndicators.Controllers
         /// <summary>
         /// Deletes delta.
         /// </summary>
-        /// <param name="delta">delta</param>
+        /// <param name="columnId">delta</param>
         /// <returns></returns>
         [HttpDelete("intrinsiceventindicatorsdelta")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public async Task<IActionResult> RemoveDelta()
+        public async Task<IActionResult> RemoveDelta(string columnId)
         {
-            //await _scenarioAnalysisMatrixService.RemoveColumn(instanceName, columnId);
+            await _intrinsicEventIndicatorsService.RemoveColumn(columnId);
             return NoContent();
+        }
+
+        /// <summary>
+        /// Gets data.
+        /// </summary>
+        /// <returns>Data</returns>
+        [HttpGet("intrinsiceventindicatorsdata", Name = "GetData")]
+        [Produces("application/json")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(IntrinsicEventIndicatorsDto), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetData()
+        {
+            var data = await _intrinsicEventIndicatorsService.GetData();
+            var vm = _mapper.Map<IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>(data);
+            return Ok(vm);
         }
     }
 }
