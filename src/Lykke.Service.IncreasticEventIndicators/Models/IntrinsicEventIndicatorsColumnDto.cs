@@ -3,6 +3,6 @@
     public class IntrinsicEventIndicatorsColumnDto
     {
         public string ColumnId { get; set; }
-        public decimal Value { get; set; }
+        public decimal Delta { get; set; }
     }
 }

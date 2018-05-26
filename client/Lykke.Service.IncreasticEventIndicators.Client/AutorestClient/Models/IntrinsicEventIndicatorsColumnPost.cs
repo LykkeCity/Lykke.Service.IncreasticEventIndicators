@@ -24,9 +24,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
         /// Initializes a new instance of the
         /// IntrinsicEventIndicatorsColumnPost class.
         /// </summary>
-        public IntrinsicEventIndicatorsColumnPost(double value)
+        public IntrinsicEventIndicatorsColumnPost(double delta)
         {
-            Value = value;
+            Delta = delta;
             CustomInit();
         }
 
@@ -37,8 +37,8 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Value")]
-        public double Value { get; set; }
+        [JsonProperty(PropertyName = "Delta")]
+        public double Delta { get; set; }
 
         /// <summary>
         /// Validate the object.
