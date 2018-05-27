@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 {
     public interface ITickPriceManager
     {
-        Task<ITickPrice> GetCurrentTickPrice(string assetPair);
+        Task UpdateRunners(IList<string> assetPairs, IList<decimal> deltas);
     }
 }

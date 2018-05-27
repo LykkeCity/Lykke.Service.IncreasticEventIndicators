@@ -1,8 +1,9 @@
 ﻿using System;
+using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
 
 namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 {
-    internal class Runner
+    public class Runner
     {
         public int Index { get; }
         public double DeltaUp { get; private set; }
@@ -50,11 +51,11 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             DeltaStarDown = dStarDown;
         }
 
-        public void Run(TickPrice tickPrice) // TODO: probably it should return Tuple<ExpectedEvent, ExpectedLevel>
+        public void Run(ITickPrice tickPrice) // TODO: probably it should return Tuple<ExpectedEvent, ExpectedLevel>
         {
             if (!_initialized)
             {
-                _state.Extreme = _state.Reference = tickPrice.Mid;
+                _state.Extreme = _state.Reference = (tickPrice.Ask + tickPrice.Bid) / 2m;
                 _state.ExpectedDcLevel = CalcExpectedDClevel();
                 _state.ExpectedOsLevel = CalcExpectedOSlevel();
                 _state.Event = 0;

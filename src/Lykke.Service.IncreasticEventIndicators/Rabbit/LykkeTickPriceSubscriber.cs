@@ -51,9 +51,6 @@ namespace Lykke.Service.IncreasticEventIndicators.Rabbit
         {
             try
             {
-                // TODO:
-                Console.WriteLine(tickPrice.ToJson());
-
                 await _handler.Handle(tickPrice);
             }
             catch (Exception ex)

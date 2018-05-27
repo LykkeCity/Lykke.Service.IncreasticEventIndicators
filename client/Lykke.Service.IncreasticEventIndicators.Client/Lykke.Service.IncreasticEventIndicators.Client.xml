@@ -510,7 +510,7 @@
             <summary>
             </summary>
         </member>
-        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnDto.Value">
+        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnDto.Delta">
             <summary>
             </summary>
         </member>
@@ -534,7 +534,7 @@
             IntrinsicEventIndicatorsColumnPost class.
             </summary>
         </member>
-        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost.Value">
+        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost.Delta">
             <summary>
             </summary>
         </member>
