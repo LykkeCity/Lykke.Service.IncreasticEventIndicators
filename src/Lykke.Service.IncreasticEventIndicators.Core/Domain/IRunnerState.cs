@@ -8,5 +8,6 @@
         decimal ExpectedOsLevel { get; }
         decimal Reference { get; }
         ExpectedDirectionalChange ExpectedDirectionalChange { get; }
+        decimal DirectionalChangePrice { get; }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Common.Log;
@@ -22,6 +20,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
             _log = log.CreateComponentScope(nameof(IntrinsicEventIndicatorsService));
             _tickPriceManager = tickPriceManager;
+
+            var task = Task.Run(UpdateRunners);
+            Task.WaitAll(task);
         }
 
         public async Task AddColumn(IIntrinsicEventIndicatorsColumn column)
@@ -50,26 +51,12 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
 
         public async Task<IntrinsicEventIndicators> GetData()
         {
-            var columns = (await _repo.GetColumnsAsync()).OrderBy(x => x.Delta).ToList();
             var rows = (await _repo.GetAssetPairsAsync()).OrderBy(x => x.AssetPair).ToList();
+            var columns = (await _repo.GetColumnsAsync()).OrderBy(x => x.Delta).ToList();            
 
-            var data = rows.Select(x => columns.Select(c => 0M.ToString(CultureInfo.InvariantCulture)).ToArray()).ToArray();
-
-            var runners = new Dictionary<string, Runner>();
-
-            foreach (var row in rows)
-            {
-                var assetPair = row.AssetPair;
-
-                foreach (var column in columns)
-                {
-                    var delta = (double)column.Delta;
-
-                    var runner = new Runner(delta, delta, delta, delta, 0);
-
-                    runners.Add(assetPair, runner);
-                }
-            }
+            var data = await _tickPriceManager.GetIntrinsicEventIndicators(
+                rows.Select(x => x.AssetPair).ToList(),
+                columns.Select(x => x.Delta).ToList());
 
             return await Task.FromResult(new IntrinsicEventIndicators
             {

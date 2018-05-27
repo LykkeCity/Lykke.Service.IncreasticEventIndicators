@@ -4,6 +4,6 @@
     {
         public IIntrinsicEventIndicatorsColumn[] Columns { get; set; }
         public IIntrinsicEventIndicatorsAssetPair[] AssetPairs { get; set; }
-        public string[][] Data { get; set; }
+        public decimal[][] Data { get; set; }
     }
 }

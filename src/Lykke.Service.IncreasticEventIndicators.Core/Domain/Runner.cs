@@ -32,7 +32,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             if (state != null)
             {
                 _state = new RunnerState(state.Event, state.Extreme, state.ExpectedDcLevel, state.ExpectedOsLevel,
-                    state.Reference, state.ExpectedDirectionalChange);
+                    state.Reference, state.ExpectedDirectionalChange, state.DirectionalChangePrice);
                 _initialized = true;
             }
             else
@@ -55,7 +55,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         {
             if (!_initialized)
             {
-                _state.Extreme = _state.Reference = (tickPrice.Ask + tickPrice.Bid) / 2m;
+                _state.Extreme = _state.Reference = _state.DirectionalChangePrice = (tickPrice.Ask + tickPrice.Bid) / 2m;
                 _state.ExpectedDcLevel = CalcExpectedDClevel();
                 _state.ExpectedOsLevel = CalcExpectedOSlevel();
                 _state.Event = 0;
@@ -69,7 +69,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
                 if (tickPrice.Bid >= _state.ExpectedDcLevel)
                 {
                     ExpectedDirectionalChange = ExpectedDirectionalChange.Downward;
-                    _state.Extreme = _state.Reference = tickPrice.Bid;
+                    _state.Extreme = _state.Reference = _state.DirectionalChangePrice = tickPrice.Bid;
 
                     _state.ExpectedDcLevel = CalcExpectedDClevel();
                     _state.ExpectedOsLevel = CalcExpectedOSlevel();
@@ -95,7 +95,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
                 if (tickPrice.Ask <= _state.ExpectedDcLevel)
                 {
                     ExpectedDirectionalChange = ExpectedDirectionalChange.Upward;
-                    _state.Extreme = _state.Reference = tickPrice.Ask;
+                    _state.Extreme = _state.Reference = _state.DirectionalChangePrice = tickPrice.Ask;
                     _state.ExpectedDcLevel = CalcExpectedDClevel();
                     _state.ExpectedOsLevel = CalcExpectedOSlevel();
                     _state.Event = -1;
@@ -117,6 +117,17 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             }
 
             _state.Event = 0;
+        }
+
+        public decimal CalcIntrinsicEventIndicator()
+        {
+            if (_state.Extreme == 0 || DeltaUp == 0)
+            {
+                return 0;
+            }
+
+            var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / (decimal) DeltaUp);
+            return indicator;
         }
 
         private decimal CalcExpectedDClevel()

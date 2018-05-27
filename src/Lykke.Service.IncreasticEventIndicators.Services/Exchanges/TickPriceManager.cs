@@ -88,6 +88,37 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             return Task.CompletedTask;
         }
 
+        public Task<decimal[][]> GetIntrinsicEventIndicators(IList<string> assetPairs, IList<decimal> deltas)
+        {
+            var entered = false;
+            try
+            {
+                Monitor.TryEnter(_syncRoot, Constants.LockTimeout, ref entered);
+                if (entered)
+                {
+                    var data = GetIntrinsicEventIndicatorsInternal(assetPairs, deltas);
+                    return Task.FromResult(data);
+                }
+                else
+                {
+                    throw new Exception($"Monitor not entered for {Constants.LockTimeout} in {nameof(TickPriceManager)}");
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.WriteErrorAsync(nameof(TickPriceManager), nameof(GetIntrinsicEventIndicators), ex).GetAwaiter().GetResult();                
+            }
+            finally
+            {
+                if (entered)
+                {
+                    Monitor.Exit(_syncRoot);
+                }
+            }
+
+            return Task.FromResult<decimal[][]>(null);
+        }
+
         private void UpdateRunnersInternal(IList<string> assetPairs, IList<decimal> deltas)
         {
             _assetPairs =
@@ -135,6 +166,29 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                     }
                 }
             }
+        }
+
+        private decimal[][] GetIntrinsicEventIndicatorsInternal(IList<string> assetPairs, IList<decimal> deltas)
+        {
+            var data = new decimal[assetPairs.Count][];
+            for (var i = 0; i < data.Length; i++)
+            {
+                data[i] = new decimal[deltas.Count];
+            }
+
+            for (var i = 0; i < assetPairs.Count; i++)
+            {
+                for (var j = 0; j < deltas.Count; j++)
+                {
+                    var key = GetRunnersKey(assetPairs[i], deltas[j]);
+                    if (_runners.ContainsKey(key))
+                    {
+                        data[i][j] = _runners[key].CalcIntrinsicEventIndicator();
+                    }
+                }
+            }
+
+            return data;
         }
 
         private static string GetRunnersKey(string assetPair, decimal delta)
