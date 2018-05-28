@@ -121,7 +121,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 
         public decimal CalcIntrinsicEventIndicator()
         {
-            if (_state.Extreme == 0 || DeltaUp == 0)
+            if (_state.Extreme == 0 || (decimal)DeltaUp == 0)
             {
                 return 0;
             }
