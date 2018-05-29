@@ -104,8 +104,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 
         public bool IsChanged { get; set; }
 
-        public RunnerState()
+        public RunnerState(decimal delta)
         {
+            _delta = delta;
         }
 
         public RunnerState(int @event, decimal extreme, decimal expectedDcLevel, decimal expectedOsLevel,

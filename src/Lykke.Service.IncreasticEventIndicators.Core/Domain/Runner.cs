@@ -25,7 +25,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         {
             ResetDeltas(delta);
 
-            _state = new RunnerState();
+            _state = new RunnerState(delta);
             ExpectedDirectionalChange = ExpectedDirectionalChange.Upward;
             _initialized = false;
         }
