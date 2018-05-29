@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common.Log;
@@ -64,6 +65,11 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
                 AssetPairs = rows.ToArray(),
                 Data = data
             });
+        }
+
+        public Task<IDictionary<string, IList<IRunnerState>>> GetRunnersStates()
+        {
+            return _tickPriceManager.GetRunnersStates();
         }
 
         private async Task UpdateRunners()

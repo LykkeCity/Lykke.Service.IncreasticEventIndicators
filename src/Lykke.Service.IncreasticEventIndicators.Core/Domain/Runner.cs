@@ -5,11 +5,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 {
     public class Runner
     {
-        public int Index { get; }
-        public double DeltaUp { get; private set; }
-        public double DeltaDown { get; private set; }
-        public double DeltaStarUp { get; private set; }
-        public double DeltaStarDown { get; private set; }
+        public decimal Delta { get; private set; }
 
         public ExpectedDirectionalChange ExpectedDirectionalChange
         {
@@ -25,30 +21,18 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         private bool _initialized;
         private readonly RunnerState _state;
 
-        public Runner(double deltaUp, double deltaDown, double dStarUp, double dStarDown, int index, IRunnerState state = null)
+        public Runner(decimal delta)
         {
-            Index = index;
-            ResetDeltas(deltaUp, deltaDown, dStarUp, dStarDown);
-            if (state != null)
-            {
-                _state = new RunnerState(state.Event, state.Extreme, state.ExpectedDcLevel, state.ExpectedOsLevel,
-                    state.Reference, state.ExpectedDirectionalChange, state.DirectionalChangePrice);
-                _initialized = true;
-            }
-            else
-            {
-                _state = new RunnerState();
-                ExpectedDirectionalChange = ExpectedDirectionalChange.Upward;
-                _initialized = false;
-            }
+            ResetDeltas(delta);
+
+            _state = new RunnerState();
+            ExpectedDirectionalChange = ExpectedDirectionalChange.Upward;
+            _initialized = false;
         }
 
-        public void ResetDeltas(double deltaUp, double deltaDown, double dStarUp, double dStarDown)
+        public void ResetDeltas(decimal delta)
         {
-            DeltaUp = deltaUp;
-            DeltaDown = deltaDown;
-            DeltaStarUp = dStarUp;
-            DeltaStarDown = dStarDown;
+            Delta = delta;
         }
 
         public void Run(ITickPrice tickPrice) // TODO: probably it should return Tuple<ExpectedEvent, ExpectedLevel>
@@ -121,12 +105,12 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 
         public decimal CalcIntrinsicEventIndicator()
         {
-            if (_state.Extreme == 0 || (decimal)DeltaUp == 0)
+            if (_state.Extreme == 0 || (decimal)Delta == 0)
             {
                 return 0;
             }
 
-            var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / (decimal) DeltaUp);
+            var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / (decimal) Delta);
             return indicator;
         }
 
@@ -134,11 +118,11 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         {
             if (ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) + DeltaUp);
+                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) + (double)Delta);
             }
             else
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) - DeltaDown);
+                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) - (double)Delta);
             }
         }
 
@@ -146,11 +130,11 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         {
             if (ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) - DeltaStarDown);
+                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) - (double)Delta);
             }
             else
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) + DeltaStarUp);
+                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) + (double)Delta);
             }
         }
 

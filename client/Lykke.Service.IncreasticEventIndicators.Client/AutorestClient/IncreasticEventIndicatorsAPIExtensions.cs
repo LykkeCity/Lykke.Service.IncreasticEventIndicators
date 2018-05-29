@@ -7,6 +7,8 @@
 namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
 {
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -168,6 +170,34 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             public static async Task<IntrinsicEventIndicatorsDto> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetAsync(this IIncreasticEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets runners states.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IDictionary<string, IList<RunnerStateDto>> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGet(this IIncreasticEventIndicatorsAPI operations)
+            {
+                return operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets runners states.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IDictionary<string, IList<RunnerStateDto>>> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetAsync(this IIncreasticEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

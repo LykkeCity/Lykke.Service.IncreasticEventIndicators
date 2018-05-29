@@ -9,5 +9,6 @@
         decimal Reference { get; }
         ExpectedDirectionalChange ExpectedDirectionalChange { get; }
         decimal DirectionalChangePrice { get; }
+        decimal Delta { get; }
     }
 }

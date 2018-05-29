@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lykke.Service.IncreasticEventIndicators.Core.Domain;
 using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
 using Lykke.Service.IncreasticEventIndicators.Core.Services;
 using Lykke.Service.IncreasticEventIndicators.Models;
@@ -117,6 +119,21 @@ namespace Lykke.Service.IncreasticEventIndicators.Controllers
         {
             var data = await _intrinsicEventIndicatorsService.GetData();
             var vm = _mapper.Map<IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>(data);
+            return Ok(vm);
+        }
+
+        /// <summary>
+        /// Gets runners states.
+        /// </summary>
+        /// <returns>Runners states</returns>
+        [HttpGet("intrinsiceventindicatorsrunnersstates", Name = "GetRunnersStates")]
+        [Produces("application/json")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(IDictionary<string, IList<RunnerStateDto>>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetRunnersStates()
+        {
+            var runnersStates = await _intrinsicEventIndicatorsService.GetRunnersStates();
+            var vm = _mapper.Map<IDictionary<string, IList<IRunnerState>>, IDictionary<string, IList<RunnerStateDto>>>(runnersStates);
             return Ok(vm);
         }
     }

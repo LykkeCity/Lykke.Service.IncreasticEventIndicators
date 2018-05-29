@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models;
@@ -52,5 +53,12 @@ namespace Lykke.Service.IncreasticEventIndicators.Client
         /// <param name="cancellationToken"></param>
         /// <returns>Data</returns>
         Task<IntrinsicEventIndicatorsDto> GetDataAsync(CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets runners states.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Runners states</returns>
+        Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

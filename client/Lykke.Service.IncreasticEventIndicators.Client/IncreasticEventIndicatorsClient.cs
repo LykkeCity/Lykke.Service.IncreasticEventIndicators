@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -61,6 +62,14 @@ namespace Lykke.Service.IncreasticEventIndicators.Client
         public async Task<IntrinsicEventIndicatorsDto> GetDataAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             var response = await _api.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(cancellationToken: cancellationToken);
+            ValidateResponse(response);
+            return response.Body;
+        }
+
+        public async Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesAsync(
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var response = await _api.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(cancellationToken: cancellationToken);
             ValidateResponse(response);
             return response.Body;
         }

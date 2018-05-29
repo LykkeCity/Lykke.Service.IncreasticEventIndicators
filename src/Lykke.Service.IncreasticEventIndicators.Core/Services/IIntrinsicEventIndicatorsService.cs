@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Lykke.Service.IncreasticEventIndicators.Core.Domain;
 using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
 
 namespace Lykke.Service.IncreasticEventIndicators.Core.Services
@@ -12,5 +14,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Services
         Task RemoveAssetPair(string rowId);
 
         Task<IntrinsicEventIndicators> GetData();
+
+        Task<IDictionary<string, IList<IRunnerState>>> GetRunnersStates();
     }
 }

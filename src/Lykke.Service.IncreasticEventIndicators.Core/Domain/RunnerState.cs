@@ -12,6 +12,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         private ExpectedDirectionalChange _expectedDirectionalChange;
 
         private decimal _directionalChangePrice;
+        private decimal _delta;
 
         public int Event
         {
@@ -90,6 +91,17 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             }
         }
 
+        public decimal Delta
+        {
+            get => _delta;
+            private set
+            {
+                if (_delta == value) return;
+                _delta = value;
+                IsChanged = true;
+            }
+        }
+
         public bool IsChanged { get; set; }
 
         public RunnerState()
@@ -97,7 +109,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         }
 
         public RunnerState(int @event, decimal extreme, decimal expectedDcLevel, decimal expectedOsLevel,
-            decimal reference, ExpectedDirectionalChange expectedDirectionalChange, decimal directionalChangePrice)
+            decimal reference, ExpectedDirectionalChange expectedDirectionalChange, decimal directionalChangePrice, decimal delta)
         {
             _event = @event;
             _extreme = extreme;
@@ -106,11 +118,13 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             _reference = reference;
             _expectedDirectionalChange = expectedDirectionalChange;
             _directionalChangePrice = directionalChangePrice;
+            _delta = delta;
         }
 
         public object Clone()
         {
-            return new RunnerState(_event, _extreme, _expectedDcLevel, _expectedOsLevel, _reference, _expectedDirectionalChange, _directionalChangePrice);
+            return new RunnerState(_event, _extreme, _expectedDcLevel, _expectedOsLevel, _reference,
+                _expectedDirectionalChange, _directionalChangePrice, _delta);
         }
     }
 }
