@@ -111,7 +111,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             }
 
             var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / (decimal) Delta);
-            return indicator;
+            return Math.Round(indicator, 2);
         }
 
         private decimal CalcExpectedDClevel()
