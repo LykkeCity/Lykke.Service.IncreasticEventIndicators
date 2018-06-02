@@ -142,7 +142,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                     var key = GetRunnersKey(assetPair, delta);
                     if (!_runners.ContainsKey(key))
                     {
-                        _runners.TryAdd(key, new Runner(delta));
+                        _runners.TryAdd(key, new Runner(delta, assetPair));
                     }
                 }
             }

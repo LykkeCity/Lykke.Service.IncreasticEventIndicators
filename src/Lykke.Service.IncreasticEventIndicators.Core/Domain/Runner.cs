@@ -6,6 +6,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
     public class Runner
     {
         public decimal Delta { get; private set; }
+        public string AssetPair { get; private set; }
 
         public ExpectedDirectionalChange ExpectedDirectionalChange
         {
@@ -21,18 +22,19 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         private bool _initialized;
         private readonly RunnerState _state;
 
-        public Runner(decimal delta)
+        public Runner(decimal delta, string assetPair)
         {
-            ResetDeltas(delta);
+            ResetDeltas(delta, assetPair);
 
-            _state = new RunnerState(delta);
+            _state = new RunnerState(delta, assetPair);
             ExpectedDirectionalChange = ExpectedDirectionalChange.Upward;
             _initialized = false;
         }
 
-        public void ResetDeltas(decimal delta)
+        public void ResetDeltas(decimal delta, string assetPair)
         {
             Delta = delta;
+            AssetPair = assetPair;
         }
 
         public void Run(ITickPrice tickPrice) // TODO: probably it should return Tuple<ExpectedEvent, ExpectedLevel>
