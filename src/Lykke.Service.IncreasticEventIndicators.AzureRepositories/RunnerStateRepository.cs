@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
         public decimal DirectionalChangePrice { get; set; }
         public decimal Delta { get; set; }
         public string AssetPair { get; set; }
+        public string Version { get; set; }
     }
 
     [UsedImplicitly]
@@ -37,8 +39,10 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
             return (await _storage.GetDataAsync()).ToArray();
         }
 
-        public Task SaveState(IReadOnlyList<IRunnerState> state)
+        public async Task SaveState(IReadOnlyList<IRunnerState> state)
         {
+            var version = Guid.NewGuid().ToString();
+
             var entities = state.Select(x =>
                 new RunnerStateEntity
                 {
@@ -50,17 +54,23 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
                     ExpectedOsLevel = x.ExpectedOsLevel,
                     Reference = x.Reference,
                     ExpectedDirectionalChange = x.ExpectedDirectionalChange,
-                    DirectionalChangePrice = x.DirectionalChangePrice
+                    DirectionalChangePrice = x.DirectionalChangePrice,
+                    Version = version
                 }
-            ).ToList();
+            ).ToArray();
 
-            return InsertOrReplaceBatchAsync(entities);
+            await InsertOrReplaceAsync(entities, version);
         }
 
-        private Task InsertOrReplaceBatchAsync(IReadOnlyList<RunnerStateEntity> entities)
+        private async Task InsertOrReplaceAsync(IEnumerable<RunnerStateEntity> entities, string version)
         {
-            // TODO
-            return Task.CompletedTask;
+            var tasks = entities.Select(x => _storage.InsertOrReplaceAsync(x)).ToArray();
+            await Task.WhenAll(tasks);
+
+            var entitiesToDelete = await _storage.GetDataAsync(x => x.Version != version);
+
+            tasks = entitiesToDelete.Select(x => _storage.DeleteAsync(x)).ToArray();
+            await Task.WhenAll(tasks);
         }
 
         private static string GeneratePartitionKey(IRunnerState runnerState)

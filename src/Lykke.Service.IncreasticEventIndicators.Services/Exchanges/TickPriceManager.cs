@@ -14,22 +14,32 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
 {
     public class TickPriceManager : ITickPriceManager, ILykkeTickPriceHandler
     {
+        private static readonly TimeSpan SavePeriod = TimeSpan.FromSeconds(10);
+
         private readonly ILog _log;
+        private readonly IRunnerStateRepository _runnerStateRepository;
 
         private ConcurrentDictionary<string, object> _assetPairs = new ConcurrentDictionary<string, object>();
         private ConcurrentDictionary<decimal, object> _deltas = new ConcurrentDictionary<decimal, object>();
 
-        private readonly ConcurrentDictionary<string, Runner> _runners = new ConcurrentDictionary<string, Runner>();
+        private ConcurrentDictionary<string, Runner> _runners = new ConcurrentDictionary<string, Runner>();
 
         private readonly object _syncRoot = new object();
 
-        public TickPriceManager(ILog log)
+        private bool _initialized;
+        private readonly Timer _saveStateTimer;
+
+        public TickPriceManager(ILog log, IRunnerStateRepository runnerStateRepository)
         {
             _log = log;
+            _runnerStateRepository = runnerStateRepository;
+            _saveStateTimer = new Timer(OnTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
         }
 
-        public Task UpdateRunners(IList<string> assetPairs, IList<decimal> deltas)
+        public async Task UpdateRunners(IList<string> assetPairs, IList<decimal> deltas)
         {
+            await EnsureInitialized();
+
             var entered = false;
             try
             {
@@ -37,7 +47,6 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                 if (entered)
                 {
                     UpdateRunnersInternal(assetPairs, deltas);
-                    return Task.CompletedTask;
                 }
                 else
                 {
@@ -53,8 +62,10 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             }            
         }
 
-        public Task Handle(ITickPrice tickPrice)
+        public async Task Handle(ITickPrice tickPrice)
         {
+            await EnsureInitialized();
+
             var entered = false;
             try
             {
@@ -62,7 +73,6 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                 if (entered)
                 {
                     HandleInternal(tickPrice);
-                    return Task.CompletedTask;
                 }
                 else
                 {
@@ -127,7 +137,52 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             }
         }
 
-        private void UpdateRunnersInternal(IList<string> assetPairs, IList<decimal> deltas)
+        private async Task EnsureInitialized()
+        {
+            if (_initialized) return;
+
+            var entered = false;
+            try
+            {
+                Monitor.TryEnter(_syncRoot, Constants.LockTimeout, ref entered);
+                if (entered)
+                {
+                    if (_initialized) return;
+
+                    await EnsureInitializedInternal();
+                }
+                else
+                {
+                    throw new Exception($"Monitor not entered for {Constants.LockTimeout} in {nameof(TickPriceManager)}");
+                }
+            }
+            finally
+            {
+                if (entered)
+                {
+                    Monitor.Exit(_syncRoot);
+                }
+            }
+        }
+
+        private async Task EnsureInitializedInternal()
+        {
+            var runnerStatesEntities = await _runnerStateRepository.GetState();
+
+            _runners = new ConcurrentDictionary<string, Runner>();
+            foreach (var runnerStateEntity in runnerStatesEntities)
+            {
+                var runnerState = new RunnerState(runnerStateEntity.Event, runnerStateEntity.Extreme,
+                    runnerStateEntity.ExpectedDcLevel, runnerStateEntity.ExpectedOsLevel, runnerStateEntity.Reference,
+                    runnerStateEntity.ExpectedDirectionalChange, runnerStateEntity.DirectionalChangePrice,
+                    runnerStateEntity.Delta, runnerStateEntity.AssetPair);
+                _runners.TryAdd(runnerState.AssetPair, new Runner(runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerState));
+            }
+
+            _initialized = true;
+        }
+
+        private void UpdateRunnersInternal(IEnumerable<string> assetPairs, IEnumerable<decimal> deltas)
         {
             _assetPairs =
                 new ConcurrentDictionary<string, object>(assetPairs.Select(x =>
@@ -215,6 +270,55 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             }
 
             return runnersStates;
+        }
+
+        private void OnTimer(object state)
+        {
+            SaveState();
+            _saveStateTimer.Change(SavePeriod, Timeout.InfiniteTimeSpan);
+        }
+
+        public void SaveState()
+        {
+            if (!_initialized) return;
+
+            var entered = false;
+            try
+            {
+                Monitor.TryEnter(_syncRoot, Constants.LockTimeout, ref entered);
+                if (entered)
+                {
+                    SaveStateInternal();
+                }
+                else
+                {
+                    throw new Exception(
+                        $"Monitor not entered for {Constants.LockTimeout} in {nameof(TickPriceManager)}");
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.WriteErrorAsync(nameof(TickPriceManager), nameof(SaveState), ex).GetAwaiter().GetResult();
+            }
+            finally
+            {
+                if (entered)
+                {
+                    Monitor.Exit(_syncRoot);
+                }
+            }
+        }
+
+        private void SaveStateInternal()
+        {
+            var runnersStates = _runners.Values.Where(x => x.IsStateChanged).ToList();
+            if (runnersStates.Count == 0) return;
+
+            _runnerStateRepository.SaveState(runnersStates
+                .Select(x => x.GetState())
+                .ToArray());
+
+            runnersStates.ForEach(x => x.SaveState());
         }
 
         private static string GetRunnersKey(string assetPair, decimal delta)

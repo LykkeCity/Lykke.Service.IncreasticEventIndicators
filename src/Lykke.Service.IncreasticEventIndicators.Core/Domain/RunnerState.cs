@@ -2,7 +2,7 @@
 
 namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 {
-    internal class RunnerState : IRunnerState, ICloneable
+    public class RunnerState : IRunnerState, ICloneable
     {
         private int _event;
         private decimal _extreme;

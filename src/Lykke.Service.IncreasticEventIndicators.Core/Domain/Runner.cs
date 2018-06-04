@@ -5,39 +5,19 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 {
     public class Runner
     {
-        public decimal Delta { get; private set; }
-        public string AssetPair { get; private set; }
-
-        public ExpectedDirectionalChange ExpectedDirectionalChange
-        {
-            get => _state.ExpectedDirectionalChange;
-            private set => _state.ExpectedDirectionalChange = value;
-        }
-
-        public bool IsStateChanged => _state.IsChanged;
-
-        public decimal ExpectedDcLevel => _state.ExpectedDcLevel;
-        public int Event => _state.Event;
-
         private bool _initialized;
         private readonly RunnerState _state;
 
-        public Runner(decimal delta, string assetPair)
-        {
-            ResetDeltas(delta, assetPair);
+        public bool IsStateChanged => _state.IsChanged;
 
-            _state = new RunnerState(delta, assetPair);
-            ExpectedDirectionalChange = ExpectedDirectionalChange.Upward;
+        public Runner(decimal delta, string assetPair, RunnerState state = null)
+        {
+            _state = state ?? new RunnerState(delta, assetPair);
+
             _initialized = false;
         }
 
-        public void ResetDeltas(decimal delta, string assetPair)
-        {
-            Delta = delta;
-            AssetPair = assetPair;
-        }
-
-        public void Run(ITickPrice tickPrice) // TODO: probably it should return Tuple<ExpectedEvent, ExpectedLevel>
+        public void Run(ITickPrice tickPrice)
         {
             if (!_initialized)
             {
@@ -50,11 +30,11 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
                 return;
             }
 
-            if (ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
+            if (_state.ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
             {
                 if (tickPrice.Bid >= _state.ExpectedDcLevel)
                 {
-                    ExpectedDirectionalChange = ExpectedDirectionalChange.Downward;
+                    _state.ExpectedDirectionalChange = ExpectedDirectionalChange.Downward;
                     _state.Extreme = _state.Reference = _state.DirectionalChangePrice = tickPrice.Bid;
 
                     _state.ExpectedDcLevel = CalcExpectedDClevel();
@@ -67,7 +47,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
                 {
                     _state.Extreme = tickPrice.Ask;
                     _state.ExpectedDcLevel = CalcExpectedDClevel();
-                    if (tickPrice.Ask <= _state.ExpectedOsLevel) // deltaUp, it is correct. This is the difference of the trading algo.
+                    if (tickPrice.Ask <= _state.ExpectedOsLevel)
                     {
                         _state.Reference = _state.Extreme;
                         _state.ExpectedOsLevel = CalcExpectedOSlevel();
@@ -80,7 +60,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             {
                 if (tickPrice.Ask <= _state.ExpectedDcLevel)
                 {
-                    ExpectedDirectionalChange = ExpectedDirectionalChange.Upward;
+                    _state.ExpectedDirectionalChange = ExpectedDirectionalChange.Upward;
                     _state.Extreme = _state.Reference = _state.DirectionalChangePrice = tickPrice.Ask;
                     _state.ExpectedDcLevel = CalcExpectedDClevel();
                     _state.ExpectedOsLevel = CalcExpectedOSlevel();
@@ -92,7 +72,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
                 {
                     _state.Extreme = tickPrice.Bid;
                     _state.ExpectedDcLevel = CalcExpectedDClevel();
-                    if (tickPrice.Bid >= _state.ExpectedOsLevel) // deltaDown, it is correct. This is the difference of the trading algo.
+                    if (tickPrice.Bid >= _state.ExpectedOsLevel)
                     {
                         _state.Reference = _state.Extreme;
                         _state.ExpectedOsLevel = CalcExpectedOSlevel();
@@ -107,50 +87,38 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 
         public decimal CalcIntrinsicEventIndicator()
         {
-            if (_state.Extreme == 0 || (decimal)Delta == 0)
+            if (_state.Extreme == 0 || (decimal)_state.Delta == 0)
             {
                 return 0;
             }
 
-            var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / (decimal) Delta);
+            var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / (decimal)_state.Delta);
             return Math.Round(indicator, 2);
         }
 
         private decimal CalcExpectedDClevel()
         {
-            if (ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
+            if (_state.ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) + (double)Delta);
+                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) + (double)_state.Delta);
             }
             else
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) - (double)Delta);
+                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) - (double)_state.Delta);
             }
         }
 
         private decimal CalcExpectedOSlevel()
         {
-            if (ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
+            if (_state.ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) - (double)Delta);
+                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) - (double)_state.Delta);
             }
             else
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) + (double)Delta);
+                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) + (double)_state.Delta);
             }
         }
-
-        public decimal ExpectedUpperIE => Math.Max(_state.ExpectedDcLevel, _state.ExpectedOsLevel);
-
-        public decimal ExpectedLowerIE => Math.Min(_state.ExpectedDcLevel, _state.ExpectedOsLevel);
-
-        public IntrinsicEvent UpperIe => _state.ExpectedDcLevel > _state.ExpectedOsLevel
-            ? IntrinsicEvent.DirectionalChange
-            : IntrinsicEvent.Overshoot;
-
-        public IntrinsicEvent LowerIe => _state.ExpectedDcLevel < _state.ExpectedOsLevel
-            ? IntrinsicEvent.DirectionalChange
-            : IntrinsicEvent.Overshoot;
 
         public IRunnerState SaveState()
         {
