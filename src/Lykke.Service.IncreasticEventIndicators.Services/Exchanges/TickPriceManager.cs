@@ -24,7 +24,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
 
         private ConcurrentDictionary<string, Runner> _runners = new ConcurrentDictionary<string, Runner>();
 
-        private readonly object _syncRoot = new object();
+        private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1);
 
         private bool _initialized;
         private readonly Timer _saveStateTimer;
@@ -40,24 +40,24 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
         {
             await EnsureInitialized();
 
-            var entered = false;
+            var lockTaken = false;
             try
             {
-                Monitor.TryEnter(_syncRoot, Constants.LockTimeout, ref entered);
-                if (entered)
+                lockTaken = await _semaphore.WaitAsync(Constants.LockTimeout);
+                if (lockTaken)
                 {
                     UpdateRunnersInternal(assetPairs, deltas);
                 }
                 else
                 {
-                    throw new Exception($"Monitor not entered for {Constants.LockTimeout} in {nameof(TickPriceManager)}");
+                    throw new Exception("Deadlock occured");
                 }
             }
             finally
             {
-                if (entered)
+                if (lockTaken)
                 {
-                    Monitor.Exit(_syncRoot);
+                    _semaphore.Release();
                 }
             }            
         }
@@ -66,73 +66,72 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
         {
             await EnsureInitialized();
 
-            var entered = false;
+            var lockTaken = false;
             try
             {
-                Monitor.TryEnter(_syncRoot, Constants.LockTimeout, ref entered);
-                if (entered)
+                lockTaken = await _semaphore.WaitAsync(Constants.LockTimeout);
+                if (lockTaken)
                 {
                     HandleInternal(tickPrice);
                 }
                 else
                 {
-                    throw new Exception($"Monitor not entered for {Constants.LockTimeout} in {nameof(TickPriceManager)}");
+                    throw new Exception("Deadlock occured");
                 }
             }
             finally
             {
-                if (entered)
+                if (lockTaken)
                 {
-                    Monitor.Exit(_syncRoot);
+                    _semaphore.Release();
                 }
-            }            
+            }
         }
 
         public Task<decimal[][]> GetIntrinsicEventIndicators(IList<string> assetPairs, IList<decimal> deltas)
         {
-            var entered = false;
+            var lockTaken = false;
             try
             {
-                Monitor.TryEnter(_syncRoot, Constants.LockTimeout, ref entered);
-                if (entered)
+                lockTaken = _semaphore.Wait(Constants.LockTimeout);
+                if (lockTaken)
                 {
-                    var data = GetIntrinsicEventIndicatorsInternal(assetPairs, deltas);
-                    return Task.FromResult(data);
+                    return Task.FromResult(GetIntrinsicEventIndicatorsInternal(assetPairs, deltas));
                 }
                 else
                 {
-                    throw new Exception($"Monitor not entered for {Constants.LockTimeout} in {nameof(TickPriceManager)}");
+                    throw new Exception("Deadlock occured");
                 }
             }
             finally
             {
-                if (entered)
+                if (lockTaken)
                 {
-                    Monitor.Exit(_syncRoot);
+                    _semaphore.Release();
                 }
             }
         }
 
         public Task<IDictionary<string, IList<IRunnerState>>> GetRunnersStates()
         {
-            var entered = false;
+            var lockTaken = false;
             try
             {
-                Monitor.TryEnter(_syncRoot, Constants.LockTimeout, ref entered);
-                if (entered)
+                lockTaken = _semaphore.Wait(Constants.LockTimeout);
+                if (lockTaken)
                 {
                     return Task.FromResult(GetRunnersStatesInternal());
                 }
                 else
                 {
-                    throw new Exception($"Monitor not entered for {Constants.LockTimeout} in {nameof(TickPriceManager)}");
+                    throw new Exception("Deadlock occured");
                 }
             }
             finally
             {
-                if (entered)
+                if (lockTaken)
                 {
-                    Monitor.Exit(_syncRoot);
+                    _semaphore.Release();
                 }
             }
         }
@@ -141,11 +140,11 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
         {
             if (_initialized) return;
 
-            var entered = false;
+            var lockTaken = false;
             try
             {
-                Monitor.TryEnter(_syncRoot, Constants.LockTimeout, ref entered);
-                if (entered)
+                lockTaken = await _semaphore.WaitAsync(Constants.LockTimeout);
+                if (lockTaken)
                 {
                     if (_initialized) return;
 
@@ -153,14 +152,14 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                 }
                 else
                 {
-                    throw new Exception($"Monitor not entered for {Constants.LockTimeout} in {nameof(TickPriceManager)}");
+                    throw new Exception("Deadlock occured");
                 }
             }
             finally
             {
-                if (entered)
+                if (lockTaken)
                 {
-                    Monitor.Exit(_syncRoot);
+                    _semaphore.Release();
                 }
             }
         }
@@ -282,18 +281,17 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
         {
             if (!_initialized) return;
 
-            var entered = false;
+            var lockTaken = false;
             try
             {
-                Monitor.TryEnter(_syncRoot, Constants.LockTimeout, ref entered);
-                if (entered)
+                lockTaken = _semaphore.Wait(Constants.LockTimeout);
+                if (lockTaken)
                 {
                     SaveStateInternal();
                 }
                 else
                 {
-                    throw new Exception(
-                        $"Monitor not entered for {Constants.LockTimeout} in {nameof(TickPriceManager)}");
+                    throw new Exception("Deadlock occured");
                 }
             }
             catch (Exception ex)
@@ -302,9 +300,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             }
             finally
             {
-                if (entered)
+                if (lockTaken)
                 {
-                    Monitor.Exit(_syncRoot);
+                    _semaphore.Release();
                 }
             }
         }

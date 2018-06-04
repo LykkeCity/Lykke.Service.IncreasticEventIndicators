@@ -77,6 +77,12 @@ namespace Lykke.Service.IncreasticEventIndicators.Modules
                 .WithParameter(TypedParameter.From(AzureTableStorage<IntrinsicEventIndicatorsEntity>
                     .Create(_settings.ConnectionString(x => x.Db.DataConnString), "IntrinsicEventIndicators", _log)))
                 .SingleInstance();
+
+            builder.RegisterType<RunnerStateRepository>()
+                .As<IRunnerStateRepository>()
+                .WithParameter(TypedParameter.From(AzureTableStorage<RunnerStateEntity>
+                    .Create(_settings.ConnectionString(x => x.Db.DataConnString), "RunnersStates", _log)))
+                .SingleInstance();
         }
     }
 }
