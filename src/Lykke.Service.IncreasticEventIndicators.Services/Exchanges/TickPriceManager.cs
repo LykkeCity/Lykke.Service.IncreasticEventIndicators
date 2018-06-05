@@ -15,6 +15,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
     public class TickPriceManager : ITickPriceManager, ILykkeTickPriceHandler
     {
         private static readonly TimeSpan SavePeriod = TimeSpan.FromSeconds(10);
+        private static readonly TimeSpan CleanPeriod = TimeSpan.FromHours(1);
 
         private readonly ILog _log;
         private readonly IRunnerStateRepository _runnerStateRepository;
@@ -28,12 +29,14 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
 
         private bool _initialized;
         private readonly Timer _saveStateTimer;
+        private readonly Timer _cleanStateTimer;
 
         public TickPriceManager(ILog log, IRunnerStateRepository runnerStateRepository)
         {
             _log = log;
             _runnerStateRepository = runnerStateRepository;
             _saveStateTimer = new Timer(OnTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
+            _cleanStateTimer = new Timer(OnCleanTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
         }
 
         public async Task UpdateRunners(IList<string> assetPairs, IList<decimal> deltas)
@@ -319,6 +322,47 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                 .ToArray());
 
             runnersStates.ForEach(x => x.SaveState());
+        }
+
+        private void OnCleanTimer(object state)
+        {
+            CleanState();
+            _cleanStateTimer.Change(CleanPeriod, Timeout.InfiniteTimeSpan);
+        }
+
+        public void CleanState()
+        {
+            if (!_initialized) return;
+
+            var lockTaken = false;
+            try
+            {
+                lockTaken = _semaphore.Wait(Constants.LockTimeout);
+                if (lockTaken)
+                {
+                    CleanStateInternal();
+                }
+                else
+                {
+                    throw new Exception("Deadlock occured");
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.WriteErrorAsync(nameof(TickPriceManager), nameof(CleanState), ex).GetAwaiter().GetResult();
+            }
+            finally
+            {
+                if (lockTaken)
+                {
+                    _semaphore.Release();
+                }
+            }
+        }
+
+        private void CleanStateInternal()
+        {
+            _runnerStateRepository.CleanOldItems(_assetPairs.Keys, _deltas.Keys);
         }
 
         private static string GetRunnersKey(string assetPair, decimal delta)

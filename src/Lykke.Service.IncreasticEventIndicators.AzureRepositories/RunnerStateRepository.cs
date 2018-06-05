@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +20,6 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
         public decimal DirectionalChangePrice { get; set; }
         public decimal Delta { get; set; }
         public string AssetPair { get; set; }
-        public string Version { get; set; }
     }
 
     [UsedImplicitly]
@@ -41,13 +39,11 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
 
         public async Task SaveState(IReadOnlyList<IRunnerState> state)
         {
-            var version = Guid.NewGuid().ToString();
-
             var entities = state.Select(x =>
                 new RunnerStateEntity
                 {
-                    PartitionKey = GeneratePartitionKey(x),
-                    RowKey = GenerateRowKey(x),
+                    PartitionKey = GeneratePartitionKey(x.AssetPair),
+                    RowKey = GenerateRowKey(x.Delta),
                     Event = x.Event,
                     Extreme = x.Extreme,
                     ExpectedDcLevel = x.ExpectedDcLevel,
@@ -56,33 +52,38 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
                     ExpectedDirectionalChange = x.ExpectedDirectionalChange,
                     DirectionalChangePrice = x.DirectionalChangePrice,
                     AssetPair = x.AssetPair,
-                    Delta = x.Delta,
-                    Version = version
+                    Delta = x.Delta
                 }
             ).ToArray();
 
-            await InsertOrReplaceAsync(entities, version);
+            await InsertOrReplaceAsync(entities);
         }
 
-        private async Task InsertOrReplaceAsync(IEnumerable<RunnerStateEntity> entities, string version)
+        public async Task CleanOldItems(IEnumerable<string> assetPairs, IEnumerable<decimal> deltas)
+        {
+            var partitionKeys = assetPairs.Select(GeneratePartitionKey);
+            var rowKeys = deltas.Select(GenerateRowKey);
+
+            var entitiesToDelete = await _storage.GetDataAsync(x => !partitionKeys.Contains(x.PartitionKey) && !rowKeys.Contains(x.RowKey));
+
+            var tasks = entitiesToDelete.Select(x => _storage.DeleteAsync(x)).ToArray();
+            await Task.WhenAll(tasks);
+        }
+
+        private async Task InsertOrReplaceAsync(IEnumerable<RunnerStateEntity> entities)
         {
             var tasks = entities.Select(x => _storage.InsertOrReplaceAsync(x)).ToArray();
             await Task.WhenAll(tasks);
+        }        
 
-            var entitiesToDelete = await _storage.GetDataAsync(x => x.Version != version);
-
-            tasks = entitiesToDelete.Select(x => _storage.DeleteAsync(x)).ToArray();
-            await Task.WhenAll(tasks);
+        private static string GeneratePartitionKey(string assetPair)
+        {
+            return assetPair;
         }
 
-        private static string GeneratePartitionKey(IRunnerState runnerState)
+        private static string GenerateRowKey(decimal delta)
         {
-            return runnerState.AssetPair;
-        }
-
-        private static string GenerateRowKey(IRunnerState runnerState)
-        {
-            return runnerState.Delta.ToString(CultureInfo.InvariantCulture);
+            return delta.ToString(CultureInfo.InvariantCulture);
         }
     }
 }
