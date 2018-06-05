@@ -55,6 +55,8 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
                     Reference = x.Reference,
                     ExpectedDirectionalChange = x.ExpectedDirectionalChange,
                     DirectionalChangePrice = x.DirectionalChangePrice,
+                    AssetPair = x.AssetPair,
+                    Delta = x.Delta,
                     Version = version
                 }
             ).ToArray();
