@@ -178,6 +178,8 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                 _runners.TryAdd(runnerState.AssetPair, new Runner(runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerState));
             }
 
+            _saveStateTimer.Change(SavePeriod, Timeout.InfiniteTimeSpan);
+
             _initialized = true;
         }
 
