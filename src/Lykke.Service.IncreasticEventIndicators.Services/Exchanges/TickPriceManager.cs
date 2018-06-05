@@ -178,7 +178,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                     runnerStateEntity.ExpectedDcLevel, runnerStateEntity.ExpectedOsLevel, runnerStateEntity.Reference,
                     runnerStateEntity.ExpectedDirectionalChange, runnerStateEntity.DirectionalChangePrice,
                     runnerStateEntity.Delta, runnerStateEntity.AssetPair);
-                _runners.TryAdd(runnerState.AssetPair, new Runner(runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerState));
+
+                var key = GetRunnersKey(runnerState.AssetPair, runnerState.Delta);
+                _runners.TryAdd(key, new Runner(runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerState));
             }
 
             _saveStateTimer.Change(SavePeriod, Timeout.InfiniteTimeSpan);
