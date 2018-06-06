@@ -184,6 +184,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             }
 
             _saveStateTimer.Change(SavePeriod, Timeout.InfiniteTimeSpan);
+            _cleanStateTimer.Change(CleanPeriod, Timeout.InfiniteTimeSpan);
 
             _initialized = true;
         }
