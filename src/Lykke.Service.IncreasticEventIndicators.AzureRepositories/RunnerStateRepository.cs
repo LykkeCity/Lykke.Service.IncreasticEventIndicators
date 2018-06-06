@@ -64,7 +64,7 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
             var partitionKeys = assetPairs.Select(GeneratePartitionKey);
             var rowKeys = deltas.Select(GenerateRowKey);
 
-            var entitiesToDelete = await _storage.GetDataAsync(x => !partitionKeys.Contains(x.PartitionKey) && !rowKeys.Contains(x.RowKey));
+            var entitiesToDelete = await _storage.GetDataAsync(x => !partitionKeys.Contains(x.PartitionKey) || !rowKeys.Contains(x.RowKey));
 
             var tasks = entitiesToDelete.Select(x => _storage.DeleteAsync(x)).ToArray();
             await Task.WhenAll(tasks);
