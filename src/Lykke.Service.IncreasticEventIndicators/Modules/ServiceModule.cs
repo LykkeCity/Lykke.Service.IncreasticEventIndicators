@@ -1,9 +1,16 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AzureStorage.Tables;
+using Common;
 using Common.Log;
+using Lykke.Service.IncreasticEventIndicators.AzureRepositories;
+using Lykke.Service.IncreasticEventIndicators.Core.Domain;
 using Lykke.Service.IncreasticEventIndicators.Core.Services;
+using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
+using Lykke.Service.IncreasticEventIndicators.Rabbit;
 using Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings;
 using Lykke.Service.IncreasticEventIndicators.Services;
+using Lykke.Service.IncreasticEventIndicators.Services.Exchanges;
 using Lykke.SettingsReader;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,12 +33,6 @@ namespace Lykke.Service.IncreasticEventIndicators.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            // TODO: Do not register entire settings in container, pass necessary settings to services which requires them
-            // ex:
-            //  builder.RegisterType<QuotesPublisher>()
-            //      .As<IQuotesPublisher>()
-            //      .WithParameter(TypedParameter.From(_settings.CurrentValue.QuotesPublication))
-
             builder.RegisterInstance(_log)
                 .As<ILog>()
                 .SingleInstance();
@@ -46,9 +47,42 @@ namespace Lykke.Service.IncreasticEventIndicators.Modules
             builder.RegisterType<ShutdownManager>()
                 .As<IShutdownManager>();
 
-            // TODO: Add your dependencies here
+            builder.RegisterInstance(_settings.CurrentValue)
+                .SingleInstance();
+
+            builder.RegisterType<LykkeTickPriceSubscriber>()
+                .As<IStartable>()
+                .As<IStopable>()
+                .AutoActivate()
+                .SingleInstance();
+
+            builder.RegisterType<TickPriceManager>()
+                .As<ITickPriceManager>()
+                .As<ILykkeTickPriceHandler>()
+                .SingleInstance();
+
+            builder.RegisterType<IntrinsicEventIndicatorsService>()
+                .As<IIntrinsicEventIndicatorsService>()
+                .SingleInstance();
+
+            RegisterRepositories(builder);
 
             builder.Populate(_services);
+        }
+
+        private void RegisterRepositories(ContainerBuilder builder)
+        {
+            builder.RegisterType<IntrinsicEventIndicatorsRepository>()
+                .As<IIntrinsicEventIndicatorsRepository>()
+                .WithParameter(TypedParameter.From(AzureTableStorage<IntrinsicEventIndicatorsEntity>
+                    .Create(_settings.ConnectionString(x => x.Db.DataConnString), "IntrinsicEventIndicators", _log)))
+                .SingleInstance();
+
+            builder.RegisterType<RunnerStateRepository>()
+                .As<IRunnerStateRepository>()
+                .WithParameter(TypedParameter.From(AzureTableStorage<RunnerStateEntity>
+                    .Create(_settings.ConnectionString(x => x.Db.DataConnString), "RunnersStates", _log)))
+                .SingleInstance();
         }
     }
 }

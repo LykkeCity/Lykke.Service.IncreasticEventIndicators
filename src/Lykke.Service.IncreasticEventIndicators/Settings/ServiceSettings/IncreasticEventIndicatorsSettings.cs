@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using Lykke.Service.IncreasticEventIndicators.Rabbit;
 
 namespace Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings
 {
@@ -6,5 +7,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings
     public class IncreasticEventIndicatorsSettings
     {
         public DbSettings Db { get; set; }
+
+        public ExchangeSettings TickPrice { get; set; }
     }
 }
