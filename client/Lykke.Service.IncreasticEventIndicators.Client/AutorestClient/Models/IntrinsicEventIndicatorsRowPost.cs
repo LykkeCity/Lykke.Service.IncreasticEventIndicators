@@ -9,24 +9,24 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class IntrinsicEventIndicatorsAssetPairDto
+    public partial class IntrinsicEventIndicatorsRowPost
     {
         /// <summary>
-        /// Initializes a new instance of the
-        /// IntrinsicEventIndicatorsAssetPairDto class.
+        /// Initializes a new instance of the IntrinsicEventIndicatorsRowPost
+        /// class.
         /// </summary>
-        public IntrinsicEventIndicatorsAssetPairDto()
+        public IntrinsicEventIndicatorsRowPost()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// IntrinsicEventIndicatorsAssetPairDto class.
+        /// Initializes a new instance of the IntrinsicEventIndicatorsRowPost
+        /// class.
         /// </summary>
-        public IntrinsicEventIndicatorsAssetPairDto(string rowId = default(string), string assetPair = default(string))
+        public IntrinsicEventIndicatorsRowPost(string exchange = default(string), string assetPair = default(string))
         {
-            RowId = rowId;
+            Exchange = exchange;
             AssetPair = assetPair;
             CustomInit();
         }
@@ -38,8 +38,8 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "RowId")]
-        public string RowId { get; set; }
+        [JsonProperty(PropertyName = "Exchange")]
+        public string Exchange { get; set; }
 
         /// <summary>
         /// </summary>

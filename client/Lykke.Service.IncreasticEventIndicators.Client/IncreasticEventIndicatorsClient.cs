@@ -37,31 +37,31 @@ namespace Lykke.Service.IncreasticEventIndicators.Client
 
         public async Task AddDeltaAsync(IntrinsicEventIndicatorsColumnPost column, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var response = await _api.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(column, cancellationToken: cancellationToken);
+            var response = await _api.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(column, cancellationToken: cancellationToken);
             ValidateResponse(response);
         }
 
         public async Task RemoveDeltaAsync(string columnId, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var response = await _api.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(columnId, cancellationToken: cancellationToken);
+            var response = await _api.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(columnId, cancellationToken: cancellationToken);
             ValidateResponse(response);
         }
 
-        public async Task AddAssetPairAsync(IntrinsicEventIndicatorsAssetPairPost row, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task AddAssetPairAsync(IntrinsicEventIndicatorsRowPost row, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var response = await _api.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(row, cancellationToken: cancellationToken);
+            var response = await _api.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(row, cancellationToken: cancellationToken);
             ValidateResponse(response);
         }
 
         public async Task RemoveAssetPairAsync(string rowId, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var response = await _api.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(rowId, cancellationToken: cancellationToken);
+            var response = await _api.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(rowId, cancellationToken: cancellationToken);
             ValidateResponse(response);
         }
 
         public async Task<IntrinsicEventIndicatorsDto> GetDataAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            var response = await _api.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(cancellationToken: cancellationToken);
+            var response = await _api.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(cancellationToken: cancellationToken);
             ValidateResponse(response);
             return response.Body;
         }
@@ -69,7 +69,46 @@ namespace Lykke.Service.IncreasticEventIndicators.Client
         public async Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesAsync(
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var response = await _api.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(cancellationToken: cancellationToken);
+            var response = await _api.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(cancellationToken: cancellationToken);
+            ValidateResponse(response);
+            return response.Body;
+        }
+
+        public async Task AddDeltaExternalAsync(IntrinsicEventIndicatorsColumnPost column, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var response = await _api.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPutWithHttpMessagesAsync(column, cancellationToken: cancellationToken);
+            ValidateResponse(response);
+        }
+
+        public async Task RemoveDeltaExternalAsync(string columnId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var response = await _api.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteWithHttpMessagesAsync(columnId, cancellationToken: cancellationToken);
+            ValidateResponse(response);
+        }
+
+        public async Task AddAssetPairExternalAsync(IntrinsicEventIndicatorsRowPost row, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var response = await _api.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutWithHttpMessagesAsync(row, cancellationToken: cancellationToken);
+            ValidateResponse(response);
+        }
+
+        public async Task RemoveAssetPairExternalAsync(string rowId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var response = await _api.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteWithHttpMessagesAsync(rowId, cancellationToken: cancellationToken);
+            ValidateResponse(response);
+        }
+
+        public async Task<IntrinsicEventIndicatorsDto> GetDataExternalAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var response = await _api.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGetWithHttpMessagesAsync(cancellationToken: cancellationToken);
+            ValidateResponse(response);
+            return response.Body;
+        }
+
+        public async Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesExternalAsync(
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var response = await _api.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGetWithHttpMessagesAsync(cancellationToken: cancellationToken);
             ValidateResponse(response);
             return response.Body;
         }

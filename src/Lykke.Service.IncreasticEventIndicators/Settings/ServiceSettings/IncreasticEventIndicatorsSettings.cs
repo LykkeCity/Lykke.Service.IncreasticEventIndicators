@@ -8,6 +8,13 @@ namespace Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings
     {
         public DbSettings Db { get; set; }
 
-        public ExchangeSettings TickPrice { get; set; }
+        public TickPriceExchangeSettings LykkeTickPriceExchange { get; set; }
+
+        public TickPriceExchangeSettings[] ExternalTickPriceExchanges { get; set; }
+    }
+
+    public class TickPriceExchangeSettings
+    {
+        public ExchangeSettings Exchange { get; set; }
     }
 }

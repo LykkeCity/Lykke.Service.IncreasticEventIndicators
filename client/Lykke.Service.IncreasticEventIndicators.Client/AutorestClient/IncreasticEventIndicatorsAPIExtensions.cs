@@ -26,9 +26,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='column'>
             /// Delta to add.
             /// </param>
-            public static ErrorResponse ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPut(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost))
+            public static ErrorResponse ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPut(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost))
             {
-                return operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutAsync(column).GetAwaiter().GetResult();
+                return operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPutAsync(column).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,9 +43,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ErrorResponse> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutAsync(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorResponse> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPutAsync(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(column, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPutWithHttpMessagesAsync(column, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -60,9 +60,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='columnId'>
             /// delta
             /// </param>
-            public static void ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDelete(this IIncreasticEventIndicatorsAPI operations, string columnId = default(string))
+            public static void ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDelete(this IIncreasticEventIndicatorsAPI operations, string columnId = default(string))
             {
-                operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteAsync(columnId).GetAwaiter().GetResult();
+                operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteAsync(columnId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -77,9 +77,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteAsync(this IIncreasticEventIndicatorsAPI operations, string columnId = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteAsync(this IIncreasticEventIndicatorsAPI operations, string columnId = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(columnId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteWithHttpMessagesAsync(columnId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -91,9 +91,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='row'>
             /// Asset pair to add.
             /// </param>
-            public static ErrorResponse ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPut(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsAssetPairPost row = default(IntrinsicEventIndicatorsAssetPairPost))
+            public static ErrorResponse ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPut(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost))
             {
-                return operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutAsync(row).GetAwaiter().GetResult();
+                return operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutAsync(row).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -108,9 +108,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ErrorResponse> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutAsync(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsAssetPairPost row = default(IntrinsicEventIndicatorsAssetPairPost), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorResponse> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutAsync(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(row, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutWithHttpMessagesAsync(row, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -125,9 +125,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='rowId'>
             /// asset pair
             /// </param>
-            public static void ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDelete(this IIncreasticEventIndicatorsAPI operations, string rowId = default(string))
+            public static void ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDelete(this IIncreasticEventIndicatorsAPI operations, string rowId = default(string))
             {
-                operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteAsync(rowId).GetAwaiter().GetResult();
+                operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteAsync(rowId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -142,9 +142,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteAsync(this IIncreasticEventIndicatorsAPI operations, string rowId = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteAsync(this IIncreasticEventIndicatorsAPI operations, string rowId = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(rowId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteWithHttpMessagesAsync(rowId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -153,9 +153,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static IntrinsicEventIndicatorsDto ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGet(this IIncreasticEventIndicatorsAPI operations)
+            public static IntrinsicEventIndicatorsDto ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGet(this IIncreasticEventIndicatorsAPI operations)
             {
-                return operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetAsync().GetAwaiter().GetResult();
+                return operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGetAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -167,9 +167,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IntrinsicEventIndicatorsDto> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetAsync(this IIncreasticEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IntrinsicEventIndicatorsDto> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGetAsync(this IIncreasticEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -181,9 +181,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static IDictionary<string, IList<RunnerStateDto>> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGet(this IIncreasticEventIndicatorsAPI operations)
+            public static IDictionary<string, IList<RunnerStateDto>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGet(this IIncreasticEventIndicatorsAPI operations)
             {
-                return operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetAsync().GetAwaiter().GetResult();
+                return operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGetAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -195,9 +195,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IDictionary<string, IList<RunnerStateDto>>> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetAsync(this IIncreasticEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IDictionary<string, IList<RunnerStateDto>>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGetAsync(this IIncreasticEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -226,6 +226,192 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
             public static async Task<object> IsAliveAsync(this IIncreasticEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.IsAliveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Adds delta.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='column'>
+            /// Delta to add.
+            /// </param>
+            public static ErrorResponse ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPut(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost))
+            {
+                return operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutAsync(column).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Adds delta.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='column'>
+            /// Delta to add.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutAsync(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(column, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Deletes delta.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='columnId'>
+            /// delta
+            /// </param>
+            public static void ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDelete(this IIncreasticEventIndicatorsAPI operations, string columnId = default(string))
+            {
+                operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteAsync(columnId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Deletes delta.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='columnId'>
+            /// delta
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteAsync(this IIncreasticEventIndicatorsAPI operations, string columnId = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(columnId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Adds asset pair.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='row'>
+            /// Asset pair to add.
+            /// </param>
+            public static ErrorResponse ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPut(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost))
+            {
+                return operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutAsync(row).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Adds asset pair.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='row'>
+            /// Asset pair to add.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutAsync(this IIncreasticEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(row, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Deletes asset pair.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='rowId'>
+            /// asset pair
+            /// </param>
+            public static void ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDelete(this IIncreasticEventIndicatorsAPI operations, string rowId = default(string))
+            {
+                operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteAsync(rowId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Deletes asset pair.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='rowId'>
+            /// asset pair
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteAsync(this IIncreasticEventIndicatorsAPI operations, string rowId = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(rowId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Gets data.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IntrinsicEventIndicatorsDto ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGet(this IIncreasticEventIndicatorsAPI operations)
+            {
+                return operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets data.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IntrinsicEventIndicatorsDto> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetAsync(this IIncreasticEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets runners states.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IDictionary<string, IList<RunnerStateDto>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGet(this IIncreasticEventIndicatorsAPI operations)
+            {
+                return operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets runners states.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IDictionary<string, IList<RunnerStateDto>>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetAsync(this IIncreasticEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

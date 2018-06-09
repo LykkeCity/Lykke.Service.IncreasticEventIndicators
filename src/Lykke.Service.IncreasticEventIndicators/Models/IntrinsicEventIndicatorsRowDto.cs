@@ -1,8 +1,9 @@
 ﻿namespace Lykke.Service.IncreasticEventIndicators.Models
 {
-    public class IntrinsicEventIndicatorsAssetPairDto
+    public class IntrinsicEventIndicatorsRowDto
     {
         public string RowId { get; set; }
+        public string Exchange { get; set; }
         public string AssetPair { get; set; }
     }
 }

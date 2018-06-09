@@ -12,7 +12,7 @@ using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
 
 namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
 {
-    public class TickPriceManager : ITickPriceManager, ILykkeTickPriceHandler
+    public abstract class TickPriceManager : ITickPriceManager, ITickPriceHandler
     {
         private static readonly TimeSpan SavePeriod = TimeSpan.FromSeconds(10);
         private static readonly TimeSpan CleanPeriod = TimeSpan.FromHours(1);
@@ -20,9 +20,8 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
         private readonly ILog _log;
         private readonly IRunnerStateRepository _runnerStateRepository;
 
-        private ConcurrentDictionary<string, object> _assetPairs = new ConcurrentDictionary<string, object>();
+        private ConcurrentDictionary<string, object> _exchangeAssetPairs = new ConcurrentDictionary<string, object>();
         private ConcurrentDictionary<decimal, object> _deltas = new ConcurrentDictionary<decimal, object>();
-
         private ConcurrentDictionary<string, Runner> _runners = new ConcurrentDictionary<string, Runner>();
 
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1);
@@ -31,7 +30,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
         private readonly Timer _saveStateTimer;
         private readonly Timer _cleanStateTimer;
 
-        public TickPriceManager(ILog log, IRunnerStateRepository runnerStateRepository)
+        protected TickPriceManager(ILog log, IRunnerStateRepository runnerStateRepository)
         {
             _log = log;
             _runnerStateRepository = runnerStateRepository;
@@ -39,7 +38,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             _cleanStateTimer = new Timer(OnCleanTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
         }
 
-        public async Task UpdateRunners(IList<string> assetPairs, IList<decimal> deltas)
+        public async Task UpdateRunners(IList<string> exchangeAssetPairs, IList<decimal> deltas)
         {
             await EnsureInitialized();
 
@@ -49,7 +48,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                 lockTaken = await _semaphore.WaitAsync(Constants.LockTimeout);
                 if (lockTaken)
                 {
-                    UpdateRunnersInternal(assetPairs, deltas);
+                    UpdateRunnersInternal(exchangeAssetPairs, deltas);
                 }
                 else
                 {
@@ -91,7 +90,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             }
         }
 
-        public Task<decimal[][]> GetIntrinsicEventIndicators(IList<string> assetPairs, IList<decimal> deltas)
+        public Task<decimal[][]> GetIntrinsicEventIndicators(IList<string> exchangeAssetPairs, IList<decimal> deltas)
         {
             var lockTaken = false;
             try
@@ -99,7 +98,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                 lockTaken = _semaphore.Wait(Constants.LockTimeout);
                 if (lockTaken)
                 {
-                    return Task.FromResult(GetIntrinsicEventIndicatorsInternal(assetPairs, deltas));
+                    return Task.FromResult(GetIntrinsicEventIndicatorsInternal(exchangeAssetPairs, deltas));
                 }
                 else
                 {
@@ -168,19 +167,22 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
         }
 
         private async Task EnsureInitializedInternal()
-        {
-            var runnerStatesEntities = await _runnerStateRepository.GetState();
-
+        {            
             _runners = new ConcurrentDictionary<string, Runner>();
+
+            var runnerStatesEntities = await _runnerStateRepository.GetState();
             foreach (var runnerStateEntity in runnerStatesEntities)
             {
                 var runnerState = new RunnerState(runnerStateEntity.Event, runnerStateEntity.Extreme,
                     runnerStateEntity.ExpectedDcLevel, runnerStateEntity.ExpectedOsLevel, runnerStateEntity.Reference,
                     runnerStateEntity.ExpectedDirectionalChange, runnerStateEntity.DirectionalChangePrice,
-                    runnerStateEntity.Delta, runnerStateEntity.AssetPair);
+                    runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerStateEntity.Exchange);
 
-                var key = GetRunnersKey(runnerState.AssetPair, runnerState.Delta);
-                _runners.TryAdd(key, new Runner(runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerState));
+                var runner = new Runner(runnerStateEntity.Delta, runnerStateEntity.AssetPair,
+                    runnerStateEntity.Exchange, runnerState);
+
+                var runnersKey = GetRunnersKey(GetExchangeAssetPairKey(runnerState.Exchange, runnerState.AssetPair), runnerState.Delta);
+                _runners.TryAdd(runnersKey, runner);
             }
 
             _saveStateTimer.Change(SavePeriod, Timeout.InfiniteTimeSpan);
@@ -189,22 +191,22 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             _initialized = true;
         }
 
-        private void UpdateRunnersInternal(IEnumerable<string> assetPairs, IEnumerable<decimal> deltas)
+        private void UpdateRunnersInternal(IEnumerable<string> exchangeAssetPairs, IEnumerable<decimal> deltas)
         {
-            _assetPairs =
-                new ConcurrentDictionary<string, object>(assetPairs.Select(x =>
-                    new KeyValuePair<string, object>(x.ToUpperInvariant(), null)));
+            _exchangeAssetPairs = new ConcurrentDictionary<string, object>(exchangeAssetPairs.Select(x =>
+                new KeyValuePair<string, object>(x.ToUpperInvariant(), null)));
             _deltas = new ConcurrentDictionary<decimal, object>(deltas.Select(x =>
                 new KeyValuePair<decimal, object>(x, null)));
 
-            foreach (var assetPair in _assetPairs.Keys)
+            foreach (var exchangeAssetPair in _exchangeAssetPairs.Keys)
             {
                 foreach (var delta in _deltas.Keys)
                 {
-                    var key = GetRunnersKey(assetPair, delta);
-                    if (!_runners.ContainsKey(key))
+                    var runnersKey = GetRunnersKey(exchangeAssetPair, delta);
+                    if (!_runners.ContainsKey(runnersKey))
                     {
-                        _runners.TryAdd(key, new Runner(delta, assetPair));
+                        _runners.TryAdd(runnersKey, new Runner(delta, ParseAssetPairFromExchangeAssetPairKey(exchangeAssetPair),
+                            ParseExchangeFromExchangeAssetPairKey(exchangeAssetPair)));
                     }
                 }
             }
@@ -212,10 +214,10 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             var runnerKeys = _runners.Keys.ToList();
             foreach (var runnerKey in runnerKeys)
             {
-                var assetPair = ParseAssetPairFromKey(runnerKey);
-                var delta = ParseDeltaFromKey(runnerKey);
+                var exchangeAssetPair = ParseExchangeAssetPairFromRunnersKey(runnerKey);
+                var delta = ParseDeltaFromRunnersKey(runnerKey);
 
-                if (!_assetPairs.ContainsKey(assetPair) || !_deltas.ContainsKey(delta))
+                if (!_exchangeAssetPairs.ContainsKey(exchangeAssetPair) || !_deltas.ContainsKey(delta))
                 {
                     _runners.TryRemove(runnerKey, out _);
                 }
@@ -224,33 +226,33 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
 
         private void HandleInternal(ITickPrice tickPrice)
         {
-            var tickPriceAssetPair = tickPrice.Asset.ToUpperInvariant();
-            if (_assetPairs.ContainsKey(tickPriceAssetPair))
+            var exchangeAssetPair = GetExchangeAssetPairKey(tickPrice.Source.ToUpperInvariant(), tickPrice.Asset.ToUpperInvariant());
+            if (_exchangeAssetPairs.ContainsKey(exchangeAssetPair))
             {
                 foreach (var delta in _deltas.Keys)
                 {
-                    var key = GetRunnersKey(tickPriceAssetPair, delta);
-                    if (_runners.ContainsKey(key))
+                    var runnersKey = GetRunnersKey(exchangeAssetPair, delta);
+                    if (_runners.ContainsKey(runnersKey))
                     {
-                        _runners[key].Run(tickPrice);
+                        _runners[runnersKey].Run(tickPrice);
                     }
                 }
             }
         }
 
-        private decimal[][] GetIntrinsicEventIndicatorsInternal(IList<string> assetPairs, IList<decimal> deltas)
+        private decimal[][] GetIntrinsicEventIndicatorsInternal(IList<string> exchangeAssetPairs, IList<decimal> deltas)
         {
-            var data = new decimal[assetPairs.Count][];
+            var data = new decimal[exchangeAssetPairs.Count][];
             for (var i = 0; i < data.Length; i++)
             {
                 data[i] = new decimal[deltas.Count];
             }
 
-            for (var i = 0; i < assetPairs.Count; i++)
+            for (var i = 0; i < exchangeAssetPairs.Count; i++)
             {
                 for (var j = 0; j < deltas.Count; j++)
                 {
-                    var key = GetRunnersKey(assetPairs[i], deltas[j]);
+                    var key = GetRunnersKey(exchangeAssetPairs[i], deltas[j]);
                     if (_runners.ContainsKey(key))
                     {
                         data[i][j] = _runners[key].CalcIntrinsicEventIndicator();
@@ -267,13 +269,13 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
 
             foreach (var runner in _runners)
             {
-                var assetPair = ParseAssetPairFromKey(runner.Key);
-                if (!runnersStates.ContainsKey(assetPair))
+                var runnerStateKey = ParseExchangeAssetPairFromRunnersKey(runner.Key);
+                if (!runnersStates.ContainsKey(runnerStateKey))
                 {
-                    runnersStates.Add(assetPair, new List<IRunnerState>());
+                    runnersStates.Add(runnerStateKey, new List<IRunnerState>());
                 }
 
-                runnersStates[assetPair].Add(runner.Value.GetState());
+                runnersStates[runnerStateKey].Add(runner.Value.GetState());
             }
 
             return runnersStates;
@@ -285,7 +287,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             _saveStateTimer.Change(SavePeriod, Timeout.InfiniteTimeSpan);
         }
 
-        public void SaveState()
+        private void SaveState()
         {
             if (!_initialized) return;
 
@@ -365,22 +367,37 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
 
         private void CleanStateInternal()
         {
-            _runnerStateRepository.CleanOldItems(_assetPairs.Keys, _deltas.Keys);
+            _runnerStateRepository.CleanOldItems(_exchangeAssetPairs.Keys, _deltas.Keys);
         }
 
-        private static string GetRunnersKey(string assetPair, decimal delta)
+        public static string GetExchangeAssetPairKey(string exchangeName, string assetPair)
         {
-            return $"{assetPair.ToUpperInvariant()}_{delta}";
+            return $"{exchangeName.ToUpperInvariant()} {assetPair.ToUpperInvariant()}";
         }
 
-        private static string ParseAssetPairFromKey(string key)
+        private static string ParseExchangeFromExchangeAssetPairKey(string key)
         {
-            return key.Split('_')[0];
+            return key.Split(' ')[0];
         }
 
-        private static decimal ParseDeltaFromKey(string key)
+        private static string ParseAssetPairFromExchangeAssetPairKey(string key)
         {
-            return decimal.Parse(key.Split('_')[1]);
+            return key.Split(' ')[1];
+        }
+
+        private static string GetRunnersKey(string exchangeAssetPair, decimal delta)
+        {
+            return $"{exchangeAssetPair.ToUpperInvariant()} {delta}";
+        }
+
+        private static string ParseExchangeAssetPairFromRunnersKey(string key)
+        {
+            return GetExchangeAssetPairKey(key.Split(' ')[0], key.Split(' ')[1]);
+        }
+
+        private static decimal ParseDeltaFromRunnersKey(string key)
+        {
+            return decimal.Parse(key.Split(' ')[2]);
         }
     }
 }

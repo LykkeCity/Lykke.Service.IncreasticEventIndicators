@@ -23,7 +23,7 @@
             Gets or sets json deserialization settings.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Adds delta.
             </summary>
@@ -37,7 +37,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Deletes delta.
             </summary>
@@ -51,7 +51,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Adds asset pair.
             </summary>
@@ -65,7 +65,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Deletes asset pair.
             </summary>
@@ -79,7 +79,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Gets data.
             </summary>
@@ -90,7 +90,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Gets runners states.
             </summary>
@@ -104,6 +104,84 @@
         <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.IsAliveWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Checks service is alive
+            </summary>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Adds delta.
+            </summary>
+            <param name='column'>
+            Delta to add.
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Deletes delta.
+            </summary>
+            <param name='columnId'>
+            delta
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Adds asset pair.
+            </summary>
+            <param name='row'>
+            Asset pair to add.
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Deletes asset pair.
+            </summary>
+            <param name='rowId'>
+            asset pair
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Gets data.
+            </summary>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Gets runners states.
             </summary>
             <param name='customHeaders'>
             The headers that will be added to request.
@@ -182,7 +260,7 @@
             Initializes client properties.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Adds delta.
             </summary>
@@ -205,7 +283,7 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Deletes delta.
             </summary>
@@ -225,7 +303,7 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Adds asset pair.
             </summary>
@@ -248,7 +326,7 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Deletes asset pair.
             </summary>
@@ -268,7 +346,7 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Gets data.
             </summary>
@@ -288,7 +366,7 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Gets runners states.
             </summary>
@@ -328,12 +406,138 @@
             A response object containing the response body and response headers.
             </return>
         </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Adds delta.
+            </summary>
+            <param name='column'>
+            Delta to add.
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Deletes delta.
+            </summary>
+            <param name='columnId'>
+            delta
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Adds asset pair.
+            </summary>
+            <param name='row'>
+            Asset pair to add.
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Deletes asset pair.
+            </summary>
+            <param name='rowId'>
+            asset pair
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Gets data.
+            </summary>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Gets runners states.
+            </summary>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
         <member name="T:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions">
             <summary>
             Extension methods for IncreasticEventIndicatorsAPI.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPut(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPut(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost)">
             <summary>
             Adds delta.
             </summary>
@@ -344,7 +548,7 @@
             Delta to add.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPutAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost,System.Threading.CancellationToken)">
             <summary>
             Adds delta.
             </summary>
@@ -358,7 +562,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDelete(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDelete(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String)">
             <summary>
             Deletes delta.
             </summary>
@@ -369,7 +573,7 @@
             delta
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String,System.Threading.CancellationToken)">
             <summary>
             Deletes delta.
             </summary>
@@ -383,7 +587,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPut(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairPost)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPut(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost)">
             <summary>
             Adds asset pair.
             </summary>
@@ -394,7 +598,7 @@
             Asset pair to add.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairPost,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost,System.Threading.CancellationToken)">
             <summary>
             Adds asset pair.
             </summary>
@@ -408,7 +612,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDelete(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDelete(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String)">
             <summary>
             Deletes asset pair.
             </summary>
@@ -419,7 +623,7 @@
             asset pair
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String,System.Threading.CancellationToken)">
             <summary>
             Deletes asset pair.
             </summary>
@@ -433,7 +637,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGet(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGet(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI)">
             <summary>
             Gets data.
             </summary>
@@ -441,7 +645,7 @@
             The operations group for this extension method.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGetAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.Threading.CancellationToken)">
             <summary>
             Gets data.
             </summary>
@@ -452,7 +656,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGet(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGet(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI)">
             <summary>
             Gets runners states.
             </summary>
@@ -460,7 +664,7 @@
             The operations group for this extension method.
             </param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGetAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.Threading.CancellationToken)">
             <summary>
             Gets runners states.
             </summary>
@@ -490,6 +694,144 @@
             The cancellation token.
             </param>
         </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPut(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost)">
+            <summary>
+            Adds delta.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='column'>
+            Delta to add.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost,System.Threading.CancellationToken)">
+            <summary>
+            Adds delta.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='column'>
+            Delta to add.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDelete(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String)">
+            <summary>
+            Deletes delta.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='columnId'>
+            delta
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Deletes delta.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='columnId'>
+            delta
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPut(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost)">
+            <summary>
+            Adds asset pair.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='row'>
+            Asset pair to add.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost,System.Threading.CancellationToken)">
+            <summary>
+            Adds asset pair.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='row'>
+            Asset pair to add.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDelete(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String)">
+            <summary>
+            Deletes asset pair.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='rowId'>
+            asset pair
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Deletes asset pair.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='rowId'>
+            asset pair
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGet(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI)">
+            <summary>
+            Gets data.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.Threading.CancellationToken)">
+            <summary>
+            Gets data.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGet(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI)">
+            <summary>
+            Gets runners states.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IncreasticEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.IIncreasticEventIndicatorsAPI,System.Threading.CancellationToken)">
+            <summary>
+            Gets runners states.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
         <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.ErrorResponse.#ctor">
             <summary>
             Initializes a new instance of the ErrorResponse class.
@@ -511,42 +853,6 @@
         <member name="T:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.ExpectedDirectionalChange">
             <summary>
             Defines values for ExpectedDirectionalChange.
-            </summary>
-        </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairDto.#ctor">
-            <summary>
-            Initializes a new instance of the
-            IntrinsicEventIndicatorsAssetPairDto class.
-            </summary>
-        </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairDto.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the
-            IntrinsicEventIndicatorsAssetPairDto class.
-            </summary>
-        </member>
-        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairDto.RowId">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairDto.AssetPair">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairPost.#ctor">
-            <summary>
-            Initializes a new instance of the
-            IntrinsicEventIndicatorsAssetPairPost class.
-            </summary>
-        </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairPost.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the
-            IntrinsicEventIndicatorsAssetPairPost class.
-            </summary>
-        </member>
-        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairPost.AssetPair">
-            <summary>
             </summary>
         </member>
         <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnDto.#ctor">
@@ -607,7 +913,7 @@
             class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsDto.#ctor(System.Collections.Generic.IList{Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnDto},System.Collections.Generic.IList{Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairDto},System.Collections.Generic.IList{System.Collections.Generic.IList{System.Nullable{System.Double}}})">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsDto.#ctor(System.Collections.Generic.IList{Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnDto},System.Collections.Generic.IList{Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowDto},System.Collections.Generic.IList{System.Collections.Generic.IList{System.Nullable{System.Double}}})">
             <summary>
             Initializes a new instance of the IntrinsicEventIndicatorsDto
             class.
@@ -617,11 +923,55 @@
             <summary>
             </summary>
         </member>
-        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsDto.AssetPairs">
+        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsDto.Rows">
             <summary>
             </summary>
         </member>
         <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsDto.Data">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowDto.#ctor">
+            <summary>
+            Initializes a new instance of the IntrinsicEventIndicatorsRowDto
+            class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowDto.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the IntrinsicEventIndicatorsRowDto
+            class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowDto.RowId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowDto.Exchange">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowDto.AssetPair">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost.#ctor">
+            <summary>
+            Initializes a new instance of the IntrinsicEventIndicatorsRowPost
+            class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the IntrinsicEventIndicatorsRowPost
+            class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost.Exchange">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost.AssetPair">
             <summary>
             </summary>
         </member>
@@ -686,7 +1036,7 @@
             Initializes a new instance of the RunnerStateDto class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.RunnerStateDto.#ctor(System.Int32,System.Double,System.Double,System.Double,System.Double,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.ExpectedDirectionalChange,System.Double,System.Double)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.RunnerStateDto.#ctor(System.Int32,System.Double,System.Double,System.Double,System.Double,Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.ExpectedDirectionalChange,System.Double,System.Double,System.String,System.String)">
             <summary>
             Initializes a new instance of the RunnerStateDto class.
             </summary>
@@ -726,6 +1076,14 @@
             <summary>
             </summary>
         </member>
+        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.RunnerStateDto.AssetPair">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.RunnerStateDto.Exchange">
+            <summary>
+            </summary>
+        </member>
         <member name="M:Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.RunnerStateDto.Validate">
             <summary>
             Validate the object.
@@ -758,7 +1116,7 @@
             <param name="columnId">delta</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.IIncreasticEventIndicatorsClient.AddAssetPairAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsAssetPairPost,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.IIncreasticEventIndicatorsClient.AddAssetPairAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost,System.Threading.CancellationToken)">
             <summary>
             Adds asset pair.
             </summary>
@@ -780,6 +1138,48 @@
             <returns>Data</returns>
         </member>
         <member name="M:Lykke.Service.IncreasticEventIndicators.Client.IIncreasticEventIndicatorsClient.GetRunnersStatesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets runners states.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns>Runners states</returns>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.IIncreasticEventIndicatorsClient.AddDeltaExternalAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnPost,System.Threading.CancellationToken)">
+            <summary>
+            Adds delta.
+            </summary>
+            <param name="column">Delta to add.</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.IIncreasticEventIndicatorsClient.RemoveDeltaExternalAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Deletes delta.
+            </summary>
+            <param name="columnId">delta</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.IIncreasticEventIndicatorsClient.AddAssetPairExternalAsync(Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost,System.Threading.CancellationToken)">
+            <summary>
+            Adds asset pair.
+            </summary>
+            <param name="row">Asset pair to add.</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.IIncreasticEventIndicatorsClient.RemoveAssetPairExternalAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Deletes asset pair.
+            </summary>
+            <param name="rowId">asset pair</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.IIncreasticEventIndicatorsClient.GetDataExternalAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets data.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns>Data</returns>
+        </member>
+        <member name="M:Lykke.Service.IncreasticEventIndicators.Client.IIncreasticEventIndicatorsClient.GetRunnersStatesExternalAsync(System.Threading.CancellationToken)">
             <summary>
             Gets runners states.
             </summary>

@@ -12,5 +12,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Models
         public ExpectedDirectionalChange ExpectedDirectionalChange { get; set; }
         public decimal DirectionalChangePrice { get; set; }
         public decimal Delta { get; set; }
+        public string AssetPair { get; set; }
+        public string Exchange { get; set; }
     }
 }

@@ -6,10 +6,11 @@ using Common.Log;
 using Lykke.Service.IncreasticEventIndicators.Core.Domain;
 using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
 using Lykke.Service.IncreasticEventIndicators.Core.Services;
+using Lykke.Service.IncreasticEventIndicators.Services.Exchanges;
 
 namespace Lykke.Service.IncreasticEventIndicators.Services
 {
-    public class IntrinsicEventIndicatorsService : IIntrinsicEventIndicatorsService
+    public abstract class IntrinsicEventIndicatorsService : IIntrinsicEventIndicatorsService
     {
         private readonly IIntrinsicEventIndicatorsRepository _repo;
         private readonly ILog _log;
@@ -17,7 +18,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
 
         private bool _initialized;
 
-        public IntrinsicEventIndicatorsService(IIntrinsicEventIndicatorsRepository repo,
+        protected IntrinsicEventIndicatorsService(IIntrinsicEventIndicatorsRepository repo,
             ITickPriceManager tickPriceManager, ILog log)
         {
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
@@ -43,7 +44,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
             await UpdateRunners();
         }
 
-        public async Task AddAssetPair(IIntrinsicEventIndicatorsAssetPair row)
+        public async Task AddAssetPair(IIntrinsicEventIndicatorsRow row)
         {
             EnsureInitialized();
 
@@ -63,17 +64,18 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
         {
             EnsureInitialized();
 
-            var rows = (await _repo.GetAssetPairsAsync()).OrderBy(x => x.AssetPair).ToList();
+            var rows = (await _repo.GetRowsAsync()).OrderBy(x =>
+                TickPriceManager.GetExchangeAssetPairKey(x.Exchange, x.AssetPair)).ToList();
             var columns = (await _repo.GetColumnsAsync()).OrderBy(x => x.Delta).ToList();            
 
             var data = await _tickPriceManager.GetIntrinsicEventIndicators(
-                rows.Select(x => x.AssetPair).ToList(),
+                rows.Select(x => TickPriceManager.GetExchangeAssetPairKey(x.Exchange, x.AssetPair)).ToList(),
                 columns.Select(x => x.Delta).ToList());
 
             return await Task.FromResult(new IntrinsicEventIndicators
             {
                 Columns = columns.ToArray(),
-                AssetPairs = rows.ToArray(),
+                Rows = rows.ToArray(),
                 Data = data
             });
         }
@@ -98,7 +100,8 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
         private async Task UpdateRunners()
         {
             var columns = (await _repo.GetColumnsAsync()).Select(x => x.Delta).OrderBy(x => x).ToList();
-            var rows = (await _repo.GetAssetPairsAsync()).Select(x => x.AssetPair).OrderBy(x => x).ToList();
+            var rows = (await _repo.GetRowsAsync()).Select(x =>
+                TickPriceManager.GetExchangeAssetPairKey(x.Exchange, x.AssetPair)).OrderBy(x => x).ToList();
 
             await _tickPriceManager.UpdateRunners(rows, columns);
         }

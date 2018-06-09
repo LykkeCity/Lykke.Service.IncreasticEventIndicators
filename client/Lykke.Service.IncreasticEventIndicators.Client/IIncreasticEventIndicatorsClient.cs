@@ -38,7 +38,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Client
         /// </summary>
         /// <param name="row">Asset pair to add.</param>
         /// <param name="cancellationToken"></param>
-        Task AddAssetPairAsync(IntrinsicEventIndicatorsAssetPairPost row, CancellationToken cancellationToken = default(CancellationToken));
+        Task AddAssetPairAsync(IntrinsicEventIndicatorsRowPost row, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes asset pair.
@@ -60,5 +60,47 @@ namespace Lykke.Service.IncreasticEventIndicators.Client
         /// <param name="cancellationToken"></param>
         /// <returns>Runners states</returns>
         Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesAsync(CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Adds delta.
+        /// </summary>
+        /// <param name="column">Delta to add.</param>
+        /// <param name="cancellationToken"></param>
+        Task AddDeltaExternalAsync(IntrinsicEventIndicatorsColumnPost column, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Deletes delta.
+        /// </summary>
+        /// <param name="columnId">delta</param>
+        /// <param name="cancellationToken"></param>
+        Task RemoveDeltaExternalAsync(string columnId, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Adds asset pair.
+        /// </summary>
+        /// <param name="row">Asset pair to add.</param>
+        /// <param name="cancellationToken"></param>
+        Task AddAssetPairExternalAsync(IntrinsicEventIndicatorsRowPost row, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Deletes asset pair.
+        /// </summary>
+        /// <param name="rowId">asset pair</param>
+        /// <param name="cancellationToken"></param>
+        Task RemoveAssetPairExternalAsync(string rowId, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets data.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Data</returns>
+        Task<IntrinsicEventIndicatorsDto> GetDataExternalAsync(CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets runners states.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Runners states</returns>
+        Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesExternalAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

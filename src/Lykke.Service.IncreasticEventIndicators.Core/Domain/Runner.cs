@@ -10,9 +10,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 
         public bool IsStateChanged => _state.IsChanged;
 
-        public Runner(decimal delta, string assetPair, RunnerState state = null)
+        public Runner(decimal delta, string assetPair, string exchange, RunnerState state = null)
         {
-            _state = state ?? new RunnerState(delta, assetPair);
+            _state = state ?? new RunnerState(delta, assetPair, exchange);
 
             _initialized = false;
         }
