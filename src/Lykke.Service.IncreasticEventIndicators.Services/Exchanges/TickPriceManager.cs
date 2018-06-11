@@ -269,7 +269,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
 
             foreach (var runner in _runners)
             {
-                var runnerStateKey = ParseExchangeAssetPairFromRunnersKey(runner.Key);
+                var runnerStateKey = ParseRunnersStatesKeyFromRunnersKey(runner.Key);
                 if (!runnersStates.ContainsKey(runnerStateKey))
                 {
                     runnersStates.Add(runnerStateKey, new List<IRunnerState>());
@@ -380,7 +380,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             return key.Split(' ')[0];
         }
 
-        private static string ParseAssetPairFromExchangeAssetPairKey(string key)
+        protected static string ParseAssetPairFromExchangeAssetPairKey(string key)
         {
             return key.Split(' ')[1];
         }
@@ -390,7 +390,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             return $"{exchangeAssetPair.ToUpperInvariant()} {delta}";
         }
 
-        private static string ParseExchangeAssetPairFromRunnersKey(string key)
+        protected static string ParseExchangeAssetPairFromRunnersKey(string key)
         {
             return GetExchangeAssetPairKey(key.Split(' ')[0], key.Split(' ')[1]);
         }
@@ -399,5 +399,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
         {
             return decimal.Parse(key.Split(' ')[2]);
         }
+
+        protected abstract string ParseRunnersStatesKeyFromRunnersKey(string runnersKey);
     }
 }

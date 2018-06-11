@@ -10,5 +10,10 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             : base(log, runnerStateRepository)
         {
         }
+
+        protected override string ParseRunnersStatesKeyFromRunnersKey(string runnersKey)
+        {
+            return ParseExchangeAssetPairFromRunnersKey(runnersKey);
+        }
     }
 }
