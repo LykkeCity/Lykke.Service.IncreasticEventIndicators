@@ -90,15 +90,17 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             }
         }
 
-        public Task<decimal[][]> GetIntrinsicEventIndicators(IList<string> exchangeAssetPairs, IList<decimal> deltas)
+        public async Task<decimal[][]> GetIntrinsicEventIndicators(IList<string> exchangeAssetPairs, IList<decimal> deltas)
         {
+            await EnsureInitialized();
+
             var lockTaken = false;
             try
             {
                 lockTaken = _semaphore.Wait(Constants.LockTimeout);
                 if (lockTaken)
                 {
-                    return Task.FromResult(GetIntrinsicEventIndicatorsInternal(exchangeAssetPairs, deltas));
+                    return GetIntrinsicEventIndicatorsInternal(exchangeAssetPairs, deltas);
                 }
                 else
                 {
@@ -114,15 +116,17 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             }
         }
 
-        public Task<IDictionary<string, IList<IRunnerState>>> GetRunnersStates()
+        public async Task<IDictionary<string, IList<IRunnerState>>> GetRunnersStates()
         {
+            await EnsureInitialized();
+
             var lockTaken = false;
             try
             {
                 lockTaken = _semaphore.Wait(Constants.LockTimeout);
                 if (lockTaken)
                 {
-                    return Task.FromResult(GetRunnersStatesInternal());
+                    return GetRunnersStatesInternal();
                 }
                 else
                 {
@@ -178,8 +182,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
                     runnerStateEntity.ExpectedDirectionalChange, runnerStateEntity.DirectionalChangePrice,
                     runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerStateEntity.Exchange);
 
-                var runner = new Runner(runnerStateEntity.Delta, runnerStateEntity.AssetPair,
-                    runnerStateEntity.Exchange, runnerState);
+                var runner = new Runner(runnerState);
 
                 var runnersKey = GetRunnersKey(GetExchangeAssetPairKey(runnerState.Exchange, runnerState.AssetPair), runnerState.Delta);
                 _runners.TryAdd(runnersKey, runner);
@@ -335,7 +338,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             _cleanStateTimer.Change(CleanPeriod, Timeout.InfiniteTimeSpan);
         }
 
-        public void CleanState()
+        private void CleanState()
         {
             if (!_initialized) return;
 

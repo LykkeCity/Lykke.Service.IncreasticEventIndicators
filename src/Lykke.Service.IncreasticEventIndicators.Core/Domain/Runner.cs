@@ -10,11 +10,16 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 
         public bool IsStateChanged => _state.IsChanged;
 
-        public Runner(decimal delta, string assetPair, string exchange, RunnerState state = null)
+        public Runner(decimal delta, string assetPair, string exchange)
         {
-            _state = state ?? new RunnerState(delta, assetPair, exchange);
-
+            _state = new RunnerState(delta, assetPair, exchange);
             _initialized = false;
+        }
+
+        public Runner(RunnerState state)
+        {
+            _state = state;
+            _initialized = true;
         }
 
         public void Run(ITickPrice tickPrice)
@@ -87,12 +92,12 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 
         public decimal CalcIntrinsicEventIndicator()
         {
-            if (_state.Extreme == 0 || (decimal)_state.Delta == 0)
+            if (_state.Extreme == 0 || _state.Delta == 0)
             {
                 return 0;
             }
 
-            var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / (decimal)_state.Delta);
+            var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / _state.Delta);
             return Math.Round(indicator, 2);
         }
 
@@ -120,10 +125,9 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             }
         }
 
-        public IRunnerState SaveState()
+        public void SaveState()
         {
             _state.IsChanged = false;
-            return (IRunnerState)_state.Clone();
         }
 
         public IRunnerState GetState()
