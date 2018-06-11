@@ -43,7 +43,7 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
             var entities = state.Select(x =>
                 new RunnerStateEntity
                 {
-                    PartitionKey = GeneratePartitionKey(x.AssetPair),
+                    PartitionKey = GeneratePartitionKey(x),
                     RowKey = GenerateRowKey(x.Delta),
                     Event = x.Event,
                     Extreme = x.Extreme,
@@ -63,7 +63,7 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
 
         public async Task CleanOldItems(IEnumerable<string> exchangeAssetPairs, IEnumerable<decimal> deltas)
         {
-            var partitionKeys = exchangeAssetPairs.Select(GeneratePartitionKey);
+            var partitionKeys = exchangeAssetPairs;
             var rowKeys = deltas.Select(GenerateRowKey);
 
             var entitiesToDelete = await _storage.GetDataAsync(x => !partitionKeys.Contains(x.PartitionKey) || !rowKeys.Contains(x.RowKey));
@@ -78,9 +78,9 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
             await Task.WhenAll(tasks);
         }        
 
-        private static string GeneratePartitionKey(string assetPair)
+        private static string GeneratePartitionKey(IRunnerState runnerState)
         {
-            return assetPair;
+            return $"{runnerState.Exchange.ToUpperInvariant()} {runnerState.AssetPair.ToUpperInvariant()}";
         }
 
         private static string GenerateRowKey(decimal delta)
