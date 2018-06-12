@@ -24,7 +24,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
         /// </summary>
         /// <param name="expectedDirectionalChange">Possible values include:
         /// 'Upward', 'Downward'</param>
-        public RunnerStateDto(int eventProperty, double extreme, double expectedDcLevel, double expectedOsLevel, double reference, ExpectedDirectionalChange expectedDirectionalChange, double directionalChangePrice, double delta)
+        public RunnerStateDto(int eventProperty, double extreme, double expectedDcLevel, double expectedOsLevel, double reference, ExpectedDirectionalChange expectedDirectionalChange, double directionalChangePrice, double delta, string assetPair = default(string), string exchange = default(string))
         {
             EventProperty = eventProperty;
             Extreme = extreme;
@@ -34,6 +34,8 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
             ExpectedDirectionalChange = expectedDirectionalChange;
             DirectionalChangePrice = directionalChangePrice;
             Delta = delta;
+            AssetPair = assetPair;
+            Exchange = exchange;
             CustomInit();
         }
 
@@ -82,6 +84,16 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
         /// </summary>
         [JsonProperty(PropertyName = "Delta")]
         public double Delta { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AssetPair")]
+        public string AssetPair { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Exchange")]
+        public string Exchange { get; set; }
 
         /// <summary>
         /// Validate the object.

@@ -3,7 +3,7 @@
     public class IntrinsicEventIndicators
     {
         public IIntrinsicEventIndicatorsColumn[] Columns { get; set; }
-        public IIntrinsicEventIndicatorsAssetPair[] AssetPairs { get; set; }
+        public IIntrinsicEventIndicatorsRow[] Rows { get; set; }
         public decimal[][] Data { get; set; }
     }
 }

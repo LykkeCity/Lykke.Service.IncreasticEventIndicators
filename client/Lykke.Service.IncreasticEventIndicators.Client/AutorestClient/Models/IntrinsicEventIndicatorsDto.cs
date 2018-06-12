@@ -26,10 +26,10 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
         /// Initializes a new instance of the IntrinsicEventIndicatorsDto
         /// class.
         /// </summary>
-        public IntrinsicEventIndicatorsDto(IList<IntrinsicEventIndicatorsColumnDto> columns = default(IList<IntrinsicEventIndicatorsColumnDto>), IList<IntrinsicEventIndicatorsAssetPairDto> assetPairs = default(IList<IntrinsicEventIndicatorsAssetPairDto>), IList<IList<double?>> data = default(IList<IList<double?>>))
+        public IntrinsicEventIndicatorsDto(IList<IntrinsicEventIndicatorsColumnDto> columns = default(IList<IntrinsicEventIndicatorsColumnDto>), IList<IntrinsicEventIndicatorsRowDto> rows = default(IList<IntrinsicEventIndicatorsRowDto>), IList<IList<double?>> data = default(IList<IList<double?>>))
         {
             Columns = columns;
-            AssetPairs = assetPairs;
+            Rows = rows;
             Data = data;
             CustomInit();
         }
@@ -46,8 +46,8 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "AssetPairs")]
-        public IList<IntrinsicEventIndicatorsAssetPairDto> AssetPairs { get; set; }
+        [JsonProperty(PropertyName = "Rows")]
+        public IList<IntrinsicEventIndicatorsRowDto> Rows { get; set; }
 
         /// <summary>
         /// </summary>

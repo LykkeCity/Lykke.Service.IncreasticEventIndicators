@@ -7,6 +7,6 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
     {
         Task<IReadOnlyList<IRunnerState>> GetState();
         Task SaveState(IReadOnlyList<IRunnerState> state);
-        Task CleanOldItems(IEnumerable<string> assetPairs, IEnumerable<decimal> deltas);
+        Task CleanOldItems(IEnumerable<string> exchangeAssetPairs, IEnumerable<decimal> deltas);
     }
 }

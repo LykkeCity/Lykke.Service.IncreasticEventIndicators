@@ -7,10 +7,10 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
     public interface IIntrinsicEventIndicatorsRepository
     {
         Task<IEnumerable<IIntrinsicEventIndicatorsColumn>> GetColumnsAsync();
-        Task<IEnumerable<IIntrinsicEventIndicatorsAssetPair>> GetAssetPairsAsync();
+        Task<IEnumerable<IIntrinsicEventIndicatorsRow>> GetRowsAsync();
         Task AddColumnAsync(IIntrinsicEventIndicatorsColumn column);
         Task RemoveColumnAsync(string columnId);
-        Task AddAssetPairAsync(IIntrinsicEventIndicatorsAssetPair row);
+        Task AddAssetPairAsync(IIntrinsicEventIndicatorsRow row);
         Task RemoveAssetPairAsync(string rowId);
     }
 }

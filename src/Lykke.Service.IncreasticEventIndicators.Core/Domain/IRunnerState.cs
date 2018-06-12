@@ -11,5 +11,6 @@
         decimal DirectionalChangePrice { get; }
         decimal Delta { get; }
         string AssetPair { get; }
+        string Exchange { get; }
     }
 }

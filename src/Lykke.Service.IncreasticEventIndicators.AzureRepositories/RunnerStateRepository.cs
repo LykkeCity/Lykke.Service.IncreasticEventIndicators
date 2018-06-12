@@ -20,14 +20,15 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
         public decimal DirectionalChangePrice { get; set; }
         public decimal Delta { get; set; }
         public string AssetPair { get; set; }
+        public string Exchange { get; set; }
     }
 
     [UsedImplicitly]
-    public class RunnerStateRepository : IRunnerStateRepository
+    public abstract class RunnerStateRepository : IRunnerStateRepository
     {
         private readonly INoSQLTableStorage<RunnerStateEntity> _storage;
 
-        public RunnerStateRepository(INoSQLTableStorage<RunnerStateEntity> storage)
+        protected RunnerStateRepository(INoSQLTableStorage<RunnerStateEntity> storage)
         {
             _storage = storage;
         }
@@ -42,7 +43,7 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
             var entities = state.Select(x =>
                 new RunnerStateEntity
                 {
-                    PartitionKey = GeneratePartitionKey(x.AssetPair),
+                    PartitionKey = GeneratePartitionKey(x),
                     RowKey = GenerateRowKey(x.Delta),
                     Event = x.Event,
                     Extreme = x.Extreme,
@@ -52,16 +53,17 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
                     ExpectedDirectionalChange = x.ExpectedDirectionalChange,
                     DirectionalChangePrice = x.DirectionalChangePrice,
                     AssetPair = x.AssetPair,
-                    Delta = x.Delta
+                    Delta = x.Delta,                    
+                    Exchange = x.Exchange
                 }
             ).ToArray();
 
             await InsertOrReplaceAsync(entities);
         }
 
-        public async Task CleanOldItems(IEnumerable<string> assetPairs, IEnumerable<decimal> deltas)
+        public async Task CleanOldItems(IEnumerable<string> exchangeAssetPairs, IEnumerable<decimal> deltas)
         {
-            var partitionKeys = assetPairs.Select(GeneratePartitionKey);
+            var partitionKeys = exchangeAssetPairs;
             var rowKeys = deltas.Select(GenerateRowKey);
 
             var entitiesToDelete = await _storage.GetDataAsync(x => !partitionKeys.Contains(x.PartitionKey) || !rowKeys.Contains(x.RowKey));
@@ -76,9 +78,9 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
             await Task.WhenAll(tasks);
         }        
 
-        private static string GeneratePartitionKey(string assetPair)
+        private static string GeneratePartitionKey(IRunnerState runnerState)
         {
-            return assetPair;
+            return $"{runnerState.Exchange.ToUpperInvariant()} {runnerState.AssetPair.ToUpperInvariant()}";
         }
 
         private static string GenerateRowKey(decimal delta)

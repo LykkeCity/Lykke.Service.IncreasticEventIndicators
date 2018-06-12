@@ -46,7 +46,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<ErrorResponse>> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ErrorResponse>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPutWithHttpMessagesAsync(IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes delta.
@@ -60,7 +60,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(string columnId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteWithHttpMessagesAsync(string columnId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Adds asset pair.
@@ -74,7 +74,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<ErrorResponse>> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(IntrinsicEventIndicatorsAssetPairPost row = default(IntrinsicEventIndicatorsAssetPairPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ErrorResponse>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutWithHttpMessagesAsync(IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes asset pair.
@@ -88,7 +88,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(string rowId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteWithHttpMessagesAsync(string rowId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Gets data.
@@ -99,7 +99,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IntrinsicEventIndicatorsDto>> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IntrinsicEventIndicatorsDto>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Gets runners states.
@@ -110,7 +110,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IDictionary<string, IList<RunnerStateDto>>>> ApiV1IntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IDictionary<string, IList<RunnerStateDto>>>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Checks service is alive
@@ -122,6 +122,84 @@ namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<object>> IsAliveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Adds delta.
+        /// </summary>
+        /// <param name='column'>
+        /// Delta to add.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<ErrorResponse>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Deletes delta.
+        /// </summary>
+        /// <param name='columnId'>
+        /// delta
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(string columnId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Adds asset pair.
+        /// </summary>
+        /// <param name='row'>
+        /// Asset pair to add.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<ErrorResponse>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Deletes asset pair.
+        /// </summary>
+        /// <param name='rowId'>
+        /// asset pair
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(string rowId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets data.
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IntrinsicEventIndicatorsDto>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets runners states.
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IDictionary<string, IList<RunnerStateDto>>>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

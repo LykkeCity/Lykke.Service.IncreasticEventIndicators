@@ -12,8 +12,6 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         private ExpectedDirectionalChange _expectedDirectionalChange;
 
         private decimal _directionalChangePrice;
-        private decimal _delta;
-        private string _assetPair;
 
         public int Event
         {
@@ -92,39 +90,24 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             }
         }
 
-        public decimal Delta
-        {
-            get => _delta;
-            private set
-            {
-                if (_delta == value) return;
-                _delta = value;
-                IsChanged = true;
-            }
-        }
+        public decimal Delta { get; }
 
-        public string AssetPair
-        {
-            get => _assetPair;
-            private set
-            {
-                if (_assetPair == value) return;
-                _assetPair = value;
-                IsChanged = true;
-            }
-        }
+        public string AssetPair { get; }
+
+        public string Exchange { get; }
 
         public bool IsChanged { get; set; }
 
-        public RunnerState(decimal delta, string assetPair)
+        public RunnerState(decimal delta, string assetPair, string exchange)
         {
-            _delta = delta;
-            _assetPair = assetPair;
+            Delta = delta;
+            AssetPair = assetPair;
+            Exchange = exchange;
         }
 
         public RunnerState(int @event, decimal extreme, decimal expectedDcLevel, decimal expectedOsLevel,
             decimal reference, ExpectedDirectionalChange expectedDirectionalChange, decimal directionalChangePrice, decimal delta,
-            string assetPair)
+            string assetPair, string exchange)
         {
             _event = @event;
             _extreme = extreme;
@@ -133,14 +116,15 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             _reference = reference;
             _expectedDirectionalChange = expectedDirectionalChange;
             _directionalChangePrice = directionalChangePrice;
-            _delta = delta;
-            _assetPair = assetPair;
+            Delta = delta;
+            AssetPair = assetPair;
+            Exchange = exchange;
         }
 
         public object Clone()
         {
             return new RunnerState(_event, _extreme, _expectedDcLevel, _expectedOsLevel, _reference,
-                _expectedDirectionalChange, _directionalChangePrice, _delta, _assetPair);
+                _expectedDirectionalChange, _directionalChangePrice, Delta, AssetPair, Exchange);
         }
     }
 }

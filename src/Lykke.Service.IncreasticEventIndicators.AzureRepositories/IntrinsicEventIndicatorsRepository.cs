@@ -8,11 +8,12 @@ using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
 
 namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
 {
-    public class IntrinsicEventIndicatorsEntity : AzureTableEntity, IIntrinsicEventIndicatorsColumn, IIntrinsicEventIndicatorsAssetPair
+    public class IntrinsicEventIndicatorsEntity : AzureTableEntity, IIntrinsicEventIndicatorsColumn, IIntrinsicEventIndicatorsRow
     {
         public string ColumnId => RowKey;
         public string RowId => RowKey;
         public decimal Delta { get; set; }
+        public string Exchange { get; set; }
         public string AssetPair { get; set; }
 
         public static string GeneratePartitionKeyForColumn()
@@ -35,22 +36,23 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
             };
         }
 
-        public static IntrinsicEventIndicatorsEntity CreateForAssetPair(IIntrinsicEventIndicatorsAssetPair row)
+        public static IntrinsicEventIndicatorsEntity CreateForAssetPair(IIntrinsicEventIndicatorsRow row)
         {
             return new IntrinsicEventIndicatorsEntity
             {
                 PartitionKey = GeneratePartitionKeyForRow(),
                 RowKey = Guid.NewGuid().ToString(),
+                Exchange = row.Exchange,
                 AssetPair = row.AssetPair
             };
         }
     }
 
-    public class IntrinsicEventIndicatorsRepository : IIntrinsicEventIndicatorsRepository
+    public abstract class IntrinsicEventIndicatorsRepository : IIntrinsicEventIndicatorsRepository
     {
         private readonly INoSQLTableStorage<IntrinsicEventIndicatorsEntity> _storage;
 
-        public IntrinsicEventIndicatorsRepository(INoSQLTableStorage<IntrinsicEventIndicatorsEntity> storage)
+        protected IntrinsicEventIndicatorsRepository(INoSQLTableStorage<IntrinsicEventIndicatorsEntity> storage)
         {
             _storage = storage;
         }
@@ -60,7 +62,7 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
             return await _storage.GetDataAsync(IntrinsicEventIndicatorsEntity.GeneratePartitionKeyForColumn());
         }
 
-        public async Task<IEnumerable<IIntrinsicEventIndicatorsAssetPair>> GetAssetPairsAsync()
+        public async Task<IEnumerable<IIntrinsicEventIndicatorsRow>> GetRowsAsync()
         {
             return await _storage.GetDataAsync(IntrinsicEventIndicatorsEntity.GeneratePartitionKeyForRow());
         }
@@ -76,7 +78,7 @@ namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
             await _storage.DeleteAsync(IntrinsicEventIndicatorsEntity.GeneratePartitionKeyForColumn(), columnId);
         }
 
-        public Task AddAssetPairAsync(IIntrinsicEventIndicatorsAssetPair row)
+        public Task AddAssetPairAsync(IIntrinsicEventIndicatorsRow row)
         {
             var entity = IntrinsicEventIndicatorsEntity.CreateForAssetPair(row);
             return _storage.InsertAsync(entity);

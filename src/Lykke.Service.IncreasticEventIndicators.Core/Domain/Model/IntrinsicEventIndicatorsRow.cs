@@ -1,14 +1,16 @@
 ﻿namespace Lykke.Service.IncreasticEventIndicators.Core.Domain.Model
 {
-    public interface IIntrinsicEventIndicatorsAssetPair
+    public interface IIntrinsicEventIndicatorsRow
     {
         string RowId { get; }
         string AssetPair { get; }
+        string Exchange { get; }
     }
 
-    public class IntrinsicEventIndicatorsAssetPair : IIntrinsicEventIndicatorsAssetPair
+    public class IntrinsicEventIndicatorsRow : IIntrinsicEventIndicatorsRow
     {
         public string RowId { get; set; }
         public string AssetPair { get; set; }
+        public string Exchange { get; set; }
     }
 }

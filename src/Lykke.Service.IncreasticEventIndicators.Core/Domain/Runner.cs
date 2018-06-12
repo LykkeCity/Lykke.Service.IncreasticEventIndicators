@@ -1,5 +1,5 @@
 ﻿using System;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
+using Lykke.Common.ExchangeAdapter.Contracts;
 
 namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 {
@@ -10,14 +10,19 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 
         public bool IsStateChanged => _state.IsChanged;
 
-        public Runner(decimal delta, string assetPair, RunnerState state = null)
+        public Runner(decimal delta, string assetPair, string exchange)
         {
-            _state = state ?? new RunnerState(delta, assetPair);
-
+            _state = new RunnerState(delta, assetPair, exchange);
             _initialized = false;
         }
 
-        public void Run(ITickPrice tickPrice)
+        public Runner(RunnerState state)
+        {
+            _state = state;
+            _initialized = true;
+        }
+
+        public void Run(TickPrice tickPrice)
         {
             if (!_initialized)
             {
@@ -87,12 +92,12 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 
         public decimal CalcIntrinsicEventIndicator()
         {
-            if (_state.Extreme == 0 || (decimal)_state.Delta == 0)
+            if (_state.Extreme == 0 || _state.Delta == 0)
             {
                 return 0;
             }
 
-            var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / (decimal)_state.Delta);
+            var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / _state.Delta);
             return Math.Round(indicator, 2);
         }
 
@@ -100,11 +105,11 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         {
             if (_state.ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) + (double)_state.Delta);
+                return (decimal)Math.Round(Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) + (double)_state.Delta), 2);
             }
             else
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) - (double)_state.Delta);
+                return (decimal)Math.Round(Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) - (double)_state.Delta), 2);
             }
         }
 
@@ -112,18 +117,17 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         {
             if (_state.ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) - (double)_state.Delta);
+                return (decimal)Math.Round(Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) - (double)_state.Delta), 2);
             }
             else
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) + (double)_state.Delta);
+                return (decimal)Math.Round(Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) + (double)_state.Delta), 2);
             }
         }
 
-        public IRunnerState SaveState()
+        public void SaveState()
         {
             _state.IsChanged = false;
-            return (IRunnerState)_state.Clone();
         }
 
         public IRunnerState GetState()
