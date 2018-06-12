@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Common;
 using Common.Log;
+using Lykke.Common.ExchangeAdapter.Contracts;
 using Lykke.RabbitMqBroker;
 using Lykke.RabbitMqBroker.Subscriber;
 using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;

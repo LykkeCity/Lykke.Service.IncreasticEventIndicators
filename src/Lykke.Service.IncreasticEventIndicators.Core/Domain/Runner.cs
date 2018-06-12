@@ -1,5 +1,5 @@
 ﻿using System;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
+using Lykke.Common.ExchangeAdapter.Contracts;
 
 namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
 {
@@ -22,7 +22,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
             _initialized = true;
         }
 
-        public void Run(ITickPrice tickPrice)
+        public void Run(TickPrice tickPrice)
         {
             if (!_initialized)
             {

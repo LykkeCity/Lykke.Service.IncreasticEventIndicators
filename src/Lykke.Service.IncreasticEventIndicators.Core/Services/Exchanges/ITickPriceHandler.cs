@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
+using Lykke.Common.ExchangeAdapter.Contracts;
 
 namespace Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges
 {
     public interface ITickPriceHandler
     {
-        Task Handle(ITickPrice tickPrice);
+        Task Handle(TickPrice tickPrice);
     }
 }

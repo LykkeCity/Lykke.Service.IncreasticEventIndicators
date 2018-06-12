@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Log;
+using Lykke.Common.ExchangeAdapter.Contracts;
 using Lykke.Service.IncreasticEventIndicators.Core;
 using Lykke.Service.IncreasticEventIndicators.Core.Domain;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
 using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
 
 namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
@@ -64,7 +64,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             }            
         }
 
-        public async Task Handle(ITickPrice tickPrice)
+        public async Task Handle(TickPrice tickPrice)
         {
             await EnsureInitialized();
 
@@ -227,7 +227,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
             }
         }
 
-        private void HandleInternal(ITickPrice tickPrice)
+        private void HandleInternal(TickPrice tickPrice)
         {
             var exchangeAssetPair = GetExchangeAssetPairKey(tickPrice.Source.ToUpperInvariant(), tickPrice.Asset.ToUpperInvariant());
             if (_exchangeAssetPairs.ContainsKey(exchangeAssetPair))
