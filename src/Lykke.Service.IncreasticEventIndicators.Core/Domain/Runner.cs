@@ -105,11 +105,11 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         {
             if (_state.ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) + (double)_state.Delta);
+                return (decimal)Math.Round(Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) + (double)_state.Delta), 2);
             }
             else
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) - (double)_state.Delta);
+                return (decimal)Math.Round(Math.Exp(Math.Log(decimal.ToDouble(_state.Extreme)) - (double)_state.Delta), 2);
             }
         }
 
@@ -117,11 +117,11 @@ namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
         {
             if (_state.ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) - (double)_state.Delta);
+                return (decimal)Math.Round(Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) - (double)_state.Delta), 2);
             }
             else
             {
-                return (decimal)Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) + (double)_state.Delta);
+                return (decimal)Math.Round(Math.Exp(Math.Log(decimal.ToDouble(_state.Reference)) + (double)_state.Delta), 2);
             }
         }
 
