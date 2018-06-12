@@ -103,7 +103,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
             var rows = (await _repo.GetRowsAsync()).Select(x =>
                 TickPriceManager.GetExchangeAssetPairKey(x.Exchange, x.AssetPair)).OrderBy(x => x).ToList();
 
-            await _tickPriceManager.UpdateRunners(rows, columns);
+            await _tickPriceManager.UpdateRunners(rows.Select(x => x.ToUpperInvariant()).Distinct().ToList(), columns.Distinct().ToList());
         }
     }
 }
