@@ -1,9 +1,16 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AzureStorage.Tables;
+using Common;
 using Common.Log;
+using Lykke.Service.IncreasticEventIndicators.AzureRepositories;
+using Lykke.Service.IncreasticEventIndicators.Core.Domain;
 using Lykke.Service.IncreasticEventIndicators.Core.Services;
+using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
+using Lykke.Service.IncreasticEventIndicators.Rabbit;
 using Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings;
 using Lykke.Service.IncreasticEventIndicators.Services;
+using Lykke.Service.IncreasticEventIndicators.Services.Exchanges;
 using Lykke.SettingsReader;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,12 +33,6 @@ namespace Lykke.Service.IncreasticEventIndicators.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            // TODO: Do not register entire settings in container, pass necessary settings to services which requires them
-            // ex:
-            //  builder.RegisterType<QuotesPublisher>()
-            //      .As<IQuotesPublisher>()
-            //      .WithParameter(TypedParameter.From(_settings.CurrentValue.QuotesPublication))
-
             builder.RegisterInstance(_log)
                 .As<ILog>()
                 .SingleInstance();
@@ -46,9 +47,78 @@ namespace Lykke.Service.IncreasticEventIndicators.Modules
             builder.RegisterType<ShutdownManager>()
                 .As<IShutdownManager>();
 
-            // TODO: Add your dependencies here
+            builder.RegisterInstance(_settings.CurrentValue)
+                .SingleInstance();
+
+            builder.RegisterType<LykkeTickPriceManager>()
+                .As<ILykkeTickPriceManager>()
+                .As<ILykkeTickPriceHandler>()
+                .SingleInstance();
+
+            builder.RegisterType<ExternalTickPriceManager>()
+                .As<IExternalTickPriceManager>()
+                .As<IExternalTickPriceHandler>()
+                .SingleInstance();
+
+            builder.RegisterType<LykkeIntrinsicEventIndicatorsService>()
+                .As<ILykkeIntrinsicEventIndicatorsService>()
+                .SingleInstance();
+
+            builder.RegisterType<ExternalIntrinsicEventIndicatorsService>()
+                .As<IExternalIntrinsicEventIndicatorsService>()
+                .SingleInstance();
+
+            RegisterRepositories(builder);
+            RegisterRabbitMqSubscribers(builder);
 
             builder.Populate(_services);
+        }
+
+        private void RegisterRepositories(ContainerBuilder builder)
+        {
+            builder.RegisterType<LykkeIntrinsicEventIndicatorsRepository>()
+                .As<ILykkeIntrinsicEventIndicatorsRepository>()
+                .WithParameter(TypedParameter.From(AzureTableStorage<IntrinsicEventIndicatorsEntity>
+                    .Create(_settings.ConnectionString(x => x.Db.DataConnString), "LykkeIntrinsicEventIndicators", _log)))
+                .SingleInstance();
+
+            builder.RegisterType<ExternalIntrinsicEventIndicatorsRepository>()
+                .As<IExternalIntrinsicEventIndicatorsRepository>()
+                .WithParameter(TypedParameter.From(AzureTableStorage<IntrinsicEventIndicatorsEntity>
+                    .Create(_settings.ConnectionString(x => x.Db.DataConnString), "ExternalIntrinsicEventIndicators", _log)))
+                .SingleInstance();
+
+            builder.RegisterType<LykkeRunnerStateRepository>()
+                .As<ILykkeRunnerStateRepository>()
+                .WithParameter(TypedParameter.From(AzureTableStorage<RunnerStateEntity>
+                    .Create(_settings.ConnectionString(x => x.Db.DataConnString), "LykkeRunnersStates", _log)))
+                .SingleInstance();
+
+            builder.RegisterType<ExternalRunnerStateRepository>()
+                .As<IExternalRunnerStateRepository>()
+                .WithParameter(TypedParameter.From(AzureTableStorage<RunnerStateEntity>
+                    .Create(_settings.ConnectionString(x => x.Db.DataConnString), "ExternalRunnersStates", _log)))
+                .SingleInstance();
+        }
+
+        private void RegisterRabbitMqSubscribers(ContainerBuilder builder)
+        {
+            builder.RegisterType<LykkeTickPriceSubscriber>()
+                .As<IStartable>()
+                .As<IStopable>()
+                .WithParameter("settings", _settings.CurrentValue.LykkeTickPriceExchange)
+                .AutoActivate()
+                .SingleInstance();
+
+            foreach (var tickPriceExchange in _settings.CurrentValue.ExternalTickPriceExchanges)
+            {
+                builder.RegisterType<ExternalTickPriceSubscriber>()
+                    .As<IStartable>()
+                    .As<IStopable>()
+                    .WithParameter("settings", tickPriceExchange)
+                    .AutoActivate()
+                    .SingleInstance();
+            }
         }
     }
 }
