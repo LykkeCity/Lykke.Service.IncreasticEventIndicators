@@ -68,7 +68,7 @@ namespace Lykke.Service.IncreasticEventIndicators
                 Mapper.Initialize(x => x.AddProfiles(GetType().Assembly));
                 Mapper.Configuration.AssertConfigurationIsValid();
 
-                builder.RegisterModule(new ServiceModule(appSettings.Nested(x => x.IncreasticEventIndicatorsService), Log));
+                builder.RegisterModule(new ServiceModule(appSettings.Nested(x => x.IntrinsicEventIndicatorsService), Log));
                 builder.Populate(services);
                 ApplicationContainer = builder.Build();
 
@@ -184,7 +184,7 @@ namespace Lykke.Service.IncreasticEventIndicators
 
             aggregateLogger.AddLog(consoleLogger);
 
-            var dbLogConnectionStringManager = settings.Nested(x => x.IncreasticEventIndicatorsService.Db.LogsConnString);
+            var dbLogConnectionStringManager = settings.Nested(x => x.IntrinsicEventIndicatorsService.Db.LogsConnString);
             var dbLogConnectionString = dbLogConnectionStringManager.CurrentValue;
 
             if (string.IsNullOrEmpty(dbLogConnectionString))

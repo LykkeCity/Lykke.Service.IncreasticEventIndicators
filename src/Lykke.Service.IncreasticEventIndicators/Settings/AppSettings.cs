@@ -8,7 +8,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Settings
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class AppSettings
     {
-        public IncreasticEventIndicatorsSettings IncreasticEventIndicatorsService { get; set; }
+        public IncreasticEventIndicatorsSettings IntrinsicEventIndicatorsService { get; set; }
 
         public SlackNotificationsSettings SlackNotifications { get; set; }
 
