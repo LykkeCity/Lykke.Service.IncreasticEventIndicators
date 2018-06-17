@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.Core\Lykke.Service.IntrinsicEventIndicators.Core.csproj" />
+    <ProjectReference Include="..\Lykke.Service.IntrinsicEventIndicators.Core\Lykke.Service.IntrinsicEventIndicators.Core.csproj" />
   </ItemGroup>
 
 </Project>

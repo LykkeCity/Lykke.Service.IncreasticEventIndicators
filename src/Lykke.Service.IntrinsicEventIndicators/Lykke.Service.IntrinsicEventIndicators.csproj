@@ -46,9 +46,9 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.AzureRepositories\Lykke.Service.IntrinsicEventIndicators.AzureRepositories.csproj" />
-    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.Core\Lykke.Service.IntrinsicEventIndicators.Core.csproj" />
-    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.Services\Lykke.Service.IntrinsicEventIndicators.Services.csproj" />
+    <ProjectReference Include="..\Lykke.Service.IntrinsicEventIndicators.AzureRepositories\Lykke.Service.IntrinsicEventIndicators.AzureRepositories.csproj" />
+    <ProjectReference Include="..\Lykke.Service.IntrinsicEventIndicators.Core\Lykke.Service.IntrinsicEventIndicators.Core.csproj" />
+    <ProjectReference Include="..\Lykke.Service.IntrinsicEventIndicators.Services\Lykke.Service.IntrinsicEventIndicators.Services.csproj" />
   </ItemGroup>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
