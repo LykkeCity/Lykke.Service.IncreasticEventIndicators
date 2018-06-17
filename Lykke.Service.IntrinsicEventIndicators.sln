@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Instrastructure", "1. Instrastructure", "{CC2067D7-1971-47BB-B491-5649EA3C18B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Repositories", "2. Repositories", "{BF745453-B940-470E-81BC-43FB67703D4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{6CA74DE0-A357-4934-9D8B-FEA3F0A2D690}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Client", "3. Client", "{C9A2CFDE-EA32-4946-B679-7CE6EFA816B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Tests", "4. Tests", "{8F9036B1-5106-4C69-B2D2-B78EE52687A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lykke.Service.IntrinsicEventIndicators", "src\Lykke.Service.IntrinsicEventIndicators\Lykke.Service.IntrinsicEventIndicators.csproj", "{17B4F855-E5DE-41A7-87A7-AA70F8C050D1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lykke.Service.IntrinsicEventIndicators.Tests", "tests\Lykke.Service.IntrinsicEventIndicators.Tests\Lykke.Service.IntrinsicEventIndicators.Tests.csproj", "{14F3ABC4-EA14-4BEC-A6F4-E8770A65260F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lykke.Service.IntrinsicEventIndicators.Client", "client\Lykke.Service.IntrinsicEventIndicators.Client\Lykke.Service.IntrinsicEventIndicators.Client.csproj", "{4246C2F8-1625-4EF6-8361-C879CEBC340E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lykke.Service.IntrinsicEventIndicators.Core", "src\Lykke.Service.IntrinsicEventIndicators.Core\Lykke.Service.IntrinsicEventIndicators.Core.csproj", "{03D843AF-DCDF-409B-8039-71FC80BE2703}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lykke.Service.IntrinsicEventIndicators.AzureRepositories", "src\Lykke.Service.IntrinsicEventIndicators.AzureRepositories\Lykke.Service.IntrinsicEventIndicators.AzureRepositories.csproj", "{E558F0E3-816B-4757-8636-AB6F1D93D075}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lykke.Service.IntrinsicEventIndicators.Services", "src\Lykke.Service.IntrinsicEventIndicators.Services\Lykke.Service.IntrinsicEventIndicators.Services.csproj", "{6CF563B9-16D1-4390-A319-4E782CA5E925}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17B4F855-E5DE-41A7-87A7-AA70F8C050D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17B4F855-E5DE-41A7-87A7-AA70F8C050D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17B4F855-E5DE-41A7-87A7-AA70F8C050D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17B4F855-E5DE-41A7-87A7-AA70F8C050D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14F3ABC4-EA14-4BEC-A6F4-E8770A65260F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14F3ABC4-EA14-4BEC-A6F4-E8770A65260F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14F3ABC4-EA14-4BEC-A6F4-E8770A65260F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14F3ABC4-EA14-4BEC-A6F4-E8770A65260F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4246C2F8-1625-4EF6-8361-C879CEBC340E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4246C2F8-1625-4EF6-8361-C879CEBC340E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4246C2F8-1625-4EF6-8361-C879CEBC340E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4246C2F8-1625-4EF6-8361-C879CEBC340E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03D843AF-DCDF-409B-8039-71FC80BE2703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D843AF-DCDF-409B-8039-71FC80BE2703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D843AF-DCDF-409B-8039-71FC80BE2703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D843AF-DCDF-409B-8039-71FC80BE2703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E558F0E3-816B-4757-8636-AB6F1D93D075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E558F0E3-816B-4757-8636-AB6F1D93D075}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E558F0E3-816B-4757-8636-AB6F1D93D075}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E558F0E3-816B-4757-8636-AB6F1D93D075}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF563B9-16D1-4390-A319-4E782CA5E925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF563B9-16D1-4390-A319-4E782CA5E925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF563B9-16D1-4390-A319-4E782CA5E925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF563B9-16D1-4390-A319-4E782CA5E925}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{14F3ABC4-EA14-4BEC-A6F4-E8770A65260F} = {8F9036B1-5106-4C69-B2D2-B78EE52687A0}
+		{4246C2F8-1625-4EF6-8361-C879CEBC340E} = {C9A2CFDE-EA32-4946-B679-7CE6EFA816B8}
+		{03D843AF-DCDF-409B-8039-71FC80BE2703} = {CC2067D7-1971-47BB-B491-5649EA3C18B2}
+		{E558F0E3-816B-4757-8636-AB6F1D93D075} = {BF745453-B940-470E-81BC-43FB67703D4E}
+		{6CF563B9-16D1-4390-A319-4E782CA5E925} = {CC2067D7-1971-47BB-B491-5649EA3C18B2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46063157-36BA-4BB0-A414-259E0D938082}
+	EndGlobalSection
+EndGlobal
