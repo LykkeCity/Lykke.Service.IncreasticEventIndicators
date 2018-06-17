@@ -34,7 +34,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Adds delta.
+        /// </summary>
         /// <param name='column'>
+        /// Delta to add.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -44,7 +48,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPutWithHttpMessagesAsync(IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Deletes delta.
+        /// </summary>
         /// <param name='columnId'>
+        /// delta
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -54,7 +62,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteWithHttpMessagesAsync(string columnId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Adds asset pair.
+        /// </summary>
         /// <param name='row'>
+        /// Asset pair to add.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -64,7 +76,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutWithHttpMessagesAsync(IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Deletes asset pair.
+        /// </summary>
         /// <param name='rowId'>
+        /// asset pair
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -74,6 +90,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteWithHttpMessagesAsync(string rowId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Gets data.
+        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -82,6 +101,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<IntrinsicEventIndicatorsDto>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Gets runners states.
+        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -90,6 +112,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<IDictionary<string, IList<RunnerStateDto>>>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Checks service is alive
+        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -98,7 +123,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<object>> IsAliveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Adds delta.
+        /// </summary>
         /// <param name='column'>
+        /// Delta to add.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -108,7 +137,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutWithHttpMessagesAsync(IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Deletes delta.
+        /// </summary>
         /// <param name='columnId'>
+        /// delta
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -118,7 +151,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(string columnId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Adds asset pair.
+        /// </summary>
         /// <param name='row'>
+        /// Asset pair to add.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -128,7 +165,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Deletes asset pair.
+        /// </summary>
         /// <param name='rowId'>
+        /// asset pair
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -138,6 +179,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(string rowId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Gets data.
+        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -146,6 +190,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<IntrinsicEventIndicatorsDto>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Gets runners states.
+        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>

@@ -5,12 +5,12 @@
     <Version>1.0.1</Version>
     <Authors>Lykke</Authors>
     <Company>Lykke</Company>
-    <Product>Lykke.Service.IncreasticEventIndicators</Product>
-    <Description>Client for Lykke.Service.IncreasticEventIndicators API</Description>
-    <PackageLicenseUrl>https://github.com/LykkeCity/Lykke.Service.IncreasticEventIndicators/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/LykkeCity/Lykke.Service.IncreasticEventIndicators</PackageProjectUrl>
+    <Product>Lykke.Service.IntrinsicEventIndicators</Product>
+    <Description>Client for Lykke.Service.IntrinsicEventIndicators API</Description>
+    <PackageLicenseUrl>https://github.com/LykkeCity/Lykke.Service.IntrinsicEventIndicators/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/LykkeCity/Lykke.Service.IntrinsicEventIndicators</PackageProjectUrl>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/14153330?v=3&amp;s=200</PackageIconUrl>
-    <RepositoryUrl>https://github.com/LykkeCity/Lykke.Service.IncreasticEventIndicators.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/LykkeCity/Lykke.Service.IntrinsicEventIndicators.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Lykke</PackageTags>
   </PropertyGroup>

@@ -141,7 +141,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             };
             CustomInitialize();
         }
+        /// <summary>
+        /// Adds delta.
+        /// </summary>
         /// <param name='column'>
+        /// Delta to add.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -271,7 +275,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Deletes delta.
+        /// </summary>
         /// <param name='columnId'>
+        /// delta
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -379,7 +387,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Adds asset pair.
+        /// </summary>
         /// <param name='row'>
+        /// Asset pair to add.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -505,7 +517,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Deletes asset pair.
+        /// </summary>
         /// <param name='rowId'>
+        /// asset pair
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -613,6 +629,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Gets data.
+        /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -730,6 +749,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Gets runners states.
+        /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -847,6 +869,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Checks service is alive
+        /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -982,7 +1007,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Adds delta.
+        /// </summary>
         /// <param name='column'>
+        /// Delta to add.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1112,7 +1141,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Deletes delta.
+        /// </summary>
         /// <param name='columnId'>
+        /// delta
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1220,7 +1253,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Adds asset pair.
+        /// </summary>
         /// <param name='row'>
+        /// Asset pair to add.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1346,7 +1383,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Deletes asset pair.
+        /// </summary>
         /// <param name='rowId'>
+        /// asset pair
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1454,6 +1495,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Gets data.
+        /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1571,6 +1615,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
+        /// <summary>
+        /// Gets runners states.
+        /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

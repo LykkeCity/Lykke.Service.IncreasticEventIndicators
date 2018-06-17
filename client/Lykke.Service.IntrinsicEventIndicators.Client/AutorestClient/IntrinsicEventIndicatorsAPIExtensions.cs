@@ -17,20 +17,28 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
     /// </summary>
     public static partial class IntrinsicEventIndicatorsAPIExtensions
     {
+            /// <summary>
+            /// Adds delta.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='column'>
+            /// Delta to add.
             /// </param>
             public static ErrorResponse ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPut(this IIntrinsicEventIndicatorsAPI operations, IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost))
             {
                 return operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalPutAsync(column).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Adds delta.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='column'>
+            /// Delta to add.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -43,20 +51,28 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Deletes delta.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='columnId'>
+            /// delta
             /// </param>
             public static void ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDelete(this IIntrinsicEventIndicatorsAPI operations, string columnId = default(string))
             {
                 operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteAsync(columnId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Deletes delta.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='columnId'>
+            /// delta
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -66,20 +82,28 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 (await operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaexternalDeleteWithHttpMessagesAsync(columnId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Adds asset pair.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='row'>
+            /// Asset pair to add.
             /// </param>
             public static ErrorResponse ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPut(this IIntrinsicEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost))
             {
                 return operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutAsync(row).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Adds asset pair.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='row'>
+            /// Asset pair to add.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -92,20 +116,28 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Deletes asset pair.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='rowId'>
+            /// asset pair
             /// </param>
             public static void ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDelete(this IIntrinsicEventIndicatorsAPI operations, string rowId = default(string))
             {
                 operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteAsync(rowId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Deletes asset pair.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='rowId'>
+            /// asset pair
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -115,6 +147,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 (await operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteWithHttpMessagesAsync(rowId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Gets data.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -123,6 +158,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 return operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsdataexternalGetAsync().GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Gets data.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -137,6 +175,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Gets runners states.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -145,6 +186,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 return operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesexternalGetAsync().GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Gets runners states.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -159,6 +203,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Checks service is alive
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -167,6 +214,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 return operations.IsAliveAsync().GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Checks service is alive
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -181,20 +231,28 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Adds delta.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='column'>
+            /// Delta to add.
             /// </param>
             public static ErrorResponse ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPut(this IIntrinsicEventIndicatorsAPI operations, IntrinsicEventIndicatorsColumnPost column = default(IntrinsicEventIndicatorsColumnPost))
             {
                 return operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaPutAsync(column).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Adds delta.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='column'>
+            /// Delta to add.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -207,20 +265,28 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Deletes delta.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='columnId'>
+            /// delta
             /// </param>
             public static void ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDelete(this IIntrinsicEventIndicatorsAPI operations, string columnId = default(string))
             {
                 operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteAsync(columnId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Deletes delta.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='columnId'>
+            /// delta
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -230,20 +296,28 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 (await operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdeltaDeleteWithHttpMessagesAsync(columnId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Adds asset pair.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='row'>
+            /// Asset pair to add.
             /// </param>
             public static ErrorResponse ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPut(this IIntrinsicEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost))
             {
                 return operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutAsync(row).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Adds asset pair.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='row'>
+            /// Asset pair to add.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -256,20 +330,28 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Deletes asset pair.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='rowId'>
+            /// asset pair
             /// </param>
             public static void ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDelete(this IIntrinsicEventIndicatorsAPI operations, string rowId = default(string))
             {
                 operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteAsync(rowId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Deletes asset pair.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='rowId'>
+            /// asset pair
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -279,6 +361,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 (await operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(rowId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Gets data.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -287,6 +372,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 return operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsdataGetAsync().GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Gets data.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -301,6 +389,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Gets runners states.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -309,6 +400,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 return operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsrunnersstatesGetAsync().GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Gets runners states.
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
