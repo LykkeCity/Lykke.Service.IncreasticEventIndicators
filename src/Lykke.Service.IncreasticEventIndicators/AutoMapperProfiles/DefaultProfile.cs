@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
-using Lykke.Service.IncreasticEventIndicators.Models;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
+using Lykke.Service.IntrinsicEventIndicators.Models;
 
-namespace Lykke.Service.IncreasticEventIndicators.AutoMapperProfiles
+namespace Lykke.Service.IntrinsicEventIndicators.AutoMapperProfiles
 {
     public class DefaultProfile : Profile
     {
@@ -15,7 +15,7 @@ namespace Lykke.Service.IncreasticEventIndicators.AutoMapperProfiles
             CreateMap<IntrinsicEventIndicatorsRowPost, IntrinsicEventIndicatorsRow>()
                 .ForMember(x => x.RowId, opt => opt.Ignore());
             CreateMap<IIntrinsicEventIndicatorsRow, IntrinsicEventIndicatorsRowDto>();
-            CreateMap<IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>();
+            CreateMap<IntrinsicEventIndicators.Core.Domain.Model.IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>();
 
             CreateMap<IRunnerState, RunnerStateDto>();
         }

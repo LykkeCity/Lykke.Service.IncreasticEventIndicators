@@ -1,4 +1,4 @@
-﻿namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
+﻿namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 {
     public interface IRunnerState
     {

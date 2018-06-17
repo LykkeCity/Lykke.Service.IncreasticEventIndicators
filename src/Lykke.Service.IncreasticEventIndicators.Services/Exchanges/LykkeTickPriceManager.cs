@@ -1,8 +1,8 @@
 ﻿using Common.Log;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain;
-using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services.Exchanges;
 
-namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
+namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
 {
     public class LykkeTickPriceManager : TickPriceManager, ILykkeTickPriceManager, ILykkeTickPriceHandler
     {

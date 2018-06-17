@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using AzureStorage;
 using JetBrains.Annotations;
 using Lykke.AzureStorage.Tables;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
 
-namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
+namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
 {
     public class RunnerStateEntity : AzureTableEntity, IRunnerState
     {

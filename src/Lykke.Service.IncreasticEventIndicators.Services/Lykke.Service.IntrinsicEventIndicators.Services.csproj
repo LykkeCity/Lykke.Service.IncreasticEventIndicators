@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>Lykke.Service.IntrinsicEventIndicators.Services</AssemblyName>
+    <RootNamespace>Lykke.Service.IntrinsicEventIndicators.Services</RootNamespace>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lykke.Common" Version="6.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.Core\Lykke.Service.IntrinsicEventIndicators.Core.csproj" />
+  </ItemGroup>
+
+</Project>

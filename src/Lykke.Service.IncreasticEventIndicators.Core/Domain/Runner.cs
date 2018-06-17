@@ -1,7 +1,7 @@
 ﻿using System;
 using Lykke.Common.ExchangeAdapter.Contracts;
 
-namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
+namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 {
     public class Runner
     {

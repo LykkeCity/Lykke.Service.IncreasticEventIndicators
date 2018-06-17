@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace Lykke.Service.IncreasticEventIndicators.Settings.SlackNotifications
+namespace Lykke.Service.IntrinsicEventIndicators.Settings.SlackNotifications
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class SlackNotificationsSettings

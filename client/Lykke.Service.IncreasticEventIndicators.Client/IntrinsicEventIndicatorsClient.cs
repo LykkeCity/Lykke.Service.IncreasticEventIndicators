@@ -4,23 +4,23 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Log;
-using Lykke.Service.IncreasticEventIndicators.Client.AutorestClient;
-using Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models;
-using Lykke.Service.IncreasticEventIndicators.Client.Exceptions;
+using Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient;
+using Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models;
+using Lykke.Service.IntrinsicEventIndicators.Client.Exceptions;
 using Microsoft.Rest;
 using Newtonsoft.Json;
 
-namespace Lykke.Service.IncreasticEventIndicators.Client
+namespace Lykke.Service.IntrinsicEventIndicators.Client
 {
-    public class IncreasticEventIndicatorsClient : IIncreasticEventIndicatorsClient
+    public class IntrinsicEventIndicatorsClient : IIntrinsicEventIndicatorsClient
     {
         private readonly ILog _log;
-        private readonly IncreasticEventIndicatorsAPI _api;
+        private readonly IntrinsicEventIndicatorsAPI _api;
 
-        public IncreasticEventIndicatorsClient(string serviceUrl, ILog log)
+        public IntrinsicEventIndicatorsClient(string serviceUrl, ILog log)
         {
             _log = log;
-            _api = new IncreasticEventIndicatorsAPI(new Uri(serviceUrl));
+            _api = new IntrinsicEventIndicatorsAPI(new Uri(serviceUrl));
         }
 
         public void Dispose()

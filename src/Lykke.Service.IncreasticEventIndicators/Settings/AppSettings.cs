@@ -1,14 +1,14 @@
 ﻿using JetBrains.Annotations;
-using Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings;
-using Lykke.Service.IncreasticEventIndicators.Settings.SlackNotifications;
+using Lykke.Service.IntrinsicEventIndicators.Settings.ServiceSettings;
+using Lykke.Service.IntrinsicEventIndicators.Settings.SlackNotifications;
 using Lykke.SettingsReader.Attributes;
 
-namespace Lykke.Service.IncreasticEventIndicators.Settings
+namespace Lykke.Service.IntrinsicEventIndicators.Settings
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class AppSettings
     {
-        public IncreasticEventIndicatorsSettings IntrinsicEventIndicatorsService { get; set; }
+        public IntrinsicEventIndicatorsSettings IntrinsicEventIndicatorsService { get; set; }
 
         public SlackNotificationsSettings SlackNotifications { get; set; }
 

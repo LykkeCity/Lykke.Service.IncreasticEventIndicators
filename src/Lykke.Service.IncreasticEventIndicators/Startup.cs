@@ -8,19 +8,19 @@ using Common.Log;
 using Lykke.Common.ApiLibrary.Middleware;
 using Lykke.Common.ApiLibrary.Swagger;
 using Lykke.Logs;
-using Lykke.Service.IncreasticEventIndicators.Core.Services;
-using Lykke.Service.IncreasticEventIndicators.Settings;
-using Lykke.Service.IncreasticEventIndicators.Modules;
+using Lykke.MonitoringServiceApiCaller;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services;
+using Lykke.Service.IntrinsicEventIndicators.Infrastructure;
+using Lykke.Service.IntrinsicEventIndicators.Modules;
+using Lykke.Service.IntrinsicEventIndicators.Settings;
 using Lykke.SettingsReader;
 using Lykke.SlackNotification.AzureQueue;
-using Lykke.MonitoringServiceApiCaller;
-using Lykke.Service.IncreasticEventIndicators.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Lykke.Service.IncreasticEventIndicators
+namespace Lykke.Service.IntrinsicEventIndicators
 {
     public class Startup
     {
@@ -54,7 +54,7 @@ namespace Lykke.Service.IncreasticEventIndicators
 
                 services.AddSwaggerGen(options =>
                 {
-                    options.DefaultLykkeConfiguration("v1", "IncreasticEventIndicators API");
+                    options.DefaultLykkeConfiguration("v1", "IntrinsicEventIndicators API");
                 });
 
                 var builder = new ContainerBuilder();
@@ -91,7 +91,7 @@ namespace Lykke.Service.IncreasticEventIndicators
                 }
 
                 app.UseLykkeForwardedHeaders();
-                app.UseLykkeMiddleware("IncreasticEventIndicators", ex => new { Message = "Technical problem" });
+                app.UseLykkeMiddleware("IntrinsicEventIndicators", ex => new { Message = "Technical problem" });
 
                 app.UseMvc();
                 app.UseSwagger(c =>
@@ -197,7 +197,7 @@ namespace Lykke.Service.IncreasticEventIndicators
                 throw new InvalidOperationException($"LogsConnString {dbLogConnectionString} is not filled in settings");
 
             var persistenceManager = new LykkeLogToAzureStoragePersistenceManager(
-                AzureTableStorage<LogEntity>.Create(dbLogConnectionStringManager, "IncreasticEventIndicatorsLog", consoleLogger),
+                AzureTableStorage<LogEntity>.Create(dbLogConnectionStringManager, "IntrinsicEventIndicatorsLog", consoleLogger),
                 consoleLogger);
 
             // Creating slack notification service, which logs own azure queue processing messages to aggregate log

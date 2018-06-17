@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lykke.Service.IncreasticEventIndicators.Core
+namespace Lykke.Service.IntrinsicEventIndicators.Core
 {
     public static class Constants
     {

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Common.Log;
-using Lykke.Service.IncreasticEventIndicators.Core.Services;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services;
 
-namespace Lykke.Service.IncreasticEventIndicators.Services
+namespace Lykke.Service.IntrinsicEventIndicators.Services
 {
     // NOTE: Sometimes, startup process which is expressed explicitly is not just better, 
     // but the only way. If this is your case, use this class to manage startup.

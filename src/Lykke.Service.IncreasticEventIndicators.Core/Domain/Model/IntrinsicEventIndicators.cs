@@ -1,4 +1,4 @@
-﻿namespace Lykke.Service.IncreasticEventIndicators.Core.Domain.Model
+﻿namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model
 {
     public class IntrinsicEventIndicators
     {

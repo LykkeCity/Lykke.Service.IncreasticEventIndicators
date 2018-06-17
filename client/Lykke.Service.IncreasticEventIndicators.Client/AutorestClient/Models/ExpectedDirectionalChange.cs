@@ -4,13 +4,12 @@
 // regenerated.
 // </auto-generated>
 
-namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
-{
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using System.Runtime;
-    using System.Runtime.Serialization;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
+namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
+{
     /// <summary>
     /// Defines values for ExpectedDirectionalChange.
     /// </summary>

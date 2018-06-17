@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
 
-namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
+namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 {
     public interface IIntrinsicEventIndicatorsRepository
     {

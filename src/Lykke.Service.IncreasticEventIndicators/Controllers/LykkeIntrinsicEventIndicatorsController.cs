@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
-using Lykke.Service.IncreasticEventIndicators.Core.Services;
-using Lykke.Service.IncreasticEventIndicators.Models;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services;
+using Lykke.Service.IntrinsicEventIndicators.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lykke.Service.IncreasticEventIndicators.Controllers
+namespace Lykke.Service.IntrinsicEventIndicators.Controllers
 {
     [Route("api/v1/[controller]")]
     public class LykkeIntrinsicEventIndicatorsController : Controller
@@ -118,7 +118,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Controllers
         public async Task<IActionResult> GetData()
         {
             var data = await _intrinsicEventIndicatorsService.GetData();
-            var vm = _mapper.Map<IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>(data);
+            var vm = _mapper.Map<IntrinsicEventIndicators.Core.Domain.Model.IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>(data);
             return Ok(vm);
         }
 

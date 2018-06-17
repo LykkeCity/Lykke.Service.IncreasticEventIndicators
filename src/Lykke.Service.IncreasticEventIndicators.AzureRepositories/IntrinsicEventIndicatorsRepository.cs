@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AzureStorage;
 using Lykke.AzureStorage.Tables;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
 
-namespace Lykke.Service.IncreasticEventIndicators.AzureRepositories
+namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
 {
     public class IntrinsicEventIndicatorsEntity : AzureTableEntity, IIntrinsicEventIndicatorsColumn, IIntrinsicEventIndicatorsRow
     {

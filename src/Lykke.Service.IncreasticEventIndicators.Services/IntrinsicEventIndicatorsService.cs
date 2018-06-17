@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common.Log;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Model;
-using Lykke.Service.IncreasticEventIndicators.Core.Services;
-using Lykke.Service.IncreasticEventIndicators.Services.Exchanges;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services;
+using Lykke.Service.IntrinsicEventIndicators.Services.Exchanges;
 
-namespace Lykke.Service.IncreasticEventIndicators.Services
+namespace Lykke.Service.IntrinsicEventIndicators.Services
 {
     public abstract class IntrinsicEventIndicatorsService : IIntrinsicEventIndicatorsService
     {
@@ -60,7 +60,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
             await UpdateRunners();
         }
 
-        public async Task<IntrinsicEventIndicators> GetData()
+        public async Task<IntrinsicEventIndicators.Core.Domain.Model.IntrinsicEventIndicators> GetData()
         {
             EnsureInitialized();
 
@@ -72,7 +72,7 @@ namespace Lykke.Service.IncreasticEventIndicators.Services
                 rows.Select(x => TickPriceManager.GetExchangeAssetPairKey(x.Exchange, x.AssetPair)).ToList(),
                 columns.Select(x => x.Delta).ToList());
 
-            return await Task.FromResult(new IntrinsicEventIndicators
+            return await Task.FromResult(new IntrinsicEventIndicators.Core.Domain.Model.IntrinsicEventIndicators
             {
                 Columns = columns.ToArray(),
                 Rows = rows.ToArray(),

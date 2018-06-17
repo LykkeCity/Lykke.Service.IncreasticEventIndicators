@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain.Health;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Health;
 
-namespace Lykke.Service.IncreasticEventIndicators.Core.Services
+namespace Lykke.Service.IntrinsicEventIndicators.Core.Services
 {
     // NOTE: See https://lykkex.atlassian.net/wiki/spaces/LKEWALLET/pages/35755585/Add+your+app+to+Monitoring
     public interface IHealthService

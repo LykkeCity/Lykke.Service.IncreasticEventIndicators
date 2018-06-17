@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Autofac;
 using AutoMapper;
-using Lykke.Service.IncreasticEventIndicators.AutoMapperProfiles;
+using Lykke.Service.IntrinsicEventIndicators.AutoMapperProfiles;
 
-namespace Lykke.Service.IncreasticEventIndicators.Infrastructure
+namespace Lykke.Service.IntrinsicEventIndicators.Infrastructure
 {
     internal static class AutoMapperConfig
     {

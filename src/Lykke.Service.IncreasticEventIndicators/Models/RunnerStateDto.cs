@@ -1,6 +1,6 @@
-﻿using Lykke.Service.IncreasticEventIndicators.Core.Domain;
+﻿using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
 
-namespace Lykke.Service.IncreasticEventIndicators.Models
+namespace Lykke.Service.IntrinsicEventIndicators.Models
 {
     public class RunnerStateDto
     {

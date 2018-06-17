@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
+namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 {
     public interface ITickPriceManager
     {

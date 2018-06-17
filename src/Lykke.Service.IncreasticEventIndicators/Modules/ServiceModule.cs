@@ -3,27 +3,27 @@ using Autofac.Extensions.DependencyInjection;
 using AzureStorage.Tables;
 using Common;
 using Common.Log;
-using Lykke.Service.IncreasticEventIndicators.AzureRepositories;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain;
-using Lykke.Service.IncreasticEventIndicators.Core.Services;
-using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
-using Lykke.Service.IncreasticEventIndicators.Rabbit;
-using Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings;
-using Lykke.Service.IncreasticEventIndicators.Services;
-using Lykke.Service.IncreasticEventIndicators.Services.Exchanges;
+using Lykke.Service.IntrinsicEventIndicators.AzureRepositories;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services.Exchanges;
+using Lykke.Service.IntrinsicEventIndicators.Rabbit;
+using Lykke.Service.IntrinsicEventIndicators.Services;
+using Lykke.Service.IntrinsicEventIndicators.Services.Exchanges;
+using Lykke.Service.IntrinsicEventIndicators.Settings.ServiceSettings;
 using Lykke.SettingsReader;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Lykke.Service.IncreasticEventIndicators.Modules
+namespace Lykke.Service.IntrinsicEventIndicators.Modules
 {
     public class ServiceModule : Module
     {
-        private readonly IReloadingManager<IncreasticEventIndicatorsSettings> _settings;
+        private readonly IReloadingManager<IntrinsicEventIndicatorsSettings> _settings;
         private readonly ILog _log;
         // NOTE: you can remove it if you don't need to use IServiceCollection extensions to register service specific dependencies
         private readonly IServiceCollection _services;
 
-        public ServiceModule(IReloadingManager<IncreasticEventIndicatorsSettings> settings, ILog log)
+        public ServiceModule(IReloadingManager<IntrinsicEventIndicatorsSettings> settings, ILog log)
         {
             _settings = settings;
             _log = log;

@@ -1,4 +1,4 @@
-﻿namespace Lykke.Service.IncreasticEventIndicators.Core.Domain.Health
+﻿namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain.Health
 {
     public class HealthIssue
     {

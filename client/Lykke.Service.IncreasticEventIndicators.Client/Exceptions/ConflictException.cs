@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Lykke.Service.IncreasticEventIndicators.Client.Exceptions
+namespace Lykke.Service.IntrinsicEventIndicators.Client.Exceptions
 {
     [Serializable]
     public class ConflictException : ApiException

@@ -6,11 +6,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common.Log;
 using Lykke.Common.ExchangeAdapter.Contracts;
-using Lykke.Service.IncreasticEventIndicators.Core;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain;
-using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
+using Lykke.Service.IntrinsicEventIndicators.Core;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services.Exchanges;
 
-namespace Lykke.Service.IncreasticEventIndicators.Services.Exchanges
+namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
 {
     public abstract class TickPriceManager : ITickPriceManager, ITickPriceHandler
     {

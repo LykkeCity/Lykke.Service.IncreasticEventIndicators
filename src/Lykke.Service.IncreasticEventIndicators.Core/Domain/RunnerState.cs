@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lykke.Service.IncreasticEventIndicators.Core.Domain
+namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 {
     public class RunnerState : IRunnerState, ICloneable
     {

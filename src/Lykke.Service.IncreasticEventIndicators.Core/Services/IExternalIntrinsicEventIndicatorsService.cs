@@ -1,4 +1,4 @@
-﻿namespace Lykke.Service.IncreasticEventIndicators.Core.Services
+﻿namespace Lykke.Service.IntrinsicEventIndicators.Core.Services
 {
     public interface IExternalIntrinsicEventIndicatorsService : IIntrinsicEventIndicatorsService
     {

@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Lykke.Service.IncreasticEventIndicators.Tests
+namespace Lykke.Service.IntrinsicEventIndicators.Tests
 {
     public class UnitTest1
     {

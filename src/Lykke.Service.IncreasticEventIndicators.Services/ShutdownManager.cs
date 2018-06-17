@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
 using Common.Log;
-using Lykke.Service.IncreasticEventIndicators.Core.Services;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services;
 
-namespace Lykke.Service.IncreasticEventIndicators.Services
+namespace Lykke.Service.IntrinsicEventIndicators.Services
 {
     // NOTE: Sometimes, shutdown process should be expressed explicitly. 
     // If this is your case, use this class to manage shutdown.

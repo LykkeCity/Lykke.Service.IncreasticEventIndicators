@@ -1,4 +1,4 @@
-﻿namespace Lykke.Service.IncreasticEventIndicators.Rabbit
+﻿namespace Lykke.Service.IntrinsicEventIndicators.Rabbit
 {
     public class ExchangeSettings
     {

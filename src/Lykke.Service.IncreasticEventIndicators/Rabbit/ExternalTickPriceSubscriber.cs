@@ -1,8 +1,8 @@
 ﻿using Common.Log;
-using Lykke.Service.IncreasticEventIndicators.Core.Services.Exchanges;
-using Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services.Exchanges;
+using Lykke.Service.IntrinsicEventIndicators.Settings.ServiceSettings;
 
-namespace Lykke.Service.IncreasticEventIndicators.Rabbit
+namespace Lykke.Service.IntrinsicEventIndicators.Rabbit
 {
     public class ExternalTickPriceSubscriber : TickPriceSubscriber
     {

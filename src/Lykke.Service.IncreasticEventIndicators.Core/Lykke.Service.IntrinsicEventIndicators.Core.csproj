@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>Lykke.Service.IncreasticEventIndicators.Core</AssemblyName>
-    <RootNamespace>Lykke.Service.IncreasticEventIndicators.Core</RootNamespace>
+    <AssemblyName>Lykke.Service.IntrinsicEventIndicators.Core</AssemblyName>
+    <RootNamespace>Lykke.Service.IntrinsicEventIndicators.Core</RootNamespace>
     <Version>1.0.0</Version>
   </PropertyGroup>
 

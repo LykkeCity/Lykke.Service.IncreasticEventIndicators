@@ -1,6 +1,6 @@
 ﻿using Lykke.SettingsReader.Attributes;
 
-namespace Lykke.Service.IncreasticEventIndicators.Settings
+namespace Lykke.Service.IntrinsicEventIndicators.Settings
 {
     public class MonitoringServiceClientSettings
     {

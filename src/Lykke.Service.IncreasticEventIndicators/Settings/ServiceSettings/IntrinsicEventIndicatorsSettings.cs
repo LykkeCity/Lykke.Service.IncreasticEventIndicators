@@ -1,10 +1,10 @@
 ﻿using JetBrains.Annotations;
-using Lykke.Service.IncreasticEventIndicators.Rabbit;
+using Lykke.Service.IntrinsicEventIndicators.Rabbit;
 
-namespace Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings
+namespace Lykke.Service.IntrinsicEventIndicators.Settings.ServiceSettings
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
-    public class IncreasticEventIndicatorsSettings
+    public class IntrinsicEventIndicatorsSettings
     {
         public DbSettings Db { get; set; }
 

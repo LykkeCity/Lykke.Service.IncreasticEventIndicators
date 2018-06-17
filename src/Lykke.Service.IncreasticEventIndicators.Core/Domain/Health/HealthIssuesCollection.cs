@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Lykke.Service.IncreasticEventIndicators.Core.Domain.Health
+namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain.Health
 {
     public class HealthIssuesCollection : IReadOnlyCollection<HealthIssue>
     {

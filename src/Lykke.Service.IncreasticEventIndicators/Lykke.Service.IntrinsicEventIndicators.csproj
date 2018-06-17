@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <Version>1.0.1</Version>
-    <AssemblyName>Lykke.Service.IncreasticEventIndicators</AssemblyName>
-    <RootNamespace>Lykke.Service.IncreasticEventIndicators</RootNamespace>
+    <AssemblyName>Lykke.Service.IntrinsicEventIndicators</AssemblyName>
+    <RootNamespace>Lykke.Service.IntrinsicEventIndicators</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -46,9 +46,9 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.AzureRepositories\Lykke.Service.IncreasticEventIndicators.AzureRepositories.csproj" />
-    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.Core\Lykke.Service.IncreasticEventIndicators.Core.csproj" />
-    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.Services\Lykke.Service.IncreasticEventIndicators.Services.csproj" />
+    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.AzureRepositories\Lykke.Service.IntrinsicEventIndicators.AzureRepositories.csproj" />
+    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.Core\Lykke.Service.IntrinsicEventIndicators.Core.csproj" />
+    <ProjectReference Include="..\Lykke.Service.IncreasticEventIndicators.Services\Lykke.Service.IntrinsicEventIndicators.Services.csproj" />
   </ItemGroup>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">

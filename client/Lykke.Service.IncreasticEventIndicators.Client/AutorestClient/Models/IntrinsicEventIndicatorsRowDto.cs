@@ -4,11 +4,10 @@
 // regenerated.
 // </auto-generated>
 
-namespace Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models
-{
-    using Newtonsoft.Json;
-    using System.Linq;
+using Newtonsoft.Json;
 
+namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
+{
     public partial class IntrinsicEventIndicatorsRowDto
     {
         /// <summary>

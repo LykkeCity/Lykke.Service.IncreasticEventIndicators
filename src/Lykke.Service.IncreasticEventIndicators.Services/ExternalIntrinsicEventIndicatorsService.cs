@@ -1,8 +1,8 @@
 ﻿using Common.Log;
-using Lykke.Service.IncreasticEventIndicators.Core.Domain;
-using Lykke.Service.IncreasticEventIndicators.Core.Services;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services;
 
-namespace Lykke.Service.IncreasticEventIndicators.Services
+namespace Lykke.Service.IntrinsicEventIndicators.Services
 {
     public class ExternalIntrinsicEventIndicatorsService : IntrinsicEventIndicatorsService, IExternalIntrinsicEventIndicatorsService
     {

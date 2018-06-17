@@ -1,6 +1,6 @@
 ﻿using Lykke.SettingsReader.Attributes;
 
-namespace Lykke.Service.IncreasticEventIndicators.Settings.ServiceSettings
+namespace Lykke.Service.IntrinsicEventIndicators.Settings.ServiceSettings
 {
     public class DbSettings
     {

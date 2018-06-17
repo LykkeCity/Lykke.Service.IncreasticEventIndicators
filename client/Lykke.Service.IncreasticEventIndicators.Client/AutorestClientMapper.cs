@@ -1,4 +1,4 @@
-﻿namespace Lykke.Service.IncreasticEventIndicators.Client
+﻿namespace Lykke.Service.IntrinsicEventIndicators.Client
 {
     public static class AutorestClientMapper
     {

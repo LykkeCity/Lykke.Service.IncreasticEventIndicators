@@ -1,13 +1,12 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Lykke.Service.IncreasticEventIndicators.Client.AutorestClient.Models;
+using Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models;
 
-namespace Lykke.Service.IncreasticEventIndicators.Client
+namespace Lykke.Service.IntrinsicEventIndicators.Client
 {
-    public interface IIncreasticEventIndicatorsClient : IDisposable
+    public interface IIntrinsicEventIndicatorsClient : IDisposable
     {
         /// <summary>
         /// Checks if service is alive
