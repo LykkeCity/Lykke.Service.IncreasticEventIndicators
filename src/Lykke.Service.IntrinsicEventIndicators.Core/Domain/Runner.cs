@@ -98,6 +98,12 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
             }
 
             var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.Extreme / _state.Delta);
+
+            if (_state.ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
+            {
+                indicator *= -1;
+            }
+
             return Math.Round(indicator, 2);
         }
 
