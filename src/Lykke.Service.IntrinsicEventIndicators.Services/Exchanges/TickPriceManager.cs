@@ -182,7 +182,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                     runnerStateEntity.ExpectedDirectionalChange, runnerStateEntity.DirectionalChangePrice,
                     runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerStateEntity.Exchange);
 
-                var runner = new Runner(runnerState);
+                var runner = new Runner(runnerState, _log);
 
                 var runnersKey = GetRunnersKey(GetExchangeAssetPairKey(runnerState.Exchange, runnerState.AssetPair), runnerState.Delta);
                 _runners.TryAdd(runnersKey, runner);
@@ -209,7 +209,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                     if (!_runners.ContainsKey(runnersKey))
                     {
                         _runners.TryAdd(runnersKey, new Runner(delta, ParseAssetPairFromExchangeAssetPairKey(exchangeAssetPair),
-                            ParseExchangeFromExchangeAssetPairKey(exchangeAssetPair)));
+                            ParseExchangeFromExchangeAssetPairKey(exchangeAssetPair), _log));
                     }
                 }
             }
