@@ -157,7 +157,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
                 TickPrice = tickPrice
             };
 
-            _log.WriteInfo(nameof(Runner), nameof(LogIntrinsicEventHistoryAsync), $"data: {data.ToJson()}");
+            _log.WriteInfoAsync(nameof(Runner), nameof(LogIntrinsicEventHistoryAsync), data.ToJson(),
+                "Intrinsic Event detected").GetAwaiter().GetResult();
         }
 
         public void SaveState()
