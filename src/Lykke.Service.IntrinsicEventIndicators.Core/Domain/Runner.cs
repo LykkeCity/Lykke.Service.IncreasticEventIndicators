@@ -30,6 +30,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 
         public void Run(TickPrice tickPrice)
         {
+            _state.Ask = tickPrice.Ask;
+            _state.Bid = tickPrice.Bid;
+            _state.TickPriceTimestamp = tickPrice.Timestamp;
+
             if (!_initialized)
             {
                 _state.Extreme = _state.Reference = _state.DirectionalChangePrice = (tickPrice.Ask + tickPrice.Bid) / 2m;

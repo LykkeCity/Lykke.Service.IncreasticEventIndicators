@@ -180,7 +180,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                 var runnerState = new RunnerState(runnerStateEntity.Event, runnerStateEntity.Extreme,
                     runnerStateEntity.ExpectedDcLevel, runnerStateEntity.ExpectedOsLevel, runnerStateEntity.Reference,
                     runnerStateEntity.ExpectedDirectionalChange, runnerStateEntity.DirectionalChangePrice,
-                    runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerStateEntity.Exchange);
+                    runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerStateEntity.Exchange,
+                    runnerStateEntity.Ask, runnerStateEntity.Bid, runnerStateEntity.TickPriceTimestamp);
 
                 var runner = new Runner(runnerState, _log);
 

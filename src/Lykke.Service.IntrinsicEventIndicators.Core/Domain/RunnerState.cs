@@ -12,6 +12,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
         private ExpectedDirectionalChange _expectedDirectionalChange;
 
         private decimal _directionalChangePrice;
+        private decimal _ask;
+        private decimal _bid;
+        private DateTime _tickPriceTimestamp;
 
         public int Event
         {
@@ -90,6 +93,39 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
             }
         }
 
+        public decimal Ask
+        {
+            get => _ask;
+            set
+            {
+                if (_ask == value) return;
+                _ask = value;
+                IsChanged = true;
+            }
+        }
+
+        public decimal Bid
+        {
+            get => _bid;
+            set
+            {
+                if (_bid == value) return;
+                _bid = value;
+                IsChanged = true;
+            }
+        }
+
+        public DateTime TickPriceTimestamp
+        {
+            get => _tickPriceTimestamp;
+            set
+            {
+                if (_tickPriceTimestamp == value) return;
+                _tickPriceTimestamp = value;
+                IsChanged = true;
+            }
+        }
+
         public decimal Delta { get; }
 
         public string AssetPair { get; }
@@ -107,7 +143,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 
         public RunnerState(int @event, decimal extreme, decimal expectedDcLevel, decimal expectedOsLevel,
             decimal reference, ExpectedDirectionalChange expectedDirectionalChange, decimal directionalChangePrice, decimal delta,
-            string assetPair, string exchange)
+            string assetPair, string exchange, decimal ask, decimal bid, DateTime tickPriceTimestamp)
         {
             _event = @event;
             _extreme = extreme;
@@ -119,12 +155,17 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
             Delta = delta;
             AssetPair = assetPair;
             Exchange = exchange;
+            _ask = ask;
+            _bid = bid;
+            _tickPriceTimestamp = tickPriceTimestamp;
+
+            IsChanged = true;
         }
 
         public object Clone()
         {
             return new RunnerState(_event, _extreme, _expectedDcLevel, _expectedOsLevel, _reference,
-                _expectedDirectionalChange, _directionalChangePrice, Delta, AssetPair, Exchange);
+                _expectedDirectionalChange, _directionalChangePrice, Delta, AssetPair, Exchange, _ask, _bid, _tickPriceTimestamp);
         }
     }
 }

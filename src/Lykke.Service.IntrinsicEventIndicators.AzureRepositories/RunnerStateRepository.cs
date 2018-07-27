@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +22,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
         public decimal Delta { get; set; }
         public string AssetPair { get; set; }
         public string Exchange { get; set; }
+        public decimal Ask { get; set; }
+        public decimal Bid { get; set; }
+        public DateTime TickPriceTimestamp { get; set; }
     }
 
     [UsedImplicitly]
@@ -54,7 +58,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
                     DirectionalChangePrice = x.DirectionalChangePrice,
                     AssetPair = x.AssetPair,
                     Delta = x.Delta,                    
-                    Exchange = x.Exchange
+                    Exchange = x.Exchange,
+                    Ask = x.Ask,
+                    Bid = x.Bid,
+                    TickPriceTimestamp = x.TickPriceTimestamp
                 }
             ).ToArray();
 
