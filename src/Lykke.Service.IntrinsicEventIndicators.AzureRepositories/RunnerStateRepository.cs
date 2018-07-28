@@ -24,7 +24,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
         public string Exchange { get; set; }
         public decimal Ask { get; set; }
         public decimal Bid { get; set; }
-        public DateTime TickPriceTimestamp { get; set; }
+        public DateTime? TickPriceTimestamp { get; set; }
     }
 
     [UsedImplicitly]

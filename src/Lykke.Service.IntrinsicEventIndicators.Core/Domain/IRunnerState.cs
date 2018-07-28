@@ -16,6 +16,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
         string Exchange { get; }
         decimal Ask { get; }
         decimal Bid { get; }
-        DateTime TickPriceTimestamp { get; }
+        DateTime? TickPriceTimestamp { get; }
     }
 }

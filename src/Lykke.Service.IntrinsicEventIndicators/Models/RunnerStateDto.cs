@@ -17,6 +17,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Models
         public string Exchange { get; set; }
         public decimal Ask { get; set; }
         public decimal Bid { get; set; }
-        public DateTime TickPriceTimestamp { get; set; }
+        public DateTime? TickPriceTimestamp { get; set; }
     }
 }

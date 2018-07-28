@@ -1036,7 +1036,7 @@
             Initializes a new instance of the RunnerStateDto class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.RunnerStateDto.#ctor(System.Int32,System.Double,System.Double,System.Double,System.Double,Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.ExpectedDirectionalChange,System.Double,System.Double,System.String,System.String)">
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.RunnerStateDto.#ctor(System.Int32,System.Double,System.Double,System.Double,System.Double,Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.ExpectedDirectionalChange,System.Double,System.Double,System.Double,System.Double,System.DateTime,System.String,System.String)">
             <summary>
             Initializes a new instance of the RunnerStateDto class.
             </summary>
@@ -1081,6 +1081,18 @@
             </summary>
         </member>
         <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.RunnerStateDto.Exchange">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.RunnerStateDto.Ask">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.RunnerStateDto.Bid">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.RunnerStateDto.TickPriceTimestamp">
             <summary>
             </summary>
         </member>

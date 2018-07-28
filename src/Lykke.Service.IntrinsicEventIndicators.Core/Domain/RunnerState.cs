@@ -14,7 +14,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
         private decimal _directionalChangePrice;
         private decimal _ask;
         private decimal _bid;
-        private DateTime _tickPriceTimestamp;
+        private DateTime? _tickPriceTimestamp;
 
         public int Event
         {
@@ -115,7 +115,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
             }
         }
 
-        public DateTime TickPriceTimestamp
+        public DateTime? TickPriceTimestamp
         {
             get => _tickPriceTimestamp;
             set
@@ -143,7 +143,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 
         public RunnerState(int @event, decimal extreme, decimal expectedDcLevel, decimal expectedOsLevel,
             decimal reference, ExpectedDirectionalChange expectedDirectionalChange, decimal directionalChangePrice, decimal delta,
-            string assetPair, string exchange, decimal ask, decimal bid, DateTime tickPriceTimestamp)
+            string assetPair, string exchange, decimal ask, decimal bid, DateTime? tickPriceTimestamp)
         {
             _event = @event;
             _extreme = extreme;
