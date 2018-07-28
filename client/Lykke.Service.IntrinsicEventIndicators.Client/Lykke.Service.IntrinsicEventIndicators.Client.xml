@@ -913,7 +913,7 @@
             class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsDto.#ctor(System.Collections.Generic.IList{Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnDto},System.Collections.Generic.IList{Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowDto},System.Collections.Generic.IList{System.Collections.Generic.IList{System.Nullable{System.Double}}})">
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsDto.#ctor(System.Collections.Generic.IList{Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsColumnDto},System.Collections.Generic.IList{Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowDto},System.Collections.Generic.IList{System.Collections.Generic.IList{System.Nullable{System.Double}}},System.Collections.Generic.IList{System.Collections.Generic.IList{System.String}})">
             <summary>
             Initializes a new instance of the IntrinsicEventIndicatorsDto
             class.
@@ -928,6 +928,10 @@
             </summary>
         </member>
         <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsDto.Data">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsDto.TimesFromDc">
             <summary>
             </summary>
         </member>
@@ -1036,7 +1040,7 @@
             Initializes a new instance of the RunnerStateDto class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.RunnerStateDto.#ctor(System.Int32,System.Double,System.Double,System.Double,System.Double,Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.ExpectedDirectionalChange,System.Double,System.Double,System.Double,System.Double,System.DateTime,System.String,System.String)">
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.RunnerStateDto.#ctor(System.Int32,System.Double,System.Double,System.Double,System.Double,Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.ExpectedDirectionalChange,System.Double,System.Double,System.Double,System.Double,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>
             Initializes a new instance of the RunnerStateDto class.
             </summary>
@@ -1093,6 +1097,10 @@
             </summary>
         </member>
         <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.RunnerStateDto.TickPriceTimestamp">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.RunnerStateDto.DcTimestamp">
             <summary>
             </summary>
         </member>

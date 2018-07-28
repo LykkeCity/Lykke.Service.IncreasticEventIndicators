@@ -15,6 +15,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
         private decimal _ask;
         private decimal _bid;
         private DateTime? _tickPriceTimestamp;
+        private DateTime? _dcTimestamp;
 
         public int Event
         {
@@ -126,6 +127,17 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
             }
         }
 
+        public DateTime? DcTimestamp
+        {
+            get => _dcTimestamp;
+            set
+            {
+                if (_dcTimestamp == value) return;
+                _dcTimestamp = value;
+                IsChanged = true;
+            }
+        }
+
         public decimal Delta { get; }
 
         public string AssetPair { get; }
@@ -143,7 +155,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 
         public RunnerState(int @event, decimal extreme, decimal expectedDcLevel, decimal expectedOsLevel,
             decimal reference, ExpectedDirectionalChange expectedDirectionalChange, decimal directionalChangePrice, decimal delta,
-            string assetPair, string exchange, decimal ask, decimal bid, DateTime? tickPriceTimestamp)
+            string assetPair, string exchange, decimal ask, decimal bid, DateTime? tickPriceTimestamp, DateTime? dcTimestamp)
         {
             _event = @event;
             _extreme = extreme;
@@ -158,6 +170,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
             _ask = ask;
             _bid = bid;
             _tickPriceTimestamp = tickPriceTimestamp;
+            _dcTimestamp = dcTimestamp;
 
             IsChanged = true;
         }
@@ -165,7 +178,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
         public object Clone()
         {
             return new RunnerState(_event, _extreme, _expectedDcLevel, _expectedOsLevel, _reference,
-                _expectedDirectionalChange, _directionalChangePrice, Delta, AssetPair, Exchange, _ask, _bid, _tickPriceTimestamp);
+                _expectedDirectionalChange, _directionalChangePrice, Delta, AssetPair, Exchange,
+                _ask, _bid, _tickPriceTimestamp, _dcTimestamp);
         }
     }
 }

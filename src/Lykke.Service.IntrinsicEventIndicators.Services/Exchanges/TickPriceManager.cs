@@ -90,7 +90,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             }
         }
 
-        public async Task<decimal[][]> GetIntrinsicEventIndicators(IList<string> exchangeAssetPairs, IList<decimal> deltas)
+        public async Task<IntrinsicEventIndicatorsData> GetIntrinsicEventIndicators(IList<string> exchangeAssetPairs, IList<decimal> deltas)
         {
             await EnsureInitialized();
 
@@ -181,7 +181,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                     runnerStateEntity.ExpectedDcLevel, runnerStateEntity.ExpectedOsLevel, runnerStateEntity.Reference,
                     runnerStateEntity.ExpectedDirectionalChange, runnerStateEntity.DirectionalChangePrice,
                     runnerStateEntity.Delta, runnerStateEntity.AssetPair, runnerStateEntity.Exchange,
-                    runnerStateEntity.Ask, runnerStateEntity.Bid, runnerStateEntity.TickPriceTimestamp);
+                    runnerStateEntity.Ask, runnerStateEntity.Bid, runnerStateEntity.TickPriceTimestamp,
+                    runnerStateEntity.DcTimestamp);
 
                 var runner = new Runner(runnerState, _log);
 
@@ -244,12 +245,16 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             }
         }
 
-        private decimal[][] GetIntrinsicEventIndicatorsInternal(IList<string> exchangeAssetPairs, IList<decimal> deltas)
+        private IntrinsicEventIndicatorsData GetIntrinsicEventIndicatorsInternal(IList<string> exchangeAssetPairs, IList<decimal> deltas)
         {
+            var now = DateTime.UtcNow;
+
             var data = new decimal[exchangeAssetPairs.Count][];
+            var timesFromDc = new TimeSpan?[exchangeAssetPairs.Count][];
             for (var i = 0; i < data.Length; i++)
             {
                 data[i] = new decimal[deltas.Count];
+                timesFromDc[i] = new TimeSpan?[deltas.Count];
             }
 
             for (var i = 0; i < exchangeAssetPairs.Count; i++)
@@ -260,11 +265,16 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                     if (_runners.ContainsKey(key))
                     {
                         data[i][j] = _runners[key].CalcIntrinsicEventIndicator();
+                        timesFromDc[i][j] = _runners[key].CalcTimeFromDc(now);
                     }
                 }
             }
 
-            return data;
+            return new IntrinsicEventIndicatorsData
+            {
+                Data = data,
+                TimesFromDc = timesFromDc
+            };
         }
 
         private IDictionary<string, IList<IRunnerState>> GetRunnersStatesInternal()

@@ -76,7 +76,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
             {
                 Columns = columns.ToArray(),
                 Rows = rows.ToArray(),
-                Data = data
+                Data = data.Data,
+                TimesFromDc = data.TimesFromDc
             });
         }
 

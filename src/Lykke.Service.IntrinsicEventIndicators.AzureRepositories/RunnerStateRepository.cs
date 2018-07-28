@@ -25,6 +25,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
         public decimal Ask { get; set; }
         public decimal Bid { get; set; }
         public DateTime? TickPriceTimestamp { get; set; }
+        public DateTime? DcTimestamp { get; set; }
     }
 
     [UsedImplicitly]
@@ -61,7 +62,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
                     Exchange = x.Exchange,
                     Ask = x.Ask,
                     Bid = x.Bid,
-                    TickPriceTimestamp = x.TickPriceTimestamp
+                    TickPriceTimestamp = x.TickPriceTimestamp,
+                    DcTimestamp = x.DcTimestamp
                 }
             ).ToArray();
 
