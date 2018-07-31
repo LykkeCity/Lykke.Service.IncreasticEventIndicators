@@ -8,6 +8,7 @@ using Common.Log;
 using Lykke.Common.ExchangeAdapter.Contracts;
 using Lykke.Service.IntrinsicEventIndicators.Core;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services.Exchanges;
 
 namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
@@ -19,9 +20,12 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
 
         private readonly ILog _log;
         private readonly IRunnerStateRepository _runnerStateRepository;
+        private readonly IIntrinsicEventIndicatorsRepository _repo;
 
-        private ConcurrentDictionary<string, object> _exchangeAssetPairs = new ConcurrentDictionary<string, object>();
-        private ConcurrentDictionary<decimal, object> _deltas = new ConcurrentDictionary<decimal, object>();
+        private ConcurrentDictionary<string, IIntrinsicEventIndicatorsRow> _exchangeAssetPairs =
+            new ConcurrentDictionary<string, IIntrinsicEventIndicatorsRow>();
+        private ConcurrentDictionary<decimal, IIntrinsicEventIndicatorsColumn> _deltas =
+            new ConcurrentDictionary<decimal, IIntrinsicEventIndicatorsColumn>();
         private ConcurrentDictionary<string, Runner> _runners = new ConcurrentDictionary<string, Runner>();
 
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1);
@@ -30,15 +34,17 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
         private readonly Timer _saveStateTimer;
         private readonly Timer _cleanStateTimer;
 
-        protected TickPriceManager(ILog log, IRunnerStateRepository runnerStateRepository)
+        protected TickPriceManager(ILog log, IRunnerStateRepository runnerStateRepository,
+            IIntrinsicEventIndicatorsRepository repo)
         {
             _log = log;
             _runnerStateRepository = runnerStateRepository;
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
             _saveStateTimer = new Timer(OnTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
             _cleanStateTimer = new Timer(OnCleanTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
         }
 
-        public async Task UpdateRunners(IList<string> exchangeAssetPairs, IList<decimal> deltas)
+        public async Task UpdateMetadataAndRunners()
         {
             await EnsureInitialized();
 
@@ -48,7 +54,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                 lockTaken = await _semaphore.WaitAsync(Constants.LockTimeout);
                 if (lockTaken)
                 {
-                    UpdateRunnersInternal(exchangeAssetPairs, deltas);
+                    await UpdateMetadataAndRunnersInternal();
                 }
                 else
                 {
@@ -90,7 +96,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             }
         }
 
-        public async Task<IntrinsicEventIndicatorsData> GetIntrinsicEventIndicators(IList<string> exchangeAssetPairs, IList<decimal> deltas)
+        public async Task<Core.Domain.Model.IntrinsicEventIndicators> GetIntrinsicEventIndicators()
         {
             await EnsureInitialized();
 
@@ -100,7 +106,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                 lockTaken = _semaphore.Wait(Constants.LockTimeout);
                 if (lockTaken)
                 {
-                    return GetIntrinsicEventIndicatorsInternal(exchangeAssetPairs, deltas);
+                    return GetIntrinsicEventIndicatorsInternal();
                 }
                 else
                 {
@@ -196,12 +202,16 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             _initialized = true;
         }
 
-        private void UpdateRunnersInternal(IEnumerable<string> exchangeAssetPairs, IEnumerable<decimal> deltas)
+        private async Task UpdateMetadataAndRunnersInternal()
         {
-            _exchangeAssetPairs = new ConcurrentDictionary<string, object>(exchangeAssetPairs.Select(x =>
-                new KeyValuePair<string, object>(x.ToUpperInvariant(), null)));
-            _deltas = new ConcurrentDictionary<decimal, object>(deltas.Select(x =>
-                new KeyValuePair<decimal, object>(x, null)));
+            var rows = (await _repo.GetRowsAsync()).ToList();            
+            var columns = (await _repo.GetColumnsAsync()).ToList();
+
+            _exchangeAssetPairs = new ConcurrentDictionary<string, IIntrinsicEventIndicatorsRow>(
+                rows.Select(x => new KeyValuePair<string, IIntrinsicEventIndicatorsRow>(
+                    GetExchangeAssetPairKey(x.Exchange, x.AssetPair).ToUpperInvariant(), x)));
+            _deltas = new ConcurrentDictionary<decimal, IIntrinsicEventIndicatorsColumn>(
+                columns.Select(x => new KeyValuePair<decimal, IIntrinsicEventIndicatorsColumn>(x.Delta, x)));
 
             foreach (var exchangeAssetPair in _exchangeAssetPairs.Keys)
             {
@@ -245,23 +255,26 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             }
         }
 
-        private IntrinsicEventIndicatorsData GetIntrinsicEventIndicatorsInternal(IList<string> exchangeAssetPairs, IList<decimal> deltas)
+        private Core.Domain.Model.IntrinsicEventIndicators GetIntrinsicEventIndicatorsInternal()
         {
+            var rows = _exchangeAssetPairs.OrderBy(x => x.Key).ToList();
+            var columns = _deltas.OrderBy(x => x.Key).ToList();
+
             var now = DateTime.UtcNow;
 
-            var data = new decimal[exchangeAssetPairs.Count][];
-            var timesFromDc = new TimeSpan?[exchangeAssetPairs.Count][];
+            var data = new decimal[rows.Count][];
+            var timesFromDc = new TimeSpan?[rows.Count][];
             for (var i = 0; i < data.Length; i++)
             {
-                data[i] = new decimal[deltas.Count];
-                timesFromDc[i] = new TimeSpan?[deltas.Count];
+                data[i] = new decimal[columns.Count];
+                timesFromDc[i] = new TimeSpan?[columns.Count];
             }
 
-            for (var i = 0; i < exchangeAssetPairs.Count; i++)
+            for (var i = 0; i < rows.Count; i++)
             {
-                for (var j = 0; j < deltas.Count; j++)
+                for (var j = 0; j < columns.Count; j++)
                 {
-                    var key = GetRunnersKey(exchangeAssetPairs[i], deltas[j]);
+                    var key = GetRunnersKey(rows[i].Key, columns[j].Key);
                     if (_runners.ContainsKey(key))
                     {
                         data[i][j] = _runners[key].CalcIntrinsicEventIndicator();
@@ -270,10 +283,12 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                 }
             }
 
-            return new IntrinsicEventIndicatorsData
+            return new Core.Domain.Model.IntrinsicEventIndicators
             {
                 Data = data,
-                TimesFromDc = timesFromDc
+                TimesFromDc = timesFromDc,
+                Rows = rows.Select(x => x.Value).ToArray(),
+                Columns = columns.Select(x => x.Value).ToArray()
             };
         }
 
@@ -384,7 +399,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             _runnerStateRepository.CleanOldItems(_exchangeAssetPairs.Keys, _deltas.Keys);
         }
 
-        public static string GetExchangeAssetPairKey(string exchangeName, string assetPair)
+        private static string GetExchangeAssetPairKey(string exchangeName, string assetPair)
         {
             return $"{exchangeName.ToUpperInvariant()} {assetPair.ToUpperInvariant()}";
         }
