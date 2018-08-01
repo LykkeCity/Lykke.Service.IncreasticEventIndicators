@@ -7,7 +7,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
     public class ExternalTickPriceManager : TickPriceManager, IExternalTickPriceManager, IExternalTickPriceHandler
     {
         public ExternalTickPriceManager(ILog log, IExternalRunnerStateRepository runnerStateRepository,
-            IIntrinsicEventIndicatorsRepository repo)
+            IExternalIntrinsicEventIndicatorsRepository repo)
             : base(log, runnerStateRepository, repo)
         {
         }
