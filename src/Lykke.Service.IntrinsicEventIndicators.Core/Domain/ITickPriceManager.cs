@@ -5,8 +5,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 {
     public interface ITickPriceManager
     {
-        Task UpdateRunners(IList<string> exchangeAssetPairs, IList<decimal> deltas);
-        Task<decimal[][]> GetIntrinsicEventIndicators(IList<string> exchangeAssetPairs, IList<decimal> deltas);
+        Task UpdateMetadataAndRunners();
+        Task<Model.IntrinsicEventIndicators> GetIntrinsicEventIndicators();
         Task<IDictionary<string, IList<IRunnerState>>> GetRunnersStates();
     }
 }

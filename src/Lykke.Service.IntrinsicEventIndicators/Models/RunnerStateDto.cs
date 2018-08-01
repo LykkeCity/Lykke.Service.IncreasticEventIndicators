@@ -1,4 +1,5 @@
-﻿using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+﻿using System;
+using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
 
 namespace Lykke.Service.IntrinsicEventIndicators.Models
 {
@@ -14,5 +15,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Models
         public decimal Delta { get; set; }
         public string AssetPair { get; set; }
         public string Exchange { get; set; }
+        public decimal Ask { get; set; }
+        public decimal Bid { get; set; }
+        public DateTime? TickPriceTimestamp { get; set; }
+        public DateTime? DcTimestamp { get; set; }
     }
 }

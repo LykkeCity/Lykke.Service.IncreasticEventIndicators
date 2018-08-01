@@ -24,7 +24,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         /// </summary>
         /// <param name="expectedDirectionalChange">Possible values include:
         /// 'Upward', 'Downward'</param>
-        public RunnerStateDto(int eventProperty, double extreme, double expectedDcLevel, double expectedOsLevel, double reference, ExpectedDirectionalChange expectedDirectionalChange, double directionalChangePrice, double delta, string assetPair = default(string), string exchange = default(string))
+        public RunnerStateDto(int eventProperty, double extreme, double expectedDcLevel, double expectedOsLevel, double reference, ExpectedDirectionalChange expectedDirectionalChange, double directionalChangePrice, double delta, double ask, double bid, string assetPair = default(string), string exchange = default(string), System.DateTime? tickPriceTimestamp = default(System.DateTime?), System.DateTime? dcTimestamp = default(System.DateTime?))
         {
             EventProperty = eventProperty;
             Extreme = extreme;
@@ -36,6 +36,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
             Delta = delta;
             AssetPair = assetPair;
             Exchange = exchange;
+            Ask = ask;
+            Bid = bid;
+            TickPriceTimestamp = tickPriceTimestamp;
+            DcTimestamp = dcTimestamp;
             CustomInit();
         }
 
@@ -94,6 +98,26 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         /// </summary>
         [JsonProperty(PropertyName = "Exchange")]
         public string Exchange { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Ask")]
+        public double Ask { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Bid")]
+        public double Bid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "TickPriceTimestamp")]
+        public System.DateTime? TickPriceTimestamp { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "DcTimestamp")]
+        public System.DateTime? DcTimestamp { get; set; }
 
         /// <summary>
         /// Validate the object.

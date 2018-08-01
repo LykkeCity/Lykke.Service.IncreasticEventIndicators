@@ -30,6 +30,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 
         public void Run(TickPrice tickPrice)
         {
+            _state.Ask = tickPrice.Ask;
+            _state.Bid = tickPrice.Bid;
+            _state.TickPriceTimestamp = tickPrice.Timestamp;
+
             if (!_initialized)
             {
                 _state.Extreme = _state.Reference = _state.DirectionalChangePrice = (tickPrice.Ask + tickPrice.Bid) / 2m;
@@ -44,8 +48,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
             if (_state.ExpectedDirectionalChange == ExpectedDirectionalChange.Upward)
             {
                 if (tickPrice.Bid >= _state.ExpectedDcLevel)
-                {
+                {                    
                     _state.ExpectedDirectionalChange = ExpectedDirectionalChange.Downward;
+                    _state.DcTimestamp = DateTime.UtcNow;
                     _state.Extreme = _state.Reference = _state.DirectionalChangePrice = tickPrice.Bid;
 
                     _state.ExpectedDcLevel = CalcExpectedDClevel();
@@ -78,6 +83,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
                 if (tickPrice.Ask <= _state.ExpectedDcLevel)
                 {
                     _state.ExpectedDirectionalChange = ExpectedDirectionalChange.Upward;
+                    _state.DcTimestamp = DateTime.UtcNow;
                     _state.Extreme = _state.Reference = _state.DirectionalChangePrice = tickPrice.Ask;
                     _state.ExpectedDcLevel = CalcExpectedDClevel();
                     _state.ExpectedOsLevel = CalcExpectedOSlevel();
@@ -123,6 +129,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
             }
 
             return Math.Round(indicator, 2);
+        }
+
+        public TimeSpan? CalcTimeFromDc(DateTime now)
+        {
+            return now - _state.DcTimestamp;
         }
 
         private decimal CalcExpectedDClevel()

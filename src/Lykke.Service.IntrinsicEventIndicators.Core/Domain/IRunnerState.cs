@@ -1,4 +1,6 @@
-﻿namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
+﻿using System;
+
+namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 {
     public interface IRunnerState
     {
@@ -12,5 +14,9 @@
         decimal Delta { get; }
         string AssetPair { get; }
         string Exchange { get; }
+        decimal Ask { get; }
+        decimal Bid { get; }
+        DateTime? TickPriceTimestamp { get; }
+        DateTime? DcTimestamp { get; }
     }
 }
