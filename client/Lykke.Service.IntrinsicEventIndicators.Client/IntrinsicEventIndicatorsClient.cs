@@ -53,6 +53,12 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client
             ValidateResponse(response);
         }
 
+        public async Task EditAssetPairAsync(IntrinsicEventIndicatorsRowEdit row, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var response = await _api.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPostWithHttpMessagesAsync(row, cancellationToken: cancellationToken);
+            ValidateResponse(response);
+        }
+
         public async Task RemoveAssetPairAsync(string rowId, CancellationToken cancellationToken = default(CancellationToken))
         {
             var response = await _api.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairDeleteWithHttpMessagesAsync(rowId, cancellationToken: cancellationToken);
@@ -89,6 +95,12 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client
         public async Task AddAssetPairExternalAsync(IntrinsicEventIndicatorsRowPost row, CancellationToken cancellationToken = default(CancellationToken))
         {
             var response = await _api.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutWithHttpMessagesAsync(row, cancellationToken: cancellationToken);
+            ValidateResponse(response);
+        }
+
+        public async Task EditAssetPairExternalAsync(IntrinsicEventIndicatorsRowEdit row, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var response = await _api.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPostWithHttpMessagesAsync(row, cancellationToken: cancellationToken);
             ValidateResponse(response);
         }
 

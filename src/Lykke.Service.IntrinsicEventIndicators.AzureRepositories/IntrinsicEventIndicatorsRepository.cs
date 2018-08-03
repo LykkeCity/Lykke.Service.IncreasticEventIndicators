@@ -15,6 +15,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
         public decimal Delta { get; set; }
         public string Exchange { get; set; }
         public string AssetPair { get; set; }
+        public string PairName { get; set; }
 
         public static string GeneratePartitionKeyForColumn()
         {
@@ -43,7 +44,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
                 PartitionKey = GeneratePartitionKeyForRow(),
                 RowKey = Guid.NewGuid().ToString(),
                 Exchange = row.Exchange,
-                AssetPair = row.AssetPair
+                AssetPair = row.AssetPair,
+                PairName = row.PairName
             };
         }
     }
@@ -82,6 +84,14 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
         {
             var entity = IntrinsicEventIndicatorsEntity.CreateForAssetPair(row);
             return _storage.InsertAsync(entity);
+        }
+
+        public async Task EditAssetPairAsync(IIntrinsicEventIndicatorsRow row)
+        {
+            var entity = await _storage.GetDataAsync(IntrinsicEventIndicatorsEntity.GeneratePartitionKeyForRow(), row.RowId);
+            entity.PairName = row.PairName;
+
+            await _storage.ReplaceAsync(entity);
         }
 
         public async Task RemoveAssetPairAsync(string rowId)

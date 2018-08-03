@@ -77,6 +77,20 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         Task<HttpOperationResponse<ErrorResponse>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutWithHttpMessagesAsync(IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Edits asset pair.
+        /// </summary>
+        /// <param name='row'>
+        /// Asset pair to edit.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<ErrorResponse>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPostWithHttpMessagesAsync(IntrinsicEventIndicatorsRowEdit row = default(IntrinsicEventIndicatorsRowEdit), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Deletes asset pair.
         /// </summary>
         /// <param name='rowId'>
@@ -164,6 +178,20 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Edits asset pair.
+        /// </summary>
+        /// <param name='row'>
+        /// Asset pair to edit.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<ErrorResponse>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPostWithHttpMessagesAsync(IntrinsicEventIndicatorsRowEdit row = default(IntrinsicEventIndicatorsRowEdit), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes asset pair.

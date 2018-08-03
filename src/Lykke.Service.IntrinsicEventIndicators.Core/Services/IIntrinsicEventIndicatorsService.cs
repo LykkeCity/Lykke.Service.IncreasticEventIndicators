@@ -11,6 +11,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Services
         Task RemoveColumn(string columnId);
 
         Task AddAssetPair(IIntrinsicEventIndicatorsRow row);
+        Task EditAssetPair(IIntrinsicEventIndicatorsRow row);
         Task RemoveAssetPair(string rowId);
 
         Task<Domain.Model.IntrinsicEventIndicators> GetData();

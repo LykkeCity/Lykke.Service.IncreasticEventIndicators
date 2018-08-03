@@ -53,6 +53,15 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
             await UpdateMetadataAndRunners();
         }
 
+        public async Task EditAssetPair(IIntrinsicEventIndicatorsRow row)
+        {
+            EnsureInitialized();
+
+            SetToReinitialize();
+            await _repo.EditAssetPairAsync(row);
+            await UpdateMetadataAndRunners();
+        }
+
         public async Task RemoveAssetPair(string rowId)
         {
             EnsureInitialized();

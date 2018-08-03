@@ -65,6 +65,20 @@
             The cancellation token.
             </param>
         </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IIntrinsicEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPostWithHttpMessagesAsync(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Edits asset pair.
+            </summary>
+            <param name='row'>
+            Asset pair to edit.
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
         <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IIntrinsicEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Deletes asset pair.
@@ -146,6 +160,20 @@
             </summary>
             <param name='row'>
             Asset pair to add.
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IIntrinsicEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPostWithHttpMessagesAsync(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Edits asset pair.
+            </summary>
+            <param name='row'>
+            Asset pair to edit.
             </param>
             <param name='customHeaders'>
             The headers that will be added to request.
@@ -326,6 +354,29 @@
             A response object containing the response body and response headers.
             </return>
         </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IntrinsicEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPostWithHttpMessagesAsync(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Edits asset pair.
+            </summary>
+            <param name='row'>
+            Asset pair to edit.
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
         <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IntrinsicEventIndicatorsAPI.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDeleteWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Deletes asset pair.
@@ -455,6 +506,29 @@
             </summary>
             <param name='row'>
             Asset pair to add.
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IntrinsicEventIndicatorsAPI.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPostWithHttpMessagesAsync(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Edits asset pair.
+            </summary>
+            <param name='row'>
+            Asset pair to edit.
             </param>
             <param name='customHeaders'>
             Headers that will be added to request.
@@ -612,6 +686,31 @@
             The cancellation token.
             </param>
         </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IntrinsicEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPost(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IIntrinsicEventIndicatorsAPI,Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit)">
+            <summary>
+            Edits asset pair.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='row'>
+            Asset pair to edit.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IntrinsicEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPostAsync(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IIntrinsicEventIndicatorsAPI,Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit,System.Threading.CancellationToken)">
+            <summary>
+            Edits asset pair.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='row'>
+            Asset pair to edit.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
         <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IntrinsicEventIndicatorsAPIExtensions.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalDelete(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IIntrinsicEventIndicatorsAPI,System.String)">
             <summary>
             Deletes asset pair.
@@ -764,6 +863,31 @@
             </param>
             <param name='row'>
             Asset pair to add.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IntrinsicEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPost(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IIntrinsicEventIndicatorsAPI,Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit)">
+            <summary>
+            Edits asset pair.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='row'>
+            Asset pair to edit.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IntrinsicEventIndicatorsAPIExtensions.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPostAsync(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.IIntrinsicEventIndicatorsAPI,Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit,System.Threading.CancellationToken)">
+            <summary>
+            Edits asset pair.
+            </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='row'>
+            Asset pair to edit.
             </param>
             <param name='cancellationToken'>
             The cancellation token.
@@ -959,13 +1083,33 @@
             <summary>
             </summary>
         </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit.#ctor">
+            <summary>
+            Initializes a new instance of the IntrinsicEventIndicatorsRowEdit
+            class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the IntrinsicEventIndicatorsRowEdit
+            class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit.RowId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit.PairName">
+            <summary>
+            </summary>
+        </member>
         <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost.#ctor">
             <summary>
             Initializes a new instance of the IntrinsicEventIndicatorsRowPost
             class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost.#ctor(System.String,System.String)">
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the IntrinsicEventIndicatorsRowPost
             class.
@@ -976,6 +1120,10 @@
             </summary>
         </member>
         <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost.AssetPair">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowPost.PairName">
             <summary>
             </summary>
         </member>
@@ -1143,6 +1291,13 @@
             <param name="row">Asset pair to add.</param>
             <param name="cancellationToken"></param>
         </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.IIntrinsicEventIndicatorsClient.EditAssetPairAsync(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit,System.Threading.CancellationToken)">
+            <summary>
+            Edits asset pair.
+            </summary>
+            <param name="row">Asset pair to edit.</param>
+            <param name="cancellationToken"></param>
+        </member>
         <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.IIntrinsicEventIndicatorsClient.RemoveAssetPairAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Deletes asset pair.
@@ -1183,6 +1338,13 @@
             Adds asset pair.
             </summary>
             <param name="row">Asset pair to add.</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.IIntrinsicEventIndicatorsClient.EditAssetPairExternalAsync(Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models.IntrinsicEventIndicatorsRowEdit,System.Threading.CancellationToken)">
+            <summary>
+            Edits asset pair.
+            </summary>
+            <param name="row">Edit pair to add.</param>
             <param name="cancellationToken"></param>
         </member>
         <member name="M:Lykke.Service.IntrinsicEventIndicators.Client.IIntrinsicEventIndicatorsClient.RemoveAssetPairExternalAsync(System.String,System.Threading.CancellationToken)">

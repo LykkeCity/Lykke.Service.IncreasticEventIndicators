@@ -95,6 +95,35 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         }
 
         /// <summary>
+        /// Edits asset pair.
+        /// </summary>
+        /// <param name="row">Asset pair to edit.</param>
+        [HttpPost("intrinsiceventindicatorsassetpair")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> EditAssetPair([FromBody] IntrinsicEventIndicatorsRowEdit row)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ErrorResponse.Create(ModelState));
+            }
+
+            var model = _mapper
+                .Map<IntrinsicEventIndicatorsRow>(row);
+
+            try
+            {
+                await _intrinsicEventIndicatorsService.EditAssetPair(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ErrorResponse.Create(ex.Message));
+            }
+
+            return StatusCode((int)HttpStatusCode.OK);
+        }
+
+        /// <summary>
         /// Deletes asset pair.
         /// </summary>
         /// <param name="rowId">asset pair</param>

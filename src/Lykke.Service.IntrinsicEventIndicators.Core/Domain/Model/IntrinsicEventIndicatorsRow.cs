@@ -4,6 +4,7 @@
     {
         string RowId { get; }
         string AssetPair { get; }
+        string PairName { get; }
         string Exchange { get; }
     }
 
@@ -11,6 +12,7 @@
     {
         public string RowId { get; set; }
         public string AssetPair { get; set; }
+        public string PairName { get; set; }
         public string Exchange { get; set; }
     }
 }
