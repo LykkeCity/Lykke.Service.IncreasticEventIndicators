@@ -4,5 +4,6 @@
     {
         public string Exchange { get; set; }
         public string AssetPair { get; set; }
+        public string PairName { get; set; }
     }
 }

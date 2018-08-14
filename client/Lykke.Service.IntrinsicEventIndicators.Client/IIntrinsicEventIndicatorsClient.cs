@@ -40,6 +40,13 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client
         Task AddAssetPairAsync(IntrinsicEventIndicatorsRowPost row, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Edits asset pair.
+        /// </summary>
+        /// <param name="row">Asset pair to edit.</param>
+        /// <param name="cancellationToken"></param>
+        Task EditAssetPairAsync(IntrinsicEventIndicatorsRowEdit row, CancellationToken cancellationToken = default(CancellationToken));
+        
+        /// <summary>
         /// Deletes asset pair.
         /// </summary>
         /// <param name="rowId">asset pair</param>
@@ -81,6 +88,13 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client
         /// <param name="cancellationToken"></param>
         Task AddAssetPairExternalAsync(IntrinsicEventIndicatorsRowPost row, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Edits asset pair.
+        /// </summary>
+        /// <param name="row">Edit pair to add.</param>
+        /// <param name="cancellationToken"></param>
+        Task EditAssetPairExternalAsync(IntrinsicEventIndicatorsRowEdit row, CancellationToken cancellationToken = default(CancellationToken));
+        
         /// <summary>
         /// Deletes asset pair.
         /// </summary>

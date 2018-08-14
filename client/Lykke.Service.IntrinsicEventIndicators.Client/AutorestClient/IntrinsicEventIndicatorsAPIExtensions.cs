@@ -117,6 +117,40 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             }
 
             /// <summary>
+            /// Edits asset pair.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='row'>
+            /// Asset pair to edit.
+            /// </param>
+            public static ErrorResponse ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPost(this IIntrinsicEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowEdit row = default(IntrinsicEventIndicatorsRowEdit))
+            {
+                return operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPostAsync(row).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Edits asset pair.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='row'>
+            /// Asset pair to edit.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPostAsync(this IIntrinsicEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowEdit row = default(IntrinsicEventIndicatorsRowEdit), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPostWithHttpMessagesAsync(row, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Deletes asset pair.
             /// </summary>
             /// <param name='operations'>
@@ -325,6 +359,40 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             public static async Task<ErrorResponse> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutAsync(this IIntrinsicEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(row, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Edits asset pair.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='row'>
+            /// Asset pair to edit.
+            /// </param>
+            public static ErrorResponse ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPost(this IIntrinsicEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowEdit row = default(IntrinsicEventIndicatorsRowEdit))
+            {
+                return operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPostAsync(row).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Edits asset pair.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='row'>
+            /// Asset pair to edit.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPostAsync(this IIntrinsicEventIndicatorsAPI operations, IntrinsicEventIndicatorsRowEdit row = default(IntrinsicEventIndicatorsRowEdit), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPostWithHttpMessagesAsync(row, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

@@ -209,9 +209,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
 
             _exchangeAssetPairs = new ConcurrentDictionary<string, IIntrinsicEventIndicatorsRow>(
                 rows.Select(x => new KeyValuePair<string, IIntrinsicEventIndicatorsRow>(
-                    GetExchangeAssetPairKey(x.Exchange, x.AssetPair).ToUpperInvariant(), x)));
+                    GetExchangeAssetPairKey(x.Exchange, x.AssetPair).ToUpperInvariant(), x))
+                    .GroupBy(x => x.Key).Select(g => g.First()));
             _deltas = new ConcurrentDictionary<decimal, IIntrinsicEventIndicatorsColumn>(
-                columns.Select(x => new KeyValuePair<decimal, IIntrinsicEventIndicatorsColumn>(x.Delta, x)));
+                columns.Select(x => new KeyValuePair<decimal, IIntrinsicEventIndicatorsColumn>(x.Delta, x))
+                    .GroupBy(x => x.Key).Select(g => g.First()));
 
             foreach (var exchangeAssetPair in _exchangeAssetPairs.Keys)
             {
