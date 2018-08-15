@@ -151,7 +151,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         {
             var data = await _intrinsicEventIndicatorsService.GetData();
             var vm = _mapper.Map<IntrinsicEventIndicators.Core.Domain.Model.IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>(data);
-            vm.Columns.ForEach(x => x.Delta /= 100);
+            vm.Columns.ForEach(x => x.Delta *= 100);
             return Ok(vm);
         }
 
