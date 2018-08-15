@@ -10,16 +10,16 @@ using Lykke.Service.IntrinsicEventIndicators.Infrastructure;
 using Lykke.Service.IntrinsicEventIndicators.Rabbit;
 using Lykke.Service.IntrinsicEventIndicators.Services;
 using Lykke.Service.IntrinsicEventIndicators.Services.Exchanges;
-using Lykke.Service.IntrinsicEventIndicators.Settings.ServiceSettings;
+using Lykke.Service.IntrinsicEventIndicators.Settings;
 using Lykke.SettingsReader;
 
 namespace Lykke.Service.IntrinsicEventIndicators.Modules
 {
     public class ServiceModule : Module
     {
-        private readonly IReloadingManager<IntrinsicEventIndicatorsSettings> _settings;
+        private readonly IReloadingManager<AppSettings> _settings;
 
-        public ServiceModule(IReloadingManager<IntrinsicEventIndicatorsSettings> settings)
+        public ServiceModule(IReloadingManager<AppSettings> settings)
         {
             _settings = settings;
         }
@@ -57,25 +57,25 @@ namespace Lykke.Service.IntrinsicEventIndicators.Modules
         {
             builder.Register(container => new LykkeIntrinsicEventIndicatorsRepository(
                     AzureTableStorage<IntrinsicEventIndicatorsEntity>
-                        .Create(_settings.ConnectionString(x => x.Db.DataConnString), "LykkeIntrinsicEventIndicators", container.Resolve<ILogFactory>())))
+                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "LykkeIntrinsicEventIndicators", container.Resolve<ILogFactory>())))
                 .As<ILykkeIntrinsicEventIndicatorsRepository>()
                 .SingleInstance();
 
             builder.Register(container => new ExternalIntrinsicEventIndicatorsRepository(
                     AzureTableStorage<IntrinsicEventIndicatorsEntity>
-                        .Create(_settings.ConnectionString(x => x.Db.DataConnString), "ExternalIntrinsicEventIndicators", container.Resolve<ILogFactory>())))
+                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "ExternalIntrinsicEventIndicators", container.Resolve<ILogFactory>())))
                 .As<IExternalIntrinsicEventIndicatorsRepository>()
                 .SingleInstance();
 
             builder.Register(container => new LykkeRunnerStateRepository(
                     AzureTableStorage<RunnerStateEntity>
-                        .Create(_settings.ConnectionString(x => x.Db.DataConnString), "LykkeRunnersStates", container.Resolve<ILogFactory>())))
+                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "LykkeRunnersStates", container.Resolve<ILogFactory>())))
                 .As<ILykkeRunnerStateRepository>()
                 .SingleInstance();
 
             builder.Register(container => new ExternalRunnerStateRepository(
                     AzureTableStorage<RunnerStateEntity>
-                        .Create(_settings.ConnectionString(x => x.Db.DataConnString), "ExternalRunnersStates", container.Resolve<ILogFactory>())))
+                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "ExternalRunnersStates", container.Resolve<ILogFactory>())))
                 .As<IExternalRunnerStateRepository>()
                 .SingleInstance();
         }
@@ -85,11 +85,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Modules
             builder.RegisterType<LykkeTickPriceSubscriber>()
                 .As<IStartable>()
                 .As<IStopable>()
-                .WithParameter("settings", _settings.CurrentValue.LykkeTickPriceExchange)
+                .WithParameter("settings", _settings.CurrentValue.IntrinsicEventIndicatorsService.LykkeTickPriceExchange)
                 .AutoActivate()
                 .SingleInstance();
 
-            foreach (var tickPriceExchange in _settings.CurrentValue.ExternalTickPriceExchanges)
+            foreach (var tickPriceExchange in _settings.CurrentValue.IntrinsicEventIndicatorsService.ExternalTickPriceExchanges)
             {
                 builder.RegisterType<ExternalTickPriceSubscriber>()
                     .As<IStartable>()

@@ -6,6 +6,7 @@
 
 namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         /// Initializes a new instance of the IntrinsicEventIndicatorsDto
         /// class.
         /// </summary>
-        public IntrinsicEventIndicatorsDto(IList<IntrinsicEventIndicatorsColumnDto> columns = default(IList<IntrinsicEventIndicatorsColumnDto>), IList<IntrinsicEventIndicatorsRowDto> rows = default(IList<IntrinsicEventIndicatorsRowDto>), IList<IList<double?>> data = default(IList<IList<double?>>), IList<IList<string>> timesFromDc = default(IList<IList<string>>))
+        public IntrinsicEventIndicatorsDto(IList<IntrinsicEventIndicatorsColumnDto> columns, IList<IntrinsicEventIndicatorsRowDto> rows, IList<IList<double?>> data, IList<IList<string>> timesFromDc)
         {
             Columns = columns;
             Rows = rows;
@@ -60,5 +61,50 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         [JsonProperty(PropertyName = "TimesFromDc")]
         public IList<IList<string>> TimesFromDc { get; set; }
 
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            if (Columns == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Columns");
+            }
+            if (Rows == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Rows");
+            }
+            if (Data == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Data");
+            }
+            if (TimesFromDc == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "TimesFromDc");
+            }
+            if (Columns != null)
+            {
+                foreach (var element in Columns)
+                {
+                    if (element != null)
+                    {
+                        element.Validate();
+                    }
+                }
+            }
+            if (Rows != null)
+            {
+                foreach (var element1 in Rows)
+                {
+                    if (element1 != null)
+                    {
+                        element1.Validate();
+                    }
+                }
+            }
+        }
     }
 }

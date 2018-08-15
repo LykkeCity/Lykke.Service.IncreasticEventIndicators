@@ -6,6 +6,7 @@
 
 namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -24,7 +25,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         /// Initializes a new instance of the IntrinsicEventIndicatorsRowEdit
         /// class.
         /// </summary>
-        public IntrinsicEventIndicatorsRowEdit(string rowId = default(string), string pairName = default(string))
+        public IntrinsicEventIndicatorsRowEdit(string rowId, string pairName)
         {
             RowId = rowId;
             PairName = pairName;
@@ -46,5 +47,22 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         [JsonProperty(PropertyName = "PairName")]
         public string PairName { get; set; }
 
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            if (RowId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "RowId");
+            }
+            if (PairName == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "PairName");
+            }
+        }
     }
 }

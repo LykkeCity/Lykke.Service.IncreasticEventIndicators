@@ -237,27 +237,21 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 }
             }
 
-            /// <summary>
-            /// Checks service is alive
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static object IsAlive(this IIntrinsicEventIndicatorsAPI operations)
+            public static IsAliveResponse IsAlive(this IIntrinsicEventIndicatorsAPI operations)
             {
                 return operations.IsAliveAsync().GetAwaiter().GetResult();
             }
 
-            /// <summary>
-            /// Checks service is alive
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> IsAliveAsync(this IIntrinsicEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IsAliveResponse> IsAliveAsync(this IIntrinsicEventIndicatorsAPI operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.IsAliveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

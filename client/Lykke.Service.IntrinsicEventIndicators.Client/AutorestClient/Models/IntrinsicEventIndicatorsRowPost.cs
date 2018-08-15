@@ -6,6 +6,7 @@
 
 namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -24,7 +25,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         /// Initializes a new instance of the IntrinsicEventIndicatorsRowPost
         /// class.
         /// </summary>
-        public IntrinsicEventIndicatorsRowPost(string exchange = default(string), string assetPair = default(string), string pairName = default(string))
+        public IntrinsicEventIndicatorsRowPost(string exchange, string assetPair, string pairName)
         {
             Exchange = exchange;
             AssetPair = assetPair;
@@ -52,5 +53,26 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         [JsonProperty(PropertyName = "PairName")]
         public string PairName { get; set; }
 
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            if (Exchange == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Exchange");
+            }
+            if (AssetPair == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "AssetPair");
+            }
+            if (PairName == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "PairName");
+            }
+        }
     }
 }

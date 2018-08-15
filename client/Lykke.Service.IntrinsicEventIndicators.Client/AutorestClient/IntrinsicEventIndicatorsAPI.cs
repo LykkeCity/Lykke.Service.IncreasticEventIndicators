@@ -410,6 +410,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </return>
         public async Task<HttpOperationResponse<ErrorResponse>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPutWithHttpMessagesAsync(IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (row != null)
+            {
+                row.Validate();
+            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -540,6 +544,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </return>
         public async Task<HttpOperationResponse<ErrorResponse>> ApiV1ExternalIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairexternalPostWithHttpMessagesAsync(IntrinsicEventIndicatorsRowEdit row = default(IntrinsicEventIndicatorsRowEdit), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (row != null)
+            {
+                row.Validate();
+            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -999,9 +1007,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             return _result;
         }
 
-        /// <summary>
-        /// Checks service is alive
-        /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1017,7 +1022,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<object>> IsAliveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IsAliveResponse>> IsAliveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1068,7 +1073,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 500)
+            if ((int)_statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
@@ -1091,7 +1096,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<object>();
+            var _result = new HttpOperationResponse<IsAliveResponse>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -1101,24 +1106,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IsAliveResponse>(_responseContent, DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 500)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorResponse>(_responseContent, DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1406,6 +1393,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </return>
         public async Task<HttpOperationResponse<ErrorResponse>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPutWithHttpMessagesAsync(IntrinsicEventIndicatorsRowPost row = default(IntrinsicEventIndicatorsRowPost), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (row != null)
+            {
+                row.Validate();
+            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1536,6 +1527,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient
         /// </return>
         public async Task<HttpOperationResponse<ErrorResponse>> ApiV1LykkeIntrinsicEventIndicatorsIntrinsiceventindicatorsassetpairPostWithHttpMessagesAsync(IntrinsicEventIndicatorsRowEdit row = default(IntrinsicEventIndicatorsRowEdit), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (row != null)
+            {
+                row.Validate();
+            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;

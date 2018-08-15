@@ -6,6 +6,7 @@
 
 namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -24,7 +25,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         /// </summary>
         /// <param name="expectedDirectionalChange">Possible values include:
         /// 'Upward', 'Downward'</param>
-        public RunnerStateDto(int eventProperty, double extreme, double expectedDcLevel, double expectedOsLevel, double reference, ExpectedDirectionalChange expectedDirectionalChange, double directionalChangePrice, double delta, double ask, double bid, string assetPair = default(string), string exchange = default(string), System.DateTime? tickPriceTimestamp = default(System.DateTime?), System.DateTime? dcTimestamp = default(System.DateTime?))
+        public RunnerStateDto(int eventProperty, double extreme, double expectedDcLevel, double expectedOsLevel, double reference, ExpectedDirectionalChange expectedDirectionalChange, double directionalChangePrice, double delta, string assetPair, string exchange, double ask, double bid, System.DateTime tickPriceTimestamp, System.DateTime dcTimestamp)
         {
             EventProperty = eventProperty;
             Extreme = extreme;
@@ -112,21 +113,29 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "TickPriceTimestamp")]
-        public System.DateTime? TickPriceTimestamp { get; set; }
+        public System.DateTime TickPriceTimestamp { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "DcTimestamp")]
-        public System.DateTime? DcTimestamp { get; set; }
+        public System.DateTime DcTimestamp { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
+            if (AssetPair == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "AssetPair");
+            }
+            if (Exchange == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Exchange");
+            }
         }
     }
 }

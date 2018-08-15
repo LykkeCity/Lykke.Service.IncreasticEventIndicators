@@ -6,6 +6,7 @@
 
 namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -24,7 +25,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         /// Initializes a new instance of the IntrinsicEventIndicatorsColumnDto
         /// class.
         /// </summary>
-        public IntrinsicEventIndicatorsColumnDto(double delta, string columnId = default(string))
+        public IntrinsicEventIndicatorsColumnDto(string columnId, double delta)
         {
             ColumnId = columnId;
             Delta = delta;
@@ -49,12 +50,15 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.AutorestClient.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
-            //Nothing to validate
+            if (ColumnId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "ColumnId");
+            }
         }
     }
 }
