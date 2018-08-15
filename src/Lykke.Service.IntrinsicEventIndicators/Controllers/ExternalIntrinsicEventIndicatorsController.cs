@@ -8,6 +8,7 @@ using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services;
 using Lykke.Service.IntrinsicEventIndicators.Models;
 using Microsoft.AspNetCore.Mvc;
+using MoreLinq;
 
 namespace Lykke.Service.IntrinsicEventIndicators.Controllers
 {
@@ -36,6 +37,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
             {
                 return BadRequest(ErrorResponse.Create(ModelState));
             }
+
+            column.Delta /= 100;
 
             var model = _mapper
                 .Map<IntrinsicEventIndicatorsColumn>(column);
@@ -148,6 +151,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         {
             var data = await _intrinsicEventIndicatorsService.GetData();
             var vm = _mapper.Map<IntrinsicEventIndicators.Core.Domain.Model.IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>(data);
+            vm.Columns.ForEach(x => x.Delta /= 100);
             return Ok(vm);
         }
 
