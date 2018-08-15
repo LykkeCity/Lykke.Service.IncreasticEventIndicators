@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Log;
+using Lykke.Common.Log;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services;
@@ -17,10 +18,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
         private bool _initialized;
 
         protected IntrinsicEventIndicatorsService(IIntrinsicEventIndicatorsRepository repo,
-            ITickPriceManager tickPriceManager, ILog log)
+            ITickPriceManager tickPriceManager, ILogFactory logFactory)
         {
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
-            _log = log.CreateComponentScope(nameof(IntrinsicEventIndicatorsService));
+            _log = logFactory.CreateLog(this);
             _tickPriceManager = tickPriceManager;
 
             EnsureInitialized();

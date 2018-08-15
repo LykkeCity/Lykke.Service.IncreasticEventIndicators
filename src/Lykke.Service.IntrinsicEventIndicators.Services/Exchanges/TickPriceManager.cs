@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common.Log;
 using Lykke.Common.ExchangeAdapter.Contracts;
+using Lykke.Common.Log;
 using Lykke.Service.IntrinsicEventIndicators.Core;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
@@ -34,10 +35,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
         private readonly Timer _saveStateTimer;
         private readonly Timer _cleanStateTimer;
 
-        protected TickPriceManager(ILog log, IRunnerStateRepository runnerStateRepository,
+        protected TickPriceManager(ILogFactory logFactory, IRunnerStateRepository runnerStateRepository,
             IIntrinsicEventIndicatorsRepository repo)
         {
-            _log = log;
+            _log = logFactory.CreateLog(this);
             _runnerStateRepository = runnerStateRepository;
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
             _saveStateTimer = new Timer(OnTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);

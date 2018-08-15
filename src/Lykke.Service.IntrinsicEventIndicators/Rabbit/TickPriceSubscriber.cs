@@ -4,6 +4,7 @@ using Autofac;
 using Common;
 using Common.Log;
 using Lykke.Common.ExchangeAdapter.Contracts;
+using Lykke.Common.Log;
 using Lykke.RabbitMqBroker;
 using Lykke.RabbitMqBroker.Subscriber;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services.Exchanges;
@@ -21,11 +22,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Rabbit
         protected TickPriceSubscriber(
             TickPriceExchangeSettings settings,
             ITickPriceHandler handler,
-            ILog log)
+            ILogFactory logFactory)
         {
             _settings = settings;
             _handler = handler;
-            _log = log;
+            _log = logFactory.CreateLog(this);
         }
 
         public void Start()
