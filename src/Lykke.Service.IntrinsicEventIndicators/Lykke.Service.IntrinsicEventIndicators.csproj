@@ -47,6 +47,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\..\client\Lykke.Service.IntrinsicEventIndicators.Client\Lykke.Service.IntrinsicEventIndicators.Client.csproj" />
     <ProjectReference Include="..\Lykke.Service.IntrinsicEventIndicators.AzureRepositories\Lykke.Service.IntrinsicEventIndicators.AzureRepositories.csproj" />
     <ProjectReference Include="..\Lykke.Service.IntrinsicEventIndicators.Core\Lykke.Service.IntrinsicEventIndicators.Core.csproj" />
     <ProjectReference Include="..\Lykke.Service.IntrinsicEventIndicators.Services\Lykke.Service.IntrinsicEventIndicators.Services.csproj" />

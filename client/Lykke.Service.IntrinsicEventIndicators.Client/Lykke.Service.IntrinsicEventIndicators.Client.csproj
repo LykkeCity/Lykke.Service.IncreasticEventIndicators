@@ -24,14 +24,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <None Remove="Models\**" />
+    <PackageReference Include="Lykke.Common" Version="7.0.3" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.12" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lykke.Common" Version="7.0.3" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.12" />
+    <Reference Include="Lykke.HttpClientGenerator">
+      <HintPath>..\..\..\..\..\Users\Taras\.nuget\packages\lykke.httpclientgenerator\1.0.0\lib\netstandard2.0\Lykke.HttpClientGenerator.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

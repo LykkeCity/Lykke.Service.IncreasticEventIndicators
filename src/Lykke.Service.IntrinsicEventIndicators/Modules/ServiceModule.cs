@@ -6,7 +6,6 @@ using Lykke.Service.IntrinsicEventIndicators.AzureRepositories;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services.Exchanges;
-using Lykke.Service.IntrinsicEventIndicators.Infrastructure;
 using Lykke.Service.IntrinsicEventIndicators.Rabbit;
 using Lykke.Service.IntrinsicEventIndicators.Services;
 using Lykke.Service.IntrinsicEventIndicators.Services.Exchanges;
@@ -26,8 +25,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAutoMapper();
-
             builder.RegisterInstance(_settings.CurrentValue)
                 .SingleInstance();
 

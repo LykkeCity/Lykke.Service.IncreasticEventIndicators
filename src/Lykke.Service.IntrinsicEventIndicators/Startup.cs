@@ -2,7 +2,6 @@
 using AutoMapper;
 using JetBrains.Annotations;
 using Lykke.Sdk;
-using Lykke.Service.IntrinsicEventIndicators.AutoMapperProfiles;
 using Lykke.Service.IntrinsicEventIndicators.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,7 +32,7 @@ namespace Lykke.Service.IntrinsicEventIndicators
 
                 Mapper.Initialize(cfg =>
                 {
-                    cfg.AddProfiles(typeof(DefaultProfile));
+                    cfg.AddProfiles(typeof(AutoMapperProfile));
                 });
                 Mapper.AssertConfigurationIsValid();
             });
