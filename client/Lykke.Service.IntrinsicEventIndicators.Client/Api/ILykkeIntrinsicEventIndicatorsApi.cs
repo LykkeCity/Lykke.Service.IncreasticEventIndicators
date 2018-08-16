@@ -2,18 +2,26 @@
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Lykke.Service.IntrinsicEventIndicators.Client.Models;
+using Refit;
 
 namespace Lykke.Service.IntrinsicEventIndicators.Client.Api
 {
     [PublicAPI]
     public interface ILykkeIntrinsicEventIndicatorsApi
     {
-        Task AddDelta(IntrinsicEventIndicatorsColumnPost column);
-        Task RemoveDelta(string columnId);
-        Task AddAssetPair(IntrinsicEventIndicatorsRowPost row);
-        Task EditAssetPair(IntrinsicEventIndicatorsRowEdit row);
-        Task RemoveAssetPair(string rowId);
-        Task<IntrinsicEventIndicatorsDto> GetData();
-        Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStates();
+        [Post("/api/intrinsiceventindicatorsdelta")]
+        Task AddDeltaAsync(IntrinsicEventIndicatorsColumnPost column);
+        [Delete("/api/intrinsiceventindicatorsdelta")]
+        Task RemoveDeltaAsync(string columnId);
+        [Post("/api/intrinsiceventindicatorsassetpair")]
+        Task AddAssetPairAsync(IntrinsicEventIndicatorsRowPost row);
+        [Put("/api/intrinsiceventindicatorsassetpair")]
+        Task EditAssetPairAsync(IntrinsicEventIndicatorsRowEdit row);
+        [Delete("/api/intrinsiceventindicatorsassetpair")]
+        Task RemoveAssetPairAsync(string rowId);
+        [Get("/api/intrinsiceventindicatorsdata")]
+        Task<IntrinsicEventIndicatorsDto> GetDataAsync();
+        [Get("/api/intrinsiceventindicatorsrunnersstates")]
+        Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesAsync();
     }
 }
