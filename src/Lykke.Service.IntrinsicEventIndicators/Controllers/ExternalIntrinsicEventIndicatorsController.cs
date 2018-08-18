@@ -3,7 +3,6 @@ using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Lykke.Common.Api.Contract.Responses;
-using Lykke.Common.ApiLibrary.Exceptions;
 using Lykke.Service.IntrinsicEventIndicators.Client.Api;
 using Lykke.Service.IntrinsicEventIndicators.Client.Models;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
@@ -33,11 +32,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task AddDeltaExternalAsync([FromBody] IntrinsicEventIndicatorsColumnPost column)
         {
-            if (!ModelState.IsValid)
-            {
-                throw new ValidationApiException("Invalid model");
-            }
-
             column.Delta /= 100;
 
             var model = Mapper.Map<IntrinsicEventIndicatorsColumn>(column);
@@ -67,11 +61,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task AddAssetPairExternalAsync([FromBody] IntrinsicEventIndicatorsRowPost row)
         {
-            if (!ModelState.IsValid)
-            {
-                throw new ValidationApiException("Invalid model");
-            }
-
             var model = Mapper.Map<IntrinsicEventIndicatorsRow>(row);
 
             await _intrinsicEventIndicatorsService.AddAssetPair(model);
@@ -86,11 +75,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task EditAssetPairExternalAsync([FromBody] IntrinsicEventIndicatorsRowEdit row)
         {
-            if (!ModelState.IsValid)
-            {
-                throw new ValidationApiException("Invalid model");
-            }
-
             var model = Mapper.Map<IntrinsicEventIndicatorsRow>(row);
 
             await _intrinsicEventIndicatorsService.EditAssetPair(model);

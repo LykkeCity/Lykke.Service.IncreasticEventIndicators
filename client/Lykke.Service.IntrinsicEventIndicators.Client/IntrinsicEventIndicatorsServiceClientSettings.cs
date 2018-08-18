@@ -4,7 +4,7 @@ using Lykke.SettingsReader.Attributes;
 namespace Lykke.Service.IntrinsicEventIndicators.Client
 {
     /// <summary>
-    /// MarketMakerReports client settings.
+    /// IntrinsicEventIndicators client settings.
     /// </summary>
     [PublicAPI]
     public class IntrinsicEventIndicatorsServiceClientSettings

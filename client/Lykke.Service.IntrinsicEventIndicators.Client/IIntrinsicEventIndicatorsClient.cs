@@ -12,6 +12,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client
         /// <summary>Api for LykkeIntrinsicEventIndicators</summary>
         ILykkeIntrinsicEventIndicatorsApi LykkeIntrinsicEventIndicatorsApi { get; }
 
+        /// <summary>Api for ExternalIntrinsicEventIndicators</summary>
         IExternalIntrinsicEventIndicatorsApi ExternalIntrinsicEventIndicatorsApi { get; }
     }
 }
