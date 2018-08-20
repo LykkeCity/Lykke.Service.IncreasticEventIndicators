@@ -9,13 +9,13 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.Api
     [PublicAPI]
     public interface IExternalIntrinsicEventIndicatorsApi
     {
-        [Put("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsdeltaexternal")]
+        [Post("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsdeltaexternal")]
         Task AddDeltaExternalAsync(IntrinsicEventIndicatorsColumnPost column);
         [Delete("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsdeltaexternal")]
         Task RemoveDeltaExternalAsync(string columnId);
-        [Put("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsassetpairexternal")]
-        Task AddAssetPairExternalAsync(IntrinsicEventIndicatorsRowPost row);
         [Post("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsassetpairexternal")]
+        Task AddAssetPairExternalAsync(IntrinsicEventIndicatorsRowPost row);
+        [Put("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsassetpairexternal")]
         Task EditAssetPairExternalAsync(IntrinsicEventIndicatorsRowEdit row);
         [Delete("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsassetpairexternal")]
         Task RemoveAssetPairExternalAsync(string rowId);
