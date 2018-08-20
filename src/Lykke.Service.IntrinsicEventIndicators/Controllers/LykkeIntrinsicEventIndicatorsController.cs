@@ -2,7 +2,9 @@
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using Lykke.Common.Api.Contract.Responses;
+using Lykke.Common.ApiLibrary.Exceptions;
 using Lykke.Service.IntrinsicEventIndicators.Client.Api;
 using Lykke.Service.IntrinsicEventIndicators.Client.Models;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
@@ -49,6 +51,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task RemoveDeltaAsync(string columnId)
         {
+            if (string.IsNullOrEmpty(columnId))
+            {
+                throw new ValidationApiException($"{nameof(columnId)} required");
+            }
+
             await _intrinsicEventIndicatorsService.RemoveColumn(columnId);
         }
 
@@ -59,7 +66,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         [HttpPost("assetpair")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task AddAssetPairAsync([FromBody] IntrinsicEventIndicatorsRowPost row)
+        public async Task AddAssetPairAsync([FromBody] [CustomizeValidator(RuleSet = "lykke")] IntrinsicEventIndicatorsRowPost row)
         {
             var model = Mapper.Map<IntrinsicEventIndicatorsRow>(row);
 
@@ -90,6 +97,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task RemoveAssetPairAsync(string rowId)
         {
+            if (string.IsNullOrEmpty(rowId))
+            {
+                throw new ValidationApiException($"{nameof(rowId)} required");
+            }
+
             await _intrinsicEventIndicatorsService.RemoveAssetPair(rowId);
         }
 

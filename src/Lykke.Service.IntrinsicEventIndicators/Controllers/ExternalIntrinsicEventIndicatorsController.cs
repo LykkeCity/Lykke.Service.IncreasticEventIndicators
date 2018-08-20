@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Lykke.Common.Api.Contract.Responses;
+using Lykke.Common.ApiLibrary.Exceptions;
 using Lykke.Service.IntrinsicEventIndicators.Client.Api;
 using Lykke.Service.IntrinsicEventIndicators.Client.Models;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
@@ -10,7 +11,6 @@ using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using MoreLinq;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Lykke.Service.IntrinsicEventIndicators.Controllers
 {
@@ -50,6 +50,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task RemoveDeltaExternalAsync(string columnId)
         {
+            if (string.IsNullOrEmpty(columnId))
+            {
+                throw new ValidationApiException($"{nameof(columnId)} required");
+            }
+
             await _intrinsicEventIndicatorsService.RemoveColumn(columnId);
         }
 
@@ -91,6 +96,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task RemoveAssetPairExternalAsync(string rowId)
         {
+            if (string.IsNullOrEmpty(rowId))
+            {
+                throw new ValidationApiException($"{nameof(rowId)} required");
+            }
+
             await _intrinsicEventIndicatorsService.RemoveAssetPair(rowId);
         }
 
