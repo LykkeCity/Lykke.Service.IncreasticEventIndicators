@@ -9,19 +9,19 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.Api
     [PublicAPI]
     public interface ILykkeIntrinsicEventIndicatorsApi
     {
-        [Post("/api/lykkeintrinsiceventindicators/delta")]
+        [Post("/api/v1/lykkeintrinsiceventindicators/intrinsiceventindicatorsdelta")]
         Task AddDeltaAsync(IntrinsicEventIndicatorsColumnPost column);
-        [Delete("/api/lykkeintrinsiceventindicators/delta")]
+        [Delete("/api/v1/lykkeintrinsiceventindicators/intrinsiceventindicatorsdelta")]
         Task RemoveDeltaAsync(string columnId);
-        [Post("/api/lykkeintrinsiceventindicators/assetpair")]
+        [Post("/api/v1/lykkeintrinsiceventindicators/intrinsiceventindicatorsassetpair")]
         Task AddAssetPairAsync(IntrinsicEventIndicatorsRowPost row);
-        [Put("/api/lykkeintrinsiceventindicators/assetpair")]
+        [Put("/api/v1/lykkeintrinsiceventindicators/intrinsiceventindicatorsassetpair")]
         Task EditAssetPairAsync(IntrinsicEventIndicatorsRowEdit row);
-        [Delete("/api/lykkeintrinsiceventindicators/assetpair")]
+        [Delete("/api/v1/lykkeintrinsiceventindicators/intrinsiceventindicatorsassetpair")]
         Task RemoveAssetPairAsync(string rowId);
-        [Get("/api/lykkeintrinsiceventindicators/data")]
+        [Get("/api/v1/lykkeintrinsiceventindicators/intrinsiceventindicatorsdata")]
         Task<IntrinsicEventIndicatorsDto> GetDataAsync();
-        [Get("/api/lykkeintrinsiceventindicators/runnersstates")]
+        [Get("/api/v1/lykkeintrinsiceventindicators/intrinsiceventindicatorsrunnersstates")]
         Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesAsync();
     }
 }

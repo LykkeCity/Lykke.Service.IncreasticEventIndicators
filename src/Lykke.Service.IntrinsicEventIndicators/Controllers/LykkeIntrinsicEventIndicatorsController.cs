@@ -15,7 +15,7 @@ using MoreLinq;
 
 namespace Lykke.Service.IntrinsicEventIndicators.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class LykkeIntrinsicEventIndicatorsController : Controller, ILykkeIntrinsicEventIndicatorsApi
     {
         private readonly ILykkeIntrinsicEventIndicatorsService _intrinsicEventIndicatorsService;        
@@ -29,7 +29,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// Adds delta.
         /// </summary>
         /// <param name="column">Delta to add.</param>
-        [HttpPost("delta")]
+        [HttpPost("intrinsiceventindicatorsdelta")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task AddDeltaAsync([FromBody] IntrinsicEventIndicatorsColumnPost column)
@@ -46,7 +46,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// </summary>
         /// <param name="columnId">delta</param>
         /// <returns></returns>
-        [HttpDelete("delta")]
+        [HttpDelete("intrinsiceventindicatorsdelta")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task RemoveDeltaAsync(string columnId)
@@ -63,7 +63,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// Adds asset pair.
         /// </summary>
         /// <param name="row">Asset pair to add.</param>
-        [HttpPost("assetpair")]
+        [HttpPost("intrinsiceventindicatorsassetpair")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task AddAssetPairAsync([FromBody] [CustomizeValidator(RuleSet = "lykke")] IntrinsicEventIndicatorsRowPost row)
@@ -77,7 +77,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// Edits asset pair.
         /// </summary>
         /// <param name="row">Asset pair to edit.</param>
-        [HttpPut("assetpair")]
+        [HttpPut("intrinsiceventindicatorsassetpair")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task EditAssetPairAsync([FromBody] IntrinsicEventIndicatorsRowEdit row)
@@ -92,7 +92,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// </summary>
         /// <param name="rowId">asset pair</param>
         /// <returns></returns>
-        [HttpDelete("assetpair")]
+        [HttpDelete("intrinsiceventindicatorsassetpair")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task RemoveAssetPairAsync(string rowId)
@@ -109,7 +109,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// Gets data.
         /// </summary>
         /// <returns>Data</returns>
-        [HttpGet("data")]
+        [HttpGet("intrinsiceventindicatorsdata")]
         [ProducesResponseType(typeof(IntrinsicEventIndicatorsDto), (int)HttpStatusCode.OK)]
         public async Task<IntrinsicEventIndicatorsDto> GetDataAsync()
         {
@@ -123,7 +123,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// Gets runners states.
         /// </summary>
         /// <returns>Runners states</returns>
-        [HttpGet("runnersstates")]
+        [HttpGet("intrinsiceventindicatorsrunnersstates")]
         [ProducesResponseType(typeof(IDictionary<string, IList<RunnerStateDto>>), (int)HttpStatusCode.OK)]
         public async Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesAsync()
         {

@@ -9,19 +9,19 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.Api
     [PublicAPI]
     public interface IExternalIntrinsicEventIndicatorsApi
     {
-        [Post("/api/externalintrinsiceventindicators/delta")]
+        [Post("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsdeltaexternal")]
         Task AddDeltaExternalAsync(IntrinsicEventIndicatorsColumnPost column);
-        [Delete("/api/externalintrinsiceventindicators/delta")]
+        [Delete("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsdeltaexternal")]
         Task RemoveDeltaExternalAsync(string columnId);
-        [Post("/api/externalintrinsiceventindicators/assetpair")]
+        [Post("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsassetpairexternal")]
         Task AddAssetPairExternalAsync(IntrinsicEventIndicatorsRowPost row);
-        [Put("/api/externalintrinsiceventindicators/assetpair")]
+        [Put("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsassetpairexternal")]
         Task EditAssetPairExternalAsync(IntrinsicEventIndicatorsRowEdit row);
-        [Delete("/api/externalintrinsiceventindicators/assetpair")]
+        [Delete("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsassetpairexternal")]
         Task RemoveAssetPairExternalAsync(string rowId);
-        [Get("/api/externalintrinsiceventindicators/data")]
+        [Get("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsdataexternal")]
         Task<IntrinsicEventIndicatorsDto> GetDataExternalAsync();
-        [Get("/api/externalintrinsiceventindicators/runnersstates")]
+        [Get("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsrunnersstatesexternal")]
         Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesExternalAsync();
     }
 }
