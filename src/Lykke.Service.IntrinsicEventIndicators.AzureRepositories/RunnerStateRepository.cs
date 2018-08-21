@@ -89,7 +89,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
 
         private static string GeneratePartitionKey(IRunnerState runnerState)
         {
-            return $"{runnerState.Exchange.ToUpperInvariant()} {runnerState.AssetPair.ToUpperInvariant()}";
+            return $"{runnerState.Exchange.Replace(" ", "").ToUpperInvariant()} {runnerState.AssetPair.Replace(" ", "").ToUpperInvariant()}";
         }
 
         private static string GenerateRowKey(decimal delta)

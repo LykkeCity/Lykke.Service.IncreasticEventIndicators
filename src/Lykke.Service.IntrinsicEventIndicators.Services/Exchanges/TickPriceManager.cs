@@ -404,7 +404,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
 
         private static string GetExchangeAssetPairKey(string exchangeName, string assetPair)
         {
-            return $"{exchangeName.ToUpperInvariant()} {assetPair.ToUpperInvariant()}";
+            return $"{exchangeName.Replace(" ", "").ToUpperInvariant()} {assetPair.Replace(" ", "").ToUpperInvariant()}";
         }
 
         private static string ParseExchangeFromExchangeAssetPairKey(string key)
