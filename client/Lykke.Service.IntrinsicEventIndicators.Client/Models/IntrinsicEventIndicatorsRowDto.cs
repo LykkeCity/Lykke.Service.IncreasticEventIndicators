@@ -1,4 +1,4 @@
-﻿namespace Lykke.Service.IntrinsicEventIndicators.Models
+﻿namespace Lykke.Service.IntrinsicEventIndicators.Client.Models
 {
     public class IntrinsicEventIndicatorsRowDto
     {

@@ -1,26 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lykke.Common.Api.Contract.Responses;
+using Lykke.Common.ApiLibrary.Exceptions;
+using Lykke.Service.IntrinsicEventIndicators.Client.Api;
+using Lykke.Service.IntrinsicEventIndicators.Client.Models;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services;
-using Lykke.Service.IntrinsicEventIndicators.Models;
 using Microsoft.AspNetCore.Mvc;
 using MoreLinq;
 
 namespace Lykke.Service.IntrinsicEventIndicators.Controllers
 {
     [Route("api/v1/[controller]")]
-    public class ExternalIntrinsicEventIndicatorsController : Controller
+    public class ExternalIntrinsicEventIndicatorsController : Controller, IExternalIntrinsicEventIndicatorsApi
     {
-        private readonly IMapper _mapper;
         private readonly IExternalIntrinsicEventIndicatorsService _intrinsicEventIndicatorsService;        
 
-        public ExternalIntrinsicEventIndicatorsController(IMapper mapper, IExternalIntrinsicEventIndicatorsService intrinsicEventIndicatorsService)
+        public ExternalIntrinsicEventIndicatorsController(IExternalIntrinsicEventIndicatorsService intrinsicEventIndicatorsService)
         {
-            _mapper = mapper;
             _intrinsicEventIndicatorsService = intrinsicEventIndicatorsService;
         }
 
@@ -28,31 +28,16 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// Adds delta.
         /// </summary>
         /// <param name="column">Delta to add.</param>
-        [HttpPut("intrinsiceventindicatorsdeltaexternal")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [HttpPost("intrinsiceventindicatorsdeltaexternal")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> AddDeltaExternal([FromBody] IntrinsicEventIndicatorsColumnPost column)
+        public async Task AddDeltaExternalAsync([FromBody] IntrinsicEventIndicatorsColumnPost column)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ErrorResponse.Create(ModelState));
-            }
-
             column.Delta /= 100;
 
-            var model = _mapper
-                .Map<IntrinsicEventIndicatorsColumn>(column);
+            var model = Mapper.Map<IntrinsicEventIndicatorsColumn>(column);
 
-            try
-            {
-                await _intrinsicEventIndicatorsService.AddColumn(model);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ErrorResponse.Create(ex.Message));
-            }
-
-            return StatusCode((int)HttpStatusCode.OK);
+            await _intrinsicEventIndicatorsService.AddColumn(model);
         }
 
         /// <summary>
@@ -62,68 +47,43 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// <returns></returns>
         [HttpDelete("intrinsiceventindicatorsdeltaexternal")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public async Task<IActionResult> RemoveDeltaExternal(string columnId)
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        public async Task RemoveDeltaExternalAsync(string columnId)
         {
+            if (string.IsNullOrEmpty(columnId))
+            {
+                throw new ValidationApiException($"{nameof(columnId)} required");
+            }
+
             await _intrinsicEventIndicatorsService.RemoveColumn(columnId);
-            return NoContent();
         }
 
         /// <summary>
         /// Adds asset pair.
         /// </summary>
         /// <param name="row">Asset pair to add.</param>
-        [HttpPut("intrinsiceventindicatorsassetpairexternal")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [HttpPost("intrinsiceventindicatorsassetpairexternal")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> AddAssetPairExternal([FromBody] IntrinsicEventIndicatorsRowPost row)
+        public async Task AddAssetPairExternalAsync([FromBody] IntrinsicEventIndicatorsRowPost row)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ErrorResponse.Create(ModelState));
-            }
+            var model = Mapper.Map<IntrinsicEventIndicatorsRow>(row);
 
-            var model = _mapper
-                .Map<IntrinsicEventIndicatorsRow>(row);
-
-            try
-            {
-                await _intrinsicEventIndicatorsService.AddAssetPair(model);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ErrorResponse.Create(ex.Message));
-            }
-
-            return StatusCode((int)HttpStatusCode.OK);
+            await _intrinsicEventIndicatorsService.AddAssetPair(model);
         }
 
         /// <summary>
         /// Edits asset pair.
         /// </summary>
         /// <param name="row">Asset pair to edit.</param>
-        [HttpPost("intrinsiceventindicatorsassetpairexternal")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [HttpPut("intrinsiceventindicatorsassetpairexternal")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> EditAssetPairExternal([FromBody] IntrinsicEventIndicatorsRowEdit row)
+        public async Task EditAssetPairExternalAsync([FromBody] IntrinsicEventIndicatorsRowEdit row)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ErrorResponse.Create(ModelState));
-            }
+            var model = Mapper.Map<IntrinsicEventIndicatorsRow>(row);
 
-            var model = _mapper
-                .Map<IntrinsicEventIndicatorsRow>(row);
-
-            try
-            {
-                await _intrinsicEventIndicatorsService.EditAssetPair(model);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ErrorResponse.Create(ex.Message));
-            }
-
-            return StatusCode((int)HttpStatusCode.OK);
+            await _intrinsicEventIndicatorsService.EditAssetPair(model);
         }
 
         /// <summary>
@@ -133,41 +93,42 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// <returns></returns>
         [HttpDelete("intrinsiceventindicatorsassetpairexternal")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public async Task<IActionResult> RemoveAssetPairExternal(string rowId)
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        public async Task RemoveAssetPairExternalAsync(string rowId)
         {
+            if (string.IsNullOrEmpty(rowId))
+            {
+                throw new ValidationApiException($"{nameof(rowId)} required");
+            }
+
             await _intrinsicEventIndicatorsService.RemoveAssetPair(rowId);
-            return NoContent();
         }
 
         /// <summary>
         /// Gets data.
         /// </summary>
         /// <returns>Data</returns>
-        [HttpGet("intrinsiceventindicatorsdataexternal", Name = "GetDataExternal")]
-        [Produces("application/json")]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [HttpGet("intrinsiceventindicatorsdataexternal")]
         [ProducesResponseType(typeof(IntrinsicEventIndicatorsDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetDataExternal()
+        public async Task<IntrinsicEventIndicatorsDto> GetDataExternalAsync()
         {
             var data = await _intrinsicEventIndicatorsService.GetData();
-            var vm = _mapper.Map<IntrinsicEventIndicators.Core.Domain.Model.IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>(data);
-            vm.Columns.ForEach(x => x.Delta *= 100);
-            return Ok(vm);
+            var model = Mapper.Map<Core.Domain.Model.IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>(data);
+            model.Columns.ForEach(x => x.Delta *= 100);
+            return model;
         }
 
         /// <summary>
         /// Gets runners states.
         /// </summary>
         /// <returns>Runners states</returns>
-        [HttpGet("intrinsiceventindicatorsrunnersstatesexternal", Name = "GetRunnersStatesExternal")]
-        [Produces("application/json")]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [HttpGet("intrinsiceventindicatorsrunnersstatesexternal")]
         [ProducesResponseType(typeof(IDictionary<string, IList<RunnerStateDto>>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetRunnersStatesExternal()
+        public async Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesExternalAsync()
         {
             var runnersStates = await _intrinsicEventIndicatorsService.GetRunnersStates();
-            var vm = _mapper.Map<IDictionary<string, IList<IRunnerState>>, IDictionary<string, IList<RunnerStateDto>>>(runnersStates);
-            return Ok(vm);
+            var model = Mapper.Map<IDictionary<string, IList<IRunnerState>>, IDictionary<string, IList<RunnerStateDto>>>(runnersStates);
+            return model;
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
+using Lykke.Service.IntrinsicEventIndicators.Client.Models;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
-using Lykke.Service.IntrinsicEventIndicators.Models;
 
-namespace Lykke.Service.IntrinsicEventIndicators.AutoMapperProfiles
+namespace Lykke.Service.IntrinsicEventIndicators
 {
-    public class DefaultProfile : Profile
+    public class AutoMapperProfile : Profile
     {
-        public DefaultProfile()
+        public AutoMapperProfile()
         {
             CreateMap<IntrinsicEventIndicatorsColumnPost, IntrinsicEventIndicatorsColumn>()
                 .ForMember(x => x.ColumnId, opt => opt.Ignore());
