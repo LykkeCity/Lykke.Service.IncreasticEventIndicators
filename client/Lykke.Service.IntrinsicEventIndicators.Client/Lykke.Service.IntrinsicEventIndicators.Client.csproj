@@ -31,10 +31,4 @@
     <PackageReference Include="Refit" Version="4.6.30" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Lykke.HttpClientGenerator">
-      <HintPath>..\..\..\..\..\Users\Taras\.nuget\packages\lykke.httpclientgenerator\1.0.0\lib\netstandard2.0\Lykke.HttpClientGenerator.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
