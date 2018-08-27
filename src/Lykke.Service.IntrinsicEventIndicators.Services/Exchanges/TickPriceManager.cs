@@ -50,6 +50,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             _saveStateTimer = new Timer(OnTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
             _saveHistoryTimer = new Timer(OnSaveHistoryTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
             _cleanStateTimer = new Timer(OnCleanTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
+
+            var task = Task.Run(EnsureInitialized);
+            Task.WaitAll(task);
         }
 
         public async Task UpdateMetadataAndRunners()
