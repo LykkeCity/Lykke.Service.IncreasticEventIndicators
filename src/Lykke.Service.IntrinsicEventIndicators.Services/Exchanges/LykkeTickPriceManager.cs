@@ -7,8 +7,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
     public class LykkeTickPriceManager : TickPriceManager, ILykkeTickPriceManager, ILykkeTickPriceHandler
     {
         public LykkeTickPriceManager(ILogFactory logFactory, ILykkeRunnerStateRepository runnerStateRepository,
+            ILykkeMatrixHistoryRepository matrixHistoryRepository,
             ILykkeIntrinsicEventIndicatorsRepository repo)
-            : base(logFactory, runnerStateRepository, repo)
+            : base(logFactory, runnerStateRepository, matrixHistoryRepository, repo)
         {
         }
 
