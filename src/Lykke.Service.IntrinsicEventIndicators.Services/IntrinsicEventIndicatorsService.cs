@@ -12,15 +12,18 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
     public abstract class IntrinsicEventIndicatorsService : IIntrinsicEventIndicatorsService
     {
         private readonly IIntrinsicEventIndicatorsRepository _repo;
+        private readonly IMatrixHistoryRepository _matrixHistoryRepo;
         private readonly ILog _log;
         private readonly ITickPriceManager _tickPriceManager;
 
         private bool _initialized;
 
         protected IntrinsicEventIndicatorsService(IIntrinsicEventIndicatorsRepository repo,
+            IMatrixHistoryRepository matrixHistoryRepo,
             ITickPriceManager tickPriceManager, ILogFactory logFactory)
         {
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
+            _matrixHistoryRepo = matrixHistoryRepo ?? throw new ArgumentNullException(nameof(matrixHistoryRepo));
             _log = logFactory.CreateLog(this);
             _tickPriceManager = tickPriceManager;
 
@@ -84,6 +87,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
             EnsureInitialized();
 
             return _tickPriceManager.GetRunnersStates();
+        }
+
+        public Task<IList<DateTime>> GetMatrixHistoryStamps(DateTime date)
+        {
+            return _matrixHistoryRepo.GetMatrixHistoryStamps(date);
         }
 
         private void EnsureInitialized()

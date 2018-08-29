@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -129,6 +130,18 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         {
             var runnersStates = await _intrinsicEventIndicatorsService.GetRunnersStates();
             var model = Mapper.Map<IDictionary<string, IList<IRunnerState>>, IDictionary<string, IList<RunnerStateDto>>>(runnersStates);
+            return model;
+        }
+
+        /// <summary>
+        /// Gets matrix history stamps.
+        /// </summary>
+        /// <returns>Matrix history stamps</returns>
+        [HttpGet("matrixhistorystamps")]
+        [ProducesResponseType(typeof(IList<DateTime>), (int)HttpStatusCode.OK)]
+        public async Task<IList<DateTime>> GetMatrixHistoryStampsAsync(DateTime date)
+        {
+            var model = await _intrinsicEventIndicatorsService.GetMatrixHistoryStamps(date);
             return model;
         }
     }

@@ -7,8 +7,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
     public class ExternalIntrinsicEventIndicatorsService : IntrinsicEventIndicatorsService, IExternalIntrinsicEventIndicatorsService
     {
         public ExternalIntrinsicEventIndicatorsService(IExternalIntrinsicEventIndicatorsRepository repo,
+            IExternalMatrixHistoryRepository matrixHistoryRepo,
             IExternalTickPriceManager tickPriceManager, ILogFactory logFactory)
-            : base(repo, tickPriceManager, logFactory)
+            : base(repo, matrixHistoryRepo, tickPriceManager, logFactory)
         {
         }
     }

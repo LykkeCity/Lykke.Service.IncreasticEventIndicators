@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AzureStorage;
 using JetBrains.Annotations;
@@ -28,8 +30,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
             var entity =
                 new MatrixHistoryEntity
                 {
-                    PartitionKey = GeneratePartitionKey(matrixHistory),
-                    RowKey = GenerateRowKey(matrixHistory),
+                    PartitionKey = GeneratePartitionKey(matrixHistory.Created),
+                    RowKey = GenerateRowKey(matrixHistory.Created),
                     Data = matrixHistory.Data,
                     Created = matrixHistory.Created
                 };
@@ -37,14 +39,20 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
             await _storage.InsertOrReplaceAsync(entity);
         }
 
-        private static string GeneratePartitionKey(IMatrixHistory matrixHistory)
+        public async Task<IList<DateTime>> GetMatrixHistoryStamps(DateTime date)
         {
-            return $"{matrixHistory.Created:yyyy-MM-dd}";
+            return (await _storage.GetDataAsync(GeneratePartitionKey(date)))
+                .Select(x => x.Created).ToList();
         }
 
-        private static string GenerateRowKey(IMatrixHistory matrixHistory)
+        private static string GeneratePartitionKey(DateTime date)
         {
-            return $"{matrixHistory.Created:HH:mm:ss.fffffff}";
+            return $"{date:yyyy-MM-dd}";
+        }
+
+        private static string GenerateRowKey(DateTime date)
+        {
+            return $"{date:HH:mm:ss.fffffff}";
         }
     }
 }
