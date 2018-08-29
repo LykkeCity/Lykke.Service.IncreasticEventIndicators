@@ -26,5 +26,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.Api
         Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesAsync();
         [Get("/api/v1/lykkeintrinsiceventindicators/matrixhistorystamps")]
         Task<IList<DateTime>> GetMatrixHistoryStampsAsync(DateTime date);
+        [Get("/api/v1/lykkeintrinsiceventindicators/matrixhistorydata")]
+        Task<IntrinsicEventIndicatorsDto> GetMatrixHistoryDataAsync(DateTime date);
     }
 }

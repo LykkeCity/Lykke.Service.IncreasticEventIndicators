@@ -20,5 +20,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Services
         Task<IDictionary<string, IList<IRunnerState>>> GetRunnersStates();
 
         Task<IList<DateTime>> GetMatrixHistoryStamps(DateTime date);
+        Task<Domain.Model.IntrinsicEventIndicators> GetMatrixHistoryData(DateTime date);
     }
 }

@@ -26,5 +26,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.Api
         Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesExternalAsync();
         [Get("/api/v1/externalintrinsiceventindicators/matrixhistorystampsexternal")]
         Task<IList<DateTime>> GetMatrixHistoryStampsExternalAsync(DateTime date);
+        [Get("/api/v1/externalintrinsiceventindicators/matrixhistorydataexternal")]
+        Task<IntrinsicEventIndicatorsDto> GetMatrixHistoryDataExternalAsync(DateTime date);
     }
 }

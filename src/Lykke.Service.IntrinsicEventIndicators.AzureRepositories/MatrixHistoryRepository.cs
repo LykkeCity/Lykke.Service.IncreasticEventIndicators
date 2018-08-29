@@ -45,6 +45,12 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
                 .Select(x => x.Created).ToList();
         }
 
+        public async Task<string> GetMatrixHistoryData(DateTime date)
+        {
+            return (await _storage.GetDataAsync(GeneratePartitionKey(date), GenerateRowKey(date)))
+                .Data;
+        }
+
         private static string GeneratePartitionKey(DateTime date)
         {
             return $"{date:yyyy-MM-dd}";

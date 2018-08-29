@@ -9,5 +9,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
         Task Save(IMatrixHistory matrixHistory);
 
         Task<IList<DateTime>> GetMatrixHistoryStamps(DateTime date);
+
+        Task<string> GetMatrixHistoryData(DateTime date);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common;
 using Common.Log;
 using Lykke.Common.Log;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
@@ -89,9 +90,15 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
             return _tickPriceManager.GetRunnersStates();
         }
 
-        public Task<IList<DateTime>> GetMatrixHistoryStamps(DateTime date)
+        public async Task<IList<DateTime>> GetMatrixHistoryStamps(DateTime date)
         {
-            return _matrixHistoryRepo.GetMatrixHistoryStamps(date);
+            return await _matrixHistoryRepo.GetMatrixHistoryStamps(date);
+        }
+
+        public async Task<Core.Domain.Model.IntrinsicEventIndicators> GetMatrixHistoryData(DateTime date)
+        {
+            var data = await _matrixHistoryRepo.GetMatrixHistoryData(date);
+            return data.DeserializeJson<Core.Domain.Model.IntrinsicEventIndicators>();
         }
 
         private void EnsureInitialized()

@@ -144,5 +144,19 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
             var model = await _intrinsicEventIndicatorsService.GetMatrixHistoryStamps(date);
             return model;
         }
+
+        /// <summary>
+        /// Gets matrix history data.
+        /// </summary>
+        /// <returns>Matrix history data</returns>
+        [HttpGet("matrixhistorydata")]
+        [ProducesResponseType(typeof(IntrinsicEventIndicatorsDto), (int)HttpStatusCode.OK)]
+        public async Task<IntrinsicEventIndicatorsDto> GetMatrixHistoryDataAsync(DateTime date)
+        {
+            var data = await _intrinsicEventIndicatorsService.GetMatrixHistoryData(date);
+            var model = Mapper.Map<Core.Domain.Model.IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>(data);
+            model.Columns.ForEach(x => x.Delta *= 100);
+            return model;
+        }
     }
 }
