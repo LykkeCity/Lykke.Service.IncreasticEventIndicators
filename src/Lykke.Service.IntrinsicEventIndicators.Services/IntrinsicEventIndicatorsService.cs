@@ -98,7 +98,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
         public async Task<Core.Domain.Model.IntrinsicEventIndicators> GetMatrixHistoryData(DateTime date)
         {
             var data = await _matrixHistoryRepo.GetMatrixHistoryData(date);
-            return data.DeserializeJson<Core.Domain.Model.IntrinsicEventIndicators>();
+            return data?.DeserializeJson<Core.Domain.Model.IntrinsicEventIndicators>();
         }
 
         private void EnsureInitialized()
