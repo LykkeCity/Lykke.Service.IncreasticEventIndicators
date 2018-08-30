@@ -301,8 +301,18 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             {
                 Data = data,
                 TimesFromDc = timesFromDc,
-                Rows = rows.Select(x => x.Value).ToArray(),
-                Columns = columns.Select(x => x.Value).ToArray()
+                Rows = rows.Select(x => new IntrinsicEventIndicatorsRow
+                {
+                    RowId = x.Value.RowId,
+                    AssetPair = x.Value.AssetPair,
+                    PairName = x.Value.PairName,
+                    Exchange = x.Value.Exchange
+                }).ToArray(),
+                Columns = columns.Select(x => new IntrinsicEventIndicatorsColumn
+                {
+                    ColumnId = x.Value.ColumnId,
+                    Delta = x.Value.Delta
+                }).ToArray()
             };
         }
 
