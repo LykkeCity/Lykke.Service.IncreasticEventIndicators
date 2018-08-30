@@ -58,7 +58,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
 
         private static string GenerateRowKey(DateTime date)
         {
-            return $"{date:HH:mm:ss.fffffff}";
+            return $"{date:HH:mm:ss}";
         }
     }
 }
