@@ -141,8 +141,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         [ProducesResponseType(typeof(IList<DateTime>), (int)HttpStatusCode.OK)]
         public async Task<IList<DateTime>> GetMatrixHistoryStampsAsync(DateTime date)
         {
-            //date = new DateTime(date.Ticks, DateTimeKind.Utc);
-
             var model = await _intrinsicEventIndicatorsService.GetMatrixHistoryStamps(date);
             return model;
         }
@@ -155,7 +153,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         [ProducesResponseType(typeof(IntrinsicEventIndicatorsDto), (int)HttpStatusCode.OK)]
         public async Task<IntrinsicEventIndicatorsDto> GetMatrixHistoryDataAsync(DateTime date)
         {
-            date = date.ToUniversalTime();
+            date = date.ToUniversalTime(); //date = new DateTime(date.Ticks, DateTimeKind.Utc);
 
             IntrinsicEventIndicatorsDto model = null;
             var data = await _intrinsicEventIndicatorsService.GetMatrixHistoryData(date);
