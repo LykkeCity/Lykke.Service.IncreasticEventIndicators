@@ -24,6 +24,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
         private readonly ILog _log;
         private readonly IRunnerStateRepository _runnerStateRepository;
         private readonly IMatrixHistoryRepository _matrixHistoryRepository;
+        private readonly IEventHistoryRepository _eventHistoryRepository;
         private readonly IIntrinsicEventIndicatorsRepository _repo;
 
         private ConcurrentDictionary<string, IIntrinsicEventIndicatorsRow> _exchangeAssetPairs =
@@ -36,19 +37,20 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
 
         private bool _initialized;
         private readonly Timer _saveStateTimer;
-        private readonly Timer _saveHistoryTimer;
+        private readonly Timer _saveMatrixHistoryTimer;
         private readonly Timer _cleanStateTimer;
 
         protected TickPriceManager(ILogFactory logFactory, IRunnerStateRepository runnerStateRepository,
-            IMatrixHistoryRepository matrixHistoryRepository,
+            IMatrixHistoryRepository matrixHistoryRepository, IEventHistoryRepository eventHistoryRepository,
             IIntrinsicEventIndicatorsRepository repo)
         {
             _log = logFactory.CreateLog(this);
             _runnerStateRepository = runnerStateRepository;
             _matrixHistoryRepository = matrixHistoryRepository;
+            _eventHistoryRepository = eventHistoryRepository;
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
             _saveStateTimer = new Timer(OnTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
-            _saveHistoryTimer = new Timer(OnSaveHistoryTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
+            _saveMatrixHistoryTimer = new Timer(OnSaveMatrixHistoryTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
             _cleanStateTimer = new Timer(OnCleanTimer, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
 
             var task = Task.Run(EnsureInitialized);
@@ -202,14 +204,14 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                     runnerStateEntity.Ask, runnerStateEntity.Bid, runnerStateEntity.TickPriceTimestamp,
                     runnerStateEntity.DcTimestamp);
 
-                var runner = new Runner(runnerState, _log);
+                var runner = new Runner(runnerState, _eventHistoryRepository, _log);
 
                 var runnersKey = GetRunnersKey(GetExchangeAssetPairKey(runnerState.Exchange, runnerState.AssetPair), runnerState.Delta);
                 _runners.TryAdd(runnersKey, runner);
             }
 
             _saveStateTimer.Change(SavePeriod, Timeout.InfiniteTimeSpan);
-            _saveHistoryTimer.Change(SaveHistoryPeriod, Timeout.InfiniteTimeSpan);            
+            _saveMatrixHistoryTimer.Change(SaveHistoryPeriod, Timeout.InfiniteTimeSpan);            
             _cleanStateTimer.Change(CleanPeriod, Timeout.InfiniteTimeSpan);
 
             _initialized = true;
@@ -236,7 +238,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                     if (!_runners.ContainsKey(runnersKey))
                     {
                         _runners.TryAdd(runnersKey, new Runner(delta, exchangeAssetPair.Value.AssetPair,
-                            exchangeAssetPair.Value.Exchange, _log));
+                            exchangeAssetPair.Value.Exchange, _eventHistoryRepository, _log));
                     }
                 }
             }
@@ -340,10 +342,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             _saveStateTimer.Change(SavePeriod, Timeout.InfiniteTimeSpan);
         }
 
-        private void OnSaveHistoryTimer(object state)
+        private void OnSaveMatrixHistoryTimer(object state)
         {
-            SaveHistory();
-            _saveHistoryTimer.Change(SaveHistoryPeriod, Timeout.InfiniteTimeSpan);
+            SaveMatrixHistory();
+            _saveMatrixHistoryTimer.Change(SaveHistoryPeriod, Timeout.InfiniteTimeSpan);
         }
 
         private void SaveState()
@@ -376,7 +378,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             }
         }
 
-        private void SaveHistory()
+        private void SaveMatrixHistory()
         {
             if (!_initialized) return;
 
@@ -386,7 +388,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
                 lockTaken = _semaphore.Wait(Constants.LockTimeout);
                 if (lockTaken)
                 {
-                    SaveHistoryInternal();
+                    SaveMatrixHistoryInternal();
                 }
                 else
                 {
@@ -395,7 +397,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             }
             catch (Exception ex)
             {
-                _log.WriteErrorAsync(nameof(TickPriceManager), nameof(SaveHistory), ex).GetAwaiter().GetResult();
+                _log.WriteErrorAsync(nameof(TickPriceManager), nameof(SaveMatrixHistory), ex).GetAwaiter().GetResult();
             }
             finally
             {
@@ -418,7 +420,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.Exchanges
             runnersStates.ForEach(x => x.SaveState());
         }
 
-        private void SaveHistoryInternal()
+        private void SaveMatrixHistoryInternal()
         {
             var data = GetIntrinsicEventIndicatorsInternal();
 

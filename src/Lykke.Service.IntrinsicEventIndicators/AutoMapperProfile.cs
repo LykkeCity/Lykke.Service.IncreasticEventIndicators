@@ -25,6 +25,7 @@ namespace Lykke.Service.IntrinsicEventIndicators
             CreateMap<Core.Domain.Model.IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>();
 
             CreateMap<IRunnerState, RunnerStateDto>();
+            CreateMap<IEventHistory, EventHistoryDto>();
         }
     }
 }

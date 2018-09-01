@@ -7,6 +7,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 {
     public class Runner
     {
+        private readonly IEventHistoryRepository _eventHistoryRepository;
         private readonly ILog _log;
 
         private bool _initialized;
@@ -14,15 +15,18 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 
         public bool IsStateChanged => _state.IsChanged;
 
-        public Runner(decimal delta, string assetPair, string exchange, ILog log)
+        public Runner(decimal delta, string assetPair, string exchange,
+            IEventHistoryRepository eventHistoryRepository, ILog log)
         {
+            _eventHistoryRepository = eventHistoryRepository;
             _log = log;
             _state = new RunnerState(delta, assetPair, exchange);
             _initialized = false;
         }
 
-        public Runner(RunnerState state, ILog log)
+        public Runner(RunnerState state, IEventHistoryRepository eventHistoryRepository, ILog log)
         {
+            _eventHistoryRepository = eventHistoryRepository;
             _log = log;
             _state = state;
             _initialized = true;
@@ -58,6 +62,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
                     _state.Event = 1;
 
                     LogIntrinsicEventHistoryAsync((RunnerState)_state.Clone(), tickPrice);
+                    SaveEventHistoryInternal((RunnerState) _state.Clone());
 
                     return;
                 }
@@ -73,6 +78,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
                         _state.Event = -2;
 
                         LogIntrinsicEventHistoryAsync((RunnerState)_state.Clone(), tickPrice);
+                        SaveEventHistoryInternal((RunnerState)_state.Clone());
 
                         return;
                     }
@@ -90,6 +96,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
                     _state.Event = -1;
 
                     LogIntrinsicEventHistoryAsync((RunnerState)_state.Clone(), tickPrice);
+                    SaveEventHistoryInternal((RunnerState)_state.Clone());
 
                     return;
                 }
@@ -105,6 +112,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
                         _state.Event = 2;
 
                         LogIntrinsicEventHistoryAsync((RunnerState)_state.Clone(), tickPrice);
+                        SaveEventHistoryInternal((RunnerState)_state.Clone());
 
                         return;
                     }
@@ -170,6 +178,29 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 
             _log.WriteInfoAsync(nameof(Runner), nameof(LogIntrinsicEventHistoryAsync), data.ToJson(),
                 "Intrinsic Event detected").GetAwaiter().GetResult();
+        }
+
+        private void SaveEventHistoryInternal(RunnerState runnerState)
+        {
+            _eventHistoryRepository.Save(
+                new EventHistory
+                {
+                    Event = runnerState.Event,
+                    Extreme = runnerState.Extreme,
+                    ExpectedDcLevel = runnerState.ExpectedDcLevel,
+                    ExpectedOsLevel = runnerState.ExpectedOsLevel,
+                    Reference = runnerState.Reference,
+                    ExpectedDirectionalChange = runnerState.ExpectedDirectionalChange,
+                    DirectionalChangePrice = runnerState.DirectionalChangePrice,
+                    AssetPair = runnerState.AssetPair,
+                    Delta = runnerState.Delta,
+                    Exchange = runnerState.Exchange,
+                    Ask = runnerState.Ask,
+                    Bid = runnerState.Bid,
+                    TickPriceTimestamp = runnerState.TickPriceTimestamp,
+                    DcTimestamp = runnerState.DcTimestamp,
+                    IntrinsicEventIndicator = CalcIntrinsicEventIndicator()
+                });
         }
 
         public void SaveState()

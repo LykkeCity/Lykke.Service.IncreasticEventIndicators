@@ -28,5 +28,8 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.Api
         Task<IList<DateTime>> GetMatrixHistoryStampsAsync(DateTime date);
         [Get("/api/v1/lykkeintrinsiceventindicators/matrixhistorydata")]
         Task<IntrinsicEventIndicatorsDto> GetMatrixHistoryDataAsync(DateTime date);
+        [Get("/api/v1/lykkeintrinsiceventindicators/eventhistorydata")]
+        Task<IReadOnlyList<EventHistoryDto>> GetEventHistoryDataAsync(DateTime from, DateTime to, string exchange,
+            string assetPair, decimal delta);
     }
 }

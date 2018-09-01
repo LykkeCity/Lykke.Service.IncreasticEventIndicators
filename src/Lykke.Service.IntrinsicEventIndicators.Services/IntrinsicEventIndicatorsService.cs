@@ -14,17 +14,19 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
     {
         private readonly IIntrinsicEventIndicatorsRepository _repo;
         private readonly IMatrixHistoryRepository _matrixHistoryRepo;
+        private readonly IEventHistoryRepository _eventHistoryRepo;
         private readonly ILog _log;
         private readonly ITickPriceManager _tickPriceManager;
 
         private bool _initialized;
 
         protected IntrinsicEventIndicatorsService(IIntrinsicEventIndicatorsRepository repo,
-            IMatrixHistoryRepository matrixHistoryRepo,
+            IMatrixHistoryRepository matrixHistoryRepo, IEventHistoryRepository eventHistoryRepo,
             ITickPriceManager tickPriceManager, ILogFactory logFactory)
         {
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
             _matrixHistoryRepo = matrixHistoryRepo ?? throw new ArgumentNullException(nameof(matrixHistoryRepo));
+            _eventHistoryRepo = eventHistoryRepo ?? throw new ArgumentNullException(nameof(eventHistoryRepo));
             _log = logFactory.CreateLog(this);
             _tickPriceManager = tickPriceManager;
 
@@ -99,6 +101,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
         {
             var data = await _matrixHistoryRepo.GetMatrixHistoryData(date);
             return data?.DeserializeJson<Core.Domain.Model.IntrinsicEventIndicators>();
+        }
+
+        public Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime from, DateTime to, string exchange, string assetPair, decimal delta)
+        {
+            return _eventHistoryRepo.GetEventHistoryData(from, to, exchange, assetPair, delta);
         }
 
         private void EnsureInitialized()
