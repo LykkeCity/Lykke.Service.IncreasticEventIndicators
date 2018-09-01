@@ -171,7 +171,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         /// <returns>Event history data</returns>
         [HttpGet("eventhistorydataexternal")]
         [ProducesResponseType(typeof(IReadOnlyList<EventHistoryDto>), (int)HttpStatusCode.OK)]
-        public async Task<IReadOnlyList<EventHistoryDto>> GetEventHistoryDataExternalAsync(DateTime from, DateTime to, string exchange, string assetPair, decimal delta)
+        public async Task<IReadOnlyList<EventHistoryDto>> GetEventHistoryDataExternalAsync(DateTime from, DateTime to, string exchange, string assetPair, decimal? delta)
         {
             var data = await _intrinsicEventIndicatorsService.GetEventHistoryData(from, to, exchange, assetPair, delta);
             var model = Mapper.Map<IReadOnlyList<IEventHistory>, IReadOnlyList<EventHistoryDto>>(data);

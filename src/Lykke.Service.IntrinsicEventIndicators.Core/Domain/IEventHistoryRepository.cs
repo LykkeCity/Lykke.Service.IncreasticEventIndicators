@@ -8,6 +8,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
     {
         Task Save(IEventHistory eventHistory);
 
-        Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime from, DateTime to, string exchange, string assetPair, decimal delta);
+        Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime from, DateTime to, string exchange, string assetPair, decimal? delta);
     }
 }

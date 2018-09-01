@@ -66,7 +66,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
             await _storage.InsertOrReplaceAsync(entity);
         }
 
-        public async Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime from, DateTime to, string exchange, string assetPair, decimal delta)
+        public async Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime from, DateTime to, string exchange, string assetPair, decimal? delta)
         {
             return (await _storage.GetDataAsync()).ToArray();
         }

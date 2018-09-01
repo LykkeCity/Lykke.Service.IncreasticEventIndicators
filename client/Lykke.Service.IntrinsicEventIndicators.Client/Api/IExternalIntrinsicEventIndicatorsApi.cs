@@ -30,6 +30,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.Api
         Task<IntrinsicEventIndicatorsDto> GetMatrixHistoryDataExternalAsync(DateTime date);
         [Get("/api/v1/externalintrinsiceventindicators/eventhistorydataexternal")]
         Task<IReadOnlyList<EventHistoryDto>> GetEventHistoryDataExternalAsync(DateTime from, DateTime to, string exchange,
-            string assetPair, decimal delta);
+            string assetPair, decimal? delta);
     }
 }
