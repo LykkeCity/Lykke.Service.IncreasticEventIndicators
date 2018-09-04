@@ -103,9 +103,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services
             return data?.DeserializeJson<Core.Domain.Model.IntrinsicEventIndicators>();
         }
 
-        public Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime from, DateTime to, string exchange, string assetPair, decimal? delta)
+        public Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime date, string exchange, string assetPair, decimal? delta)
         {
-            return _eventHistoryRepo.GetEventHistoryData(from, to, exchange, assetPair, delta);
+            return _eventHistoryRepo.GetEventHistoryData(date, exchange, assetPair, delta);
         }
 
         private void EnsureInitialized()

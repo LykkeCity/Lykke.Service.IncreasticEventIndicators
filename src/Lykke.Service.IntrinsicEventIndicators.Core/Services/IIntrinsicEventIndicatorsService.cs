@@ -21,6 +21,6 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Services
 
         Task<IList<DateTime>> GetMatrixHistoryStamps(DateTime date);
         Task<Domain.Model.IntrinsicEventIndicators> GetMatrixHistoryData(DateTime date);
-        Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime from, DateTime to, string exchange, string assetPair, decimal? delta);
+        Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime date, string exchange, string assetPair, decimal? delta);
     }
 }

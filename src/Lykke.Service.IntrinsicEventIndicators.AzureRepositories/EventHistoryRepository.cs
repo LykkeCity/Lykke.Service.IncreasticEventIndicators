@@ -69,17 +69,18 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
             await _storage.InsertOrReplaceAsync(entity);
         }
 
-        public async Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime from, DateTime to, string exchange, string assetPair, decimal? delta)
+        public async Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime date, string exchange, string assetPair, decimal? delta)
         {
-            var dateFilter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, GeneratePartitionKey(from));
+            var dateFilter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, GeneratePartitionKey(date));
 
-            var timeFilter = TableQuery.CombineFilters(
-                TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.GreaterThanOrEqual, GenerateRowKey(from)),
-                TableOperators.And,
-                TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.LessThanOrEqual, GenerateRowKey(to))
-            );
+            //var timeFilter = TableQuery.CombineFilters(
+            //    TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.GreaterThanOrEqual, GenerateRowKey(from)),
+            //    TableOperators.And,
+            //    TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.LessThanOrEqual, GenerateRowKey(to))
+            //);
 
-            var combinedFilter = TableQuery.CombineFilters(dateFilter, TableOperators.And, timeFilter);
+            //var combinedFilter = TableQuery.CombineFilters(dateFilter, TableOperators.And, timeFilter);
+            var combinedFilter = dateFilter;
 
             combinedFilter = !string.IsNullOrWhiteSpace(exchange)
                 ? TableQuery.CombineFilters(combinedFilter, TableOperators.And, TableQuery.GenerateFilterCondition("Exchange", QueryComparisons.Equal, exchange))
