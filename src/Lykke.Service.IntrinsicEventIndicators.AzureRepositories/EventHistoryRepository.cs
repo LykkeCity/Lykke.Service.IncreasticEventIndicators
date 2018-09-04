@@ -6,6 +6,7 @@ using AzureStorage;
 using JetBrains.Annotations;
 using Lykke.AzureStorage.Tables;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
 {
@@ -41,11 +42,13 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
 
         public async Task Save(IEventHistory eventHistory)
         {
+            var now = DateTime.UtcNow;
+
             var entity =
                 new EventHistoryEntity
                 {
-                    PartitionKey = GeneratePartitionKey(eventHistory),
-                    RowKey = GenerateRowKey(eventHistory.TickPriceTimestamp ?? DateTime.UtcNow),
+                    PartitionKey = GeneratePartitionKey(eventHistory.TickPriceTimestamp ?? now),
+                    RowKey = GenerateRowKey(eventHistory.TickPriceTimestamp ?? now),
                     Event = eventHistory.Event,
                     Extreme = eventHistory.Extreme,
                     ExpectedDcLevel = eventHistory.ExpectedDcLevel,
@@ -68,12 +71,35 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
 
         public async Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime from, DateTime to, string exchange, string assetPair, decimal? delta)
         {
-            return (await _storage.GetDataAsync()).ToArray();
+            var dateFilter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, GeneratePartitionKey(from));
+
+            var timeFilter = TableQuery.CombineFilters(
+                TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.GreaterThanOrEqual, GenerateRowKey(from)),
+                TableOperators.And,
+                TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.LessThanOrEqual, GenerateRowKey(to))
+            );
+
+            var combinedFilter = TableQuery.CombineFilters(dateFilter, TableOperators.And, timeFilter);
+
+            combinedFilter = !string.IsNullOrWhiteSpace(exchange)
+                ? TableQuery.CombineFilters(combinedFilter, TableOperators.And, TableQuery.GenerateFilterCondition("Exchange", QueryComparisons.Equal, exchange))
+                : combinedFilter;
+
+            combinedFilter = !string.IsNullOrWhiteSpace(assetPair)
+                ? TableQuery.CombineFilters(combinedFilter, TableOperators.And, TableQuery.GenerateFilterCondition("AssetPair", QueryComparisons.Equal, assetPair))
+                : combinedFilter;
+
+            combinedFilter = delta.HasValue
+                ? TableQuery.CombineFilters(combinedFilter, TableOperators.And, TableQuery.GenerateFilterConditionForDouble("Delta", QueryComparisons.Equal, (double)delta.Value))
+                : combinedFilter;
+
+            var query = new TableQuery<EventHistoryEntity>().Where(combinedFilter);
+            return (await _storage.WhereAsync(query)).ToArray();
         }
 
-        private static string GeneratePartitionKey(IEventHistory eventHistory)
+        private static string GeneratePartitionKey(DateTime date)
         {
-            return $"{eventHistory.TickPriceTimestamp:yyyy-MM-dd}_{eventHistory.Exchange.ToUpperInvariant()}_{eventHistory.AssetPair.ToUpperInvariant()}_{eventHistory.Delta}";
+            return $"{date:yyyy-MM-dd}";
         }
 
         private static string GenerateRowKey(DateTime date)
