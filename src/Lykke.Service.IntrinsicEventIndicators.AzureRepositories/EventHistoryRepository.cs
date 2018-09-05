@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AzureStorage;
@@ -91,7 +92,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
                 : combinedFilter;
 
             combinedFilter = delta.HasValue
-                ? TableQuery.CombineFilters(combinedFilter, TableOperators.And, TableQuery.GenerateFilterConditionForDouble("Delta", QueryComparisons.Equal, (double)delta.Value))
+                ? TableQuery.CombineFilters(combinedFilter, TableOperators.And, TableQuery.GenerateFilterCondition("Delta", QueryComparisons.Equal, delta.Value.ToString(CultureInfo.InvariantCulture)))
                 : combinedFilter;
 
             var query = new TableQuery<EventHistoryEntity>().Where(combinedFilter);
