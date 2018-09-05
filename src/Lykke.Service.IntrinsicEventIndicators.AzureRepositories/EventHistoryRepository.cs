@@ -56,9 +56,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
                     Reference = eventHistory.Reference,
                     ExpectedDirectionalChange = eventHistory.ExpectedDirectionalChange,
                     DirectionalChangePrice = eventHistory.DirectionalChangePrice,
-                    AssetPair = eventHistory.AssetPair,
+                    AssetPair = eventHistory.AssetPair.ToUpperInvariant(),
                     Delta = eventHistory.Delta,
-                    Exchange = eventHistory.Exchange,
+                    Exchange = eventHistory.Exchange.ToUpperInvariant(),
                     Ask = eventHistory.Ask,
                     Bid = eventHistory.Bid,
                     TickPriceTimestamp = eventHistory.TickPriceTimestamp,
@@ -83,11 +83,11 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
             var combinedFilter = dateFilter;
 
             combinedFilter = !string.IsNullOrWhiteSpace(exchange)
-                ? TableQuery.CombineFilters(combinedFilter, TableOperators.And, TableQuery.GenerateFilterCondition("Exchange", QueryComparisons.Equal, exchange))
+                ? TableQuery.CombineFilters(combinedFilter, TableOperators.And, TableQuery.GenerateFilterCondition("Exchange", QueryComparisons.Equal, exchange.ToUpperInvariant()))
                 : combinedFilter;
 
             combinedFilter = !string.IsNullOrWhiteSpace(assetPair)
-                ? TableQuery.CombineFilters(combinedFilter, TableOperators.And, TableQuery.GenerateFilterCondition("AssetPair", QueryComparisons.Equal, assetPair))
+                ? TableQuery.CombineFilters(combinedFilter, TableOperators.And, TableQuery.GenerateFilterCondition("AssetPair", QueryComparisons.Equal, assetPair.ToUpperInvariant()))
                 : combinedFilter;
 
             combinedFilter = delta.HasValue
