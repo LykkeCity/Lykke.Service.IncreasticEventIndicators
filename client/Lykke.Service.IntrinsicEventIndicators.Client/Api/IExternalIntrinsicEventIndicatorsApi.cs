@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Lykke.Service.IntrinsicEventIndicators.Client.Models;
@@ -23,5 +24,12 @@ namespace Lykke.Service.IntrinsicEventIndicators.Client.Api
         Task<IntrinsicEventIndicatorsDto> GetDataExternalAsync();
         [Get("/api/v1/externalintrinsiceventindicators/intrinsiceventindicatorsrunnersstatesexternal")]
         Task<IDictionary<string, IList<RunnerStateDto>>> GetRunnersStatesExternalAsync();
+        [Get("/api/v1/externalintrinsiceventindicators/matrixhistorystampsexternal")]
+        Task<IList<DateTime>> GetMatrixHistoryStampsExternalAsync(DateTime date);
+        [Get("/api/v1/externalintrinsiceventindicators/matrixhistorydataexternal")]
+        Task<IntrinsicEventIndicatorsDto> GetMatrixHistoryDataExternalAsync(DateTime date);
+        [Get("/api/v1/externalintrinsiceventindicators/eventhistorydataexternal")]
+        Task<IReadOnlyList<EventHistoryDto>> GetEventHistoryDataExternalAsync(DateTime date, string exchange,
+            string assetPair, decimal? delta);
     }
 }

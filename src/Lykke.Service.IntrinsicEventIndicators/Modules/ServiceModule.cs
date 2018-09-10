@@ -75,6 +75,30 @@ namespace Lykke.Service.IntrinsicEventIndicators.Modules
                         .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "ExternalRunnersStates", container.Resolve<ILogFactory>())))
                 .As<IExternalRunnerStateRepository>()
                 .SingleInstance();
+
+            builder.Register(container => new LykkeMatrixHistoryRepository(
+                    AzureTableStorage<MatrixHistoryEntity>
+                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "LykkeMatrixHistory", container.Resolve<ILogFactory>())))
+                .As<ILykkeMatrixHistoryRepository>()
+                .SingleInstance();
+
+            builder.Register(container => new ExternalMatrixHistoryRepository(
+                    AzureTableStorage<MatrixHistoryEntity>
+                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "ExternalMatrixHistory", container.Resolve<ILogFactory>())))
+                .As<IExternalMatrixHistoryRepository>()
+                .SingleInstance();
+
+            builder.Register(container => new LykkeEventHistoryRepository(
+                    AzureTableStorage<EventHistoryEntity>
+                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "LykkeEventHistory", container.Resolve<ILogFactory>())))
+                .As<ILykkeEventHistoryRepository>()
+                .SingleInstance();
+
+            builder.Register(container => new ExternalEventHistoryRepository(
+                    AzureTableStorage<EventHistoryEntity>
+                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "ExternalEventHistory", container.Resolve<ILogFactory>())))
+                .As<IExternalEventHistoryRepository>()
+                .SingleInstance();
         }
 
         private void RegisterRabbitMqSubscribers(ContainerBuilder builder)

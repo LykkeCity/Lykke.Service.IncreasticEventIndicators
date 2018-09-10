@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain.Model;
@@ -17,5 +18,9 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Services
         Task<Domain.Model.IntrinsicEventIndicators> GetData();
 
         Task<IDictionary<string, IList<IRunnerState>>> GetRunnersStates();
+
+        Task<IList<DateTime>> GetMatrixHistoryStamps(DateTime date);
+        Task<Domain.Model.IntrinsicEventIndicators> GetMatrixHistoryData(DateTime date);
+        Task<IReadOnlyList<IEventHistory>> GetEventHistoryData(DateTime date, string exchange, string assetPair, decimal? delta);
     }
 }

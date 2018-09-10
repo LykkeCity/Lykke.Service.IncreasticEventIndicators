@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -128,6 +129,52 @@ namespace Lykke.Service.IntrinsicEventIndicators.Controllers
         {
             var runnersStates = await _intrinsicEventIndicatorsService.GetRunnersStates();
             var model = Mapper.Map<IDictionary<string, IList<IRunnerState>>, IDictionary<string, IList<RunnerStateDto>>>(runnersStates);
+            return model;
+        }
+
+        /// <summary>
+        /// Gets matrix history stamps.
+        /// </summary>
+        /// <returns>Matrix history stamps</returns>
+        [HttpGet("matrixhistorystampsexternal")]
+        [ProducesResponseType(typeof(IList<DateTime>), (int)HttpStatusCode.OK)]
+        public async Task<IList<DateTime>> GetMatrixHistoryStampsExternalAsync(DateTime date)
+        {
+            var model = await _intrinsicEventIndicatorsService.GetMatrixHistoryStamps(date);
+            return model;
+        }
+
+        /// <summary>
+        /// Gets matrix history data.
+        /// </summary>
+        /// <returns>Matrix history data</returns>
+        [HttpGet("matrixhistorydataexternal")]
+        [ProducesResponseType(typeof(IntrinsicEventIndicatorsDto), (int)HttpStatusCode.OK)]
+        public async Task<IntrinsicEventIndicatorsDto> GetMatrixHistoryDataExternalAsync(DateTime date)
+        {
+            date = date.ToUniversalTime();
+
+            IntrinsicEventIndicatorsDto model = null;
+            var data = await _intrinsicEventIndicatorsService.GetMatrixHistoryData(date);
+            if (data != null)
+            {
+                model = Mapper.Map<Core.Domain.Model.IntrinsicEventIndicators, IntrinsicEventIndicatorsDto>(data);
+                model.Columns.ForEach(x => x.Delta *= 100);
+            }
+
+            return model;
+        }
+
+        /// <summary>
+        /// Gets event history data.
+        /// </summary>
+        /// <returns>Event history data</returns>
+        [HttpGet("eventhistorydataexternal")]
+        [ProducesResponseType(typeof(IReadOnlyList<EventHistoryDto>), (int)HttpStatusCode.OK)]
+        public async Task<IReadOnlyList<EventHistoryDto>> GetEventHistoryDataExternalAsync(DateTime date, string exchange, string assetPair, decimal? delta)
+        {
+            var data = await _intrinsicEventIndicatorsService.GetEventHistoryData(date, exchange, assetPair, delta);
+            var model = Mapper.Map<IReadOnlyList<IEventHistory>, IReadOnlyList<EventHistoryDto>>(data);
             return model;
         }
     }
