@@ -8,6 +8,7 @@ using Lykke.Common.Log;
 using Lykke.RabbitMqBroker;
 using Lykke.RabbitMqBroker.Subscriber;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services.Exchanges;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services.LyciAssets;
 using Lykke.Service.IntrinsicEventIndicators.Settings.ServiceSettings;
 
 namespace Lykke.Service.IntrinsicEventIndicators.Rabbit
@@ -16,16 +17,18 @@ namespace Lykke.Service.IntrinsicEventIndicators.Rabbit
     {
         private readonly TickPriceExchangeSettings _settings;
         private readonly ITickPriceHandler _handler;
+        private readonly IPriceManager _priceManager;
         private readonly ILog _log;
         private RabbitMqSubscriber<TickPrice> _subscriber;
 
-        protected TickPriceSubscriber(
-            TickPriceExchangeSettings settings,
+        protected TickPriceSubscriber(TickPriceExchangeSettings settings,
             ITickPriceHandler handler,
+            IPriceManager priceManager,
             ILogFactory logFactory)
         {
             _settings = settings;
             _handler = handler;
+            _priceManager = priceManager;
             _log = logFactory.CreateLog(this);
         }
 
@@ -51,6 +54,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Rabbit
             try
             {
                 await _handler.Handle(tickPrice);
+                await _priceManager.Handle(tickPrice);
             }
             catch (Exception ex)
             {

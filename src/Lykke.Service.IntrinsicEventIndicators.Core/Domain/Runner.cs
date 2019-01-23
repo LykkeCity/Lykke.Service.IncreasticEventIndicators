@@ -176,8 +176,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
                 TickPrice = tickPrice
             };
 
-            _log.WriteInfoAsync(nameof(Runner), nameof(LogIntrinsicEventHistoryAsync), data.ToJson(),
-                "Intrinsic Event detected").GetAwaiter().GetResult();
+            //_log.WriteInfoAsync(nameof(Runner), nameof(LogIntrinsicEventHistoryAsync), data.ToJson(), "Intrinsic Event detected").GetAwaiter().GetResult();
         }
 
         private void SaveEventHistoryInternal(RunnerState runnerState)
@@ -207,6 +206,10 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
         {
             _state.IsChanged = false;
         }
+
+        public string AssetPair => _state.AssetPair;
+
+        public decimal Delta => _state.Delta;
 
         public IRunnerState GetState()
         {

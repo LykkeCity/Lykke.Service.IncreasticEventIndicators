@@ -6,9 +6,11 @@ using Lykke.Service.IntrinsicEventIndicators.AzureRepositories;
 using Lykke.Service.IntrinsicEventIndicators.Core.Domain;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services;
 using Lykke.Service.IntrinsicEventIndicators.Core.Services.Exchanges;
+using Lykke.Service.IntrinsicEventIndicators.Core.Services.LyciAssets;
 using Lykke.Service.IntrinsicEventIndicators.Rabbit;
 using Lykke.Service.IntrinsicEventIndicators.Services;
 using Lykke.Service.IntrinsicEventIndicators.Services.Exchanges;
+using Lykke.Service.IntrinsicEventIndicators.Services.LyciAssets;
 using Lykke.Service.IntrinsicEventIndicators.Settings;
 using Lykke.SettingsReader;
 
@@ -45,6 +47,16 @@ namespace Lykke.Service.IntrinsicEventIndicators.Modules
             builder.RegisterType<ExternalIntrinsicEventIndicatorsService>()
                 .As<IExternalIntrinsicEventIndicatorsService>()
                 .SingleInstance();
+
+            builder.RegisterType<PriceManager>()
+                .As<IPriceManager>()
+                .SingleInstance();
+
+            builder.RegisterType<RannerManger>()
+                .As<IStartable>()
+                .As<IStopable>()
+                .SingleInstance();
+            
 
             RegisterRepositories(builder);
             RegisterRabbitMqSubscribers(builder);
@@ -99,6 +111,12 @@ namespace Lykke.Service.IntrinsicEventIndicators.Modules
                         .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "ExternalEventHistory", container.Resolve<ILogFactory>())))
                 .As<IExternalEventHistoryRepository>()
                 .SingleInstance();
+
+            builder.Register(container => new RannerManagerRepository(
+                    AzureTableStorage<RunnerStateEntity>
+                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "LyciRunners", container.Resolve<ILogFactory>())))
+                .As<IRannerManagerRepository>()
+                .SingleInstance();
         }
 
         private void RegisterRabbitMqSubscribers(ContainerBuilder builder)
@@ -119,6 +137,14 @@ namespace Lykke.Service.IntrinsicEventIndicators.Modules
                     .AutoActivate()
                     .SingleInstance();
             }
+
+            builder.RegisterType<IndecatorListPublisher>()
+                .As<IStartable>()
+                .As<IStopable>()
+                .As<IIndecatorListSender>()
+                .WithParameter("rabbitConnectionString", _settings.CurrentValue.IntrinsicEventIndicatorsService.LykkeTickPriceExchange.Exchange.ConnectionString)
+                .AutoActivate()
+                .SingleInstance();
         }
     }
 }
