@@ -74,7 +74,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.LyciAssets
                 await SendStatistic();
             }
 
-            if (_iteration % 20 == 0)
+            if (_iteration % 60 == 0)
             {
                 SaveAll();
             }
