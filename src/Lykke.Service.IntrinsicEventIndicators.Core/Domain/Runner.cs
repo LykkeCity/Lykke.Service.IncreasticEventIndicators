@@ -124,10 +124,12 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Domain
 
         public decimal CalcIntrinsicEventIndicator()
         {
-            if (_state.Extreme == 0 || _state.Delta == 0)
+            if (_state.Extreme == 0 || _state.Delta == 0 || _state.DirectionalChangePrice == 0)
             {
                 return 0;
             }
+
+
 
             var indicator = Math.Abs((_state.Extreme - _state.DirectionalChangePrice) / _state.DirectionalChangePrice / _state.Delta);
 
