@@ -85,7 +85,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.LyciAssets
             try
             {
                 var runners = GetAllRunners()
-                    .Select(e => new IndecatorModel(e.AssetPair, e.Delta, e.CalcIntrinsicEventIndicator()))
+                    .Select(e => new IndecatorModel(e.AssetPair.Replace("LYCIUSD", "LCYUSD"), e.Delta, e.CalcIntrinsicEventIndicator()))
                     .OrderBy(e => e.AssetPair + e.Delta.ToString("#.#"))
                     .ToList();
 
