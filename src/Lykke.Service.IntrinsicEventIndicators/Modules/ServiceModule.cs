@@ -114,7 +114,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Modules
 
             builder.Register(container => new RannerManagerRepository(
                     AzureTableStorage<RunnerStateEntity>
-                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "LyciRunners", container.Resolve<ILogFactory>())))
+                        .Create(_settings.ConnectionString(x => x.IntrinsicEventIndicatorsService.Db.DataConnString), "LyciRunners2", container.Resolve<ILogFactory>())))
                 .As<IRannerManagerRepository>()
                 .SingleInstance();
         }
