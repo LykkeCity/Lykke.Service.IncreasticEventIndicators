@@ -59,25 +59,16 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.LyciAssets
                     Asset = price.Asset,
                     Timestamp = DateTime.UtcNow,
                     Source = "lyci",
-                    Ask = price.AvgMig,
-                    Bid = price.AvgMig
+                    Ask = price.AvgMid,
+                    Bid = price.AvgMid
                 };
 
-                foreach (var runner in _runners[price.Asset])
-                {
-                    runner.Run(tick);
-                }
+                foreach (var runner in _runners[price.Asset]) runner.Run(tick);
             }
 
-            if (_iteration % 10 == 0)
-            {
-                await SendStatistic();
-            }
+            if (_iteration % 10 == 0) await SendStatistic();
 
-            if (_iteration % 60 == 0)
-            {
-                SaveAll();
-            }
+            if (_iteration % 60 == 0) SaveAll();
         }
 
         private async Task SendStatistic()
@@ -85,7 +76,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.LyciAssets
             try
             {
                 var runners = GetAllRunners()
-                    .Select(e => new IndecatorModel(e.AssetPair.Replace("LYCIUSD", "LCYUSD"), e.Delta, e.CalcIntrinsicEventIndicator()))
+                    .Select(e => new IndecatorModel(e.AssetPair.Replace("LYCIUSD", "LCIUSD"), e.Delta, e.CalcIntrinsicEventIndicator()))
                     .OrderBy(e => e.AssetPair + e.Delta.ToString("#.#"))
                     .ToList();
 
@@ -104,12 +95,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.Services.LyciAssets
         private IEnumerable<RunnerLyci> GetAllRunners()
         {
             foreach (var runnerList in _runners)
-            {
-                foreach (var runner in runnerList.Value)
-                {
-                    yield return runner;
-                }
-            }
+            foreach (var runner in runnerList.Value) yield return runner;
         }
 
         private void SaveAll()

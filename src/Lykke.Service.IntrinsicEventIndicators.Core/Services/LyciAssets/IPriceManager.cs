@@ -14,13 +14,13 @@ namespace Lykke.Service.IntrinsicEventIndicators.Core.Services.LyciAssets
 
     public class PriceValue
     {
-        public PriceValue(string asset, decimal avgMig)
+        public PriceValue(string asset, decimal avgMid)
         {
             Asset = asset;
-            AvgMig = avgMig;
+            AvgMid = avgMid;
         }
 
         public string Asset { get; set; }
-        public decimal AvgMig { get; set; }
+        public decimal AvgMid { get; set; }
     }
 }

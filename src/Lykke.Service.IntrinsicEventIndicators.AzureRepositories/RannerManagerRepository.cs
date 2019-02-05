@@ -37,7 +37,7 @@ namespace Lykke.Service.IntrinsicEventIndicators.AzureRepositories
                 new RunnerStateEntity
                 {
                     PartitionKey = "LyciRanner",
-                    RowKey = x.AssetPair,
+                    RowKey = $"{x.AssetPair}_{x.Delta}",
                     Event = x.Event,
                     Extreme = x.Extreme,
                     ExpectedDcLevel = x.ExpectedDcLevel,
